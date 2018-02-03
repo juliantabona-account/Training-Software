@@ -1,0 +1,68 @@
+.dropdown:hover>.dropdown-menu {
+ display: block !important;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    background-color: #ffe4e5 !important;
+}
+
+#app-main-navbar{
+    background:#fff !important;
+}
+
+#app-main-navbar #app-nav-logo{
+    margin-left: 110px;
+}
+
+.navbar-light .navbar-toggler {
+    color: rgb(255, 255, 255);
+    border-color: rgb(136, 75, 75);
+    background: #c72127;
+}
+
+.navbar-light .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,<svg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'><path stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/></svg>");
+}
+
+@media (max-width: 576px) { 
+    #app-nav-logo{
+        width: 170px !important;
+        margin-left: 10px !important;
+    }
+}
+
+@media (min-width: 576px) { 
+    #app-nav-logo{
+        width: 300px !important;
+        margin-left: 10px !important;
+    }
+}
+
+#app-main-navbar a{
+    color:#404040 !important;
+    padding: 0 15px 5px !important;
+    border-bottom: 1px dotted transparent;
+}
+
+#app-main-navbar li.whitened a span,
+#app-main-navbar li.whitened .dropdown-toggle::after{
+    color:#fff !important;
+}
+
+#app-main-navbar li.whitened:hover > a span,
+#app-main-navbar li.whitened:active > a span,
+#app-main-navbar li.whitened:hover .dropdown-toggle::after,
+#app-main-navbar li.whitened:active .dropdown-toggle::after{
+    color:#404040 !important;
+}
+
+
+#app-main-navbar .nav-item:hover,
+#app-main-navbar .nav-item.active{
+    background: #f5f5f5;
+}
+
+#app-main-navbar .nav-item:active{
+    background: #d8d8d8;
+}
+
