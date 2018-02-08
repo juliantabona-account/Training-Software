@@ -30,7 +30,7 @@
                     <div class="card-body">
                         
                         <div class="col-md-10 mb-md-4 mt-md-4 mb-4">
-                            <h2 class = "res-text-7 res-text-sm-5 res-text-md-3">Log In</h2>
+                            <h2 class = "res-text-7 res-text-sm-5 res-text-md-3">Admin Log In</h2>
                         </div>
 
                         <form class="form-horizontal" method="POST" action="{{ route('login') }}">
