@@ -17,6 +17,7 @@ class CreateLessonModuleTable extends Migration
             $table->increments('id');
             $table->integer('lesson_id')->unsigned();
             $table->integer('module_id')->unsigned();
+            $table->tinyInteger('position')->default(1);
             $table->timestamps();
         });
     }

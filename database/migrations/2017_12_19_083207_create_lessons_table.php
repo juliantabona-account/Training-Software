@@ -17,6 +17,7 @@ class CreateLessonsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('overview');
+            $table->text('notes')->nullable();
             $table->string('video_uri');
             $table->timestamps();
         });

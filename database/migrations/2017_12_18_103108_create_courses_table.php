@@ -17,6 +17,8 @@ class CreateCoursesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('overview');
+            $table->text('announcement')->nullable();
+            $table->string('img')->nullable();
             $table->string('state')->default('draft');
             $table->timestamps();
         });

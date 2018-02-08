@@ -18,7 +18,8 @@ class CreateTestsTable extends Migration
             $table->string('title');
             $table->string('notes')->nullable();
             $table->text('marking_key');
-            $table->integer('user_id')->unsigned();
+            $table->integer('lesson_id');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }
