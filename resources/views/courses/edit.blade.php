@@ -286,7 +286,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <img class="card-img-top course-image mb-3"  alt="{{ $course->title }}" src="{{ asset('storage/images/courses/'.$course->img) }}">
+                            <img class="card-img-top course-image mb-3"  alt="{{ $course->title }}" src="{{ $course->img }}">
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-btn">

@@ -73,21 +73,18 @@ class CourseController extends Controller
     public function store(Request $request)
     {
 
-        $filename = '';
-
         if(Input::file())
         {
 
             $image = Input::file('course-image');
-
-            $filename  = time() . '.' . $image->getClientOriginalExtension();
             
             Image::make($image->getRealPath())->widen(318, function ($constraint) {
                 $constraint->upsize();
             })->crop(318, 180, 0, 0);
 
-            $stored_image = Storage::disk('local')->put('public/images/courses', $image);
-            $image_name = basename($stored_image);
+            $image_name = 'courses/crs_'.time().uniqid().'.'.$image->guessClientExtension();
+            
+            Storage::disk('s3')->put($image_name, file_get_contents($image), 'public');
         }
 
 
@@ -95,7 +92,7 @@ class CourseController extends Controller
 	                'title' => $request::input('course-title'),
 	                'overview' => $request::input('course-overview'),
 	                'announcement' => 'Welcome to "' . $request::input('course-title') . '". Complete lessons in their order to unlock other modules.',
-        		    'img' => $image_name
+        		    'img' => env('AWS_URL').$image_name
                 ]);
 
         $module = Module::create([
@@ -146,30 +143,29 @@ class CourseController extends Controller
 
         if(Input::file())
         {
+            $old_image_path = str_replace(env('AWS_URL'), '', $request::input('current-course-image'));
 
-            if(!empty($request::input('current-course-image'))){
-                //return substr($request::input('current-course-image'), 1);
-
-                Storage::delete('public/images/courses/'.$request::input('current-course-image'));
+            if(Storage::disk('s3')->exists( $old_image_path )) {
+                Storage::disk('s3')->delete( $old_image_path );
             }
 
             $image = Input::file('course-image');
-
-            $filename  = time() . '.' . $image->getClientOriginalExtension();
             
             Image::make($image->getRealPath())->widen(318, function ($constraint) {
                 $constraint->upsize();
             })->crop(318, 180, 0, 0);
 
-            $stored_image = Storage::disk('local')->put('public/images/courses', $image);
-            $image_name = basename($stored_image);
+            $image_name = 'courses/crs_'.time().uniqid().'.'.$image->guessClientExtension();
+            
+            Storage::disk('s3')->put($image_name, file_get_contents($image), 'public');
+
         }
 
         $course = Course::find($course_id)->update([
 	                'title' => $request::input('course-title'),
 	                'overview' => $request::input('course-overview'),
 	                'announcement' => $request::input('course-announcement'),
-                    'img' => $image_name
+                    'img' => env('AWS_URL').$image_name
         		]);
 
         //Get The New Module Arrangement

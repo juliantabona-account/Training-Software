@@ -94,7 +94,7 @@
                             @endif
                             
                             <div class="card ml-0 mr-0 ml-xl-4 mr-xl-4">
-                                <img class="card-img-top course-image"  alt="{{ $course->title }}" src="{{ asset('storage/images/courses/'.$course->img) }}">
+                                <img class="card-img-top course-image"  alt="{{ $course->title }}" src="{{ $course->img }}">
                                 <div class="card-body">
                                     <h4 class="card-title res-text-6 mb-1">{{ $course->title }}</h4>
                                     @if($course->state == 'Published')
