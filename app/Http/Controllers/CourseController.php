@@ -82,6 +82,16 @@ class CourseController extends Controller
                 $constraint->upsize();
             })->crop(318, 180, 0, 0);
 
+            if($image->guessClientExtension() == 'jpeg' || $image->guessClientExtension() == 'jpg'){
+                
+                Image::make($image)->encode('jpg', 60);
+            
+            }else if($image->guessClientExtension() == 'png'){
+                
+                Image::make($image)->encode('png', 60);
+            
+            }
+
             $image_name = 'courses/crs_'.time().uniqid().'.'.$image->guessClientExtension();
             
             Storage::disk('s3')->put($image_name, file_get_contents($image), 'public');
@@ -212,8 +222,15 @@ class CourseController extends Controller
 
     public function delete($course_id)
     {
+
         $course = Course::find($course_id);
-        Storage::delete('public/images/courses/'.$course->img);
+
+        $image = str_replace(env('AWS_URL'), '', $course->img);
+
+        if(Storage::disk('s3')->exists( $image )) {
+            Storage::disk('s3')->delete( $image );
+        }
+
         $course->delete();
 
         return redirect()->route('course-list');
