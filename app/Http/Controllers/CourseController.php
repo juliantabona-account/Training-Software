@@ -172,7 +172,7 @@ class CourseController extends Controller
         $arrangement = json_decode( $request::input('arrangement') , true );
 
         //If We Have A New Arrangement Lets Continue 
-        if(COUNT($arrangement)){
+        if(isset($arrangement) && !empty($arrangement)){
 	        //For Each Module Lets Save The New Arrangement
 	        for($x = 0; $x < $arrangement['length']; $x++){
 
