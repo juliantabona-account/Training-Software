@@ -62,7 +62,7 @@
                     <div class="col-lg-4">
                         
                         <div class="card" style="width: 20rem;">
-                            <img class="card-img-top course-image"  alt="{{ $course->title }}" src="{{ $course->img }}">
+                            <img class="card-img-top course-image"  alt="{{ $course->title }}" src="{{ asset('storage/images/courses/'.$course->img) }}">
                             <div class="card-body">
                                 <h4 class="card-title res-text-6 mb-1">{{ $course->title }}</h4>
                                 @if($course->state == 'Published')
