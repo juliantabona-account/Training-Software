@@ -6,6 +6,19 @@
 
 @section('style')
 
+    <style>
+
+        .error-image{
+            display: block !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            width: 100% !important;
+            height: auto !important;
+            padding: 15% 40% !important;
+        }
+
+    </style>
+
 @endsection
 
 
@@ -59,7 +72,7 @@
                         <div class="col-sm-8 offset-sm-2 col-md-6 offset-md-0 col-lg-4 mb-4">
                             
                             <div class="card ml-0 mr-0 ml-xl-4 mr-xl-4">
-                                <img class="card-img-top course-image"  alt="{{ $company->name }}" src="{{ $company->img }}">
+                                <img class="card-img-top course-image"  alt="{{ $company->name }}" src="{{ $company->img }}" img-died="image">
                                 <div class="card-body">
                                     <h4 class="card-title res-text-6 res-brs-lg-b mb-2 pb-2">{{ $company->name }}</h4>
                                     <a href = "{{ route('company-show', [$company->id]) }}" class="btn btn-sm res-button app-red-btn float-right">

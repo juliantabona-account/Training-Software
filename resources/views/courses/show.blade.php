@@ -33,6 +33,15 @@
           /** Define arrowhead **/
         }
 
+        .error-image{
+            display: block !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            width: 100% !important;
+            height: auto !important;
+            padding: 25% 40% !important;
+        }
+
     </style>
 
 @endsection
@@ -122,7 +131,8 @@
                                                                                 
                                                                                 <img class="mt-3" alt="{{ $lesson->title }}" 
                                                                                      src="{{ $video['pictures']['sizes'][0]['link'] }}"  
-                                                                                     style="width: 100px;">
+                                                                                     style="width: 100px;"
+                                                                                     img-died="video">
 
                                                                             @endif
                                                                         @endforeach

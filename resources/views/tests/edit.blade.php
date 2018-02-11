@@ -91,7 +91,11 @@
                             </h2>
                         </div>
 
-                        <div class="col-12 col-sm-3 offset-sm-5 col-md-2 offset-md-6 offset-lg-3 pr-0 pt-3 pt-sm-0 mt-2 mt-sm-0 res-brs-t res-brs-sm-t-n">
+                        <div class="col-12 col-sm-6 offset-sm-2 col-md-4 offset-md-4 offset-lg-2 col-lg-3 pr-0 pt-3 pt-sm-0 mt-2 mt-sm-0 res-brs-t res-brs-sm-t-n">
+                            <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests" class="btn btn-sm res-button app-red-btn float-right ml-2">
+                                <i class="fa fa-file-text-o res-text-9" aria-hidden="true"></i>
+                                <span class = "res-text-9">View Tests</span>
+                            </a>
                             <a href = "/courses/{{ $course_id }}/edit" class="btn btn-sm res-button app-red-btn float-right">
                                 <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
                                 <span class = "res-text-9">Lessons</span>
@@ -124,6 +128,15 @@
                     </div>
 
                     <div class = "col-lg-12 master-path-guideline res-ml-lg-10-2">
+
+                        @if(Session::has('status'))
+                            <div class="alert alert-{{ Session::get('type') }}" role="alert">
+                                <span class = "res-text-9 res-text-sm-9 res-text-md-9"><i class="fa fa fa-file-text-o mr-1"></i> {{ Session::get('status') }}</span>
+                                <button type="button" class="close mt-2 d-block res-text-9 res-text-sm-9 res-text-md-9" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
 
                         <div class = "module-row res-pl-10-1 pt-4"> 
 
@@ -252,10 +265,11 @@
             </div>
 
             <div class = "col-lg-3">
-                <form action = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/test" method="POST" enctype="multipart/form-data">
+                <form action = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
-                    <input class = "arrangement" type = "hidden" name = "arrangement">
+                    <input class = "arrangement" type = "hidden" name = "arrangement" value = "{{ $test->marking_key }}">
+                    <input class = "arrangement_state" type = "hidden" name = "arrangement_state" value = "0">
                     <div class="card ml-3 mt-0">
                         <div class="card-header">
                             <div class = "row">

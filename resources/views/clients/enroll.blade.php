@@ -7,16 +7,30 @@
 @section('style')
     
     <style>
-        img.course-image{
-            height: 180px; 
-            width: 100%; 
-            display: block;
-            background: linear-gradient(#ff5a4e, #ff3925);
-        }
 
         table td{
             cursor: pointer;
         }
+
+        .course-image-box{
+            height: 180px; 
+        }
+
+        img.course-image{
+            display: none;
+            height: 180px; 
+            width: 100%; 
+            background: linear-gradient(#ff5a4e, #ff3925);
+        }
+
+        .error-image{
+            margin-left: auto !important;
+            margin-right: auto !important;
+            width: 100% !important;
+            height: auto !important;
+            padding: 25% 43% !important;
+        }
+
     </style>
 
 @endsection
@@ -62,7 +76,9 @@
                     <div class="col-lg-4">
                         
                         <div class="card" style="width: 20rem;">
-                            <img class="card-img-top course-image"  alt="{{ $course->title }}" src="{{ $course->img }}">
+                            <div class = "course-image-box">
+                                <img class="card-img-top course-image"  alt="{{ $course->title }}" src="{{ $course->img }}" img-died="video">
+                            </div>
                             <div class="card-body">
                                 <h4 class="card-title res-text-6 mb-1">{{ $course->title }}</h4>
                                 @if($course->state == 'Published')

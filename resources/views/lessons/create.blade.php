@@ -101,7 +101,7 @@
 
                                             <p style="text-align: center; font-size: 15px;" data-mce-style="text-align: center; font-size: 15px;">
                                                 <span style="color: rgb(0, 0, 0);" data-mce-style="color: #000000;">
-                                                    <img title="SALESFORCE LOGO" src="../../../../../../assets/icons/Saleschief-Logo.png" alt="SALESFORCE LOGO" width="180" height="auto" data-mce-src="../../../../../../assets/icons/Saleschief-Logo.png" data-mce-selected="1">
+                                                    <img title="SalesChief Logo" src="../../../../../../assets/icons/Saleschief-Logo.png" alt="SalesChief Logo" width="180" height="auto" data-mce-src="../../../../../../assets/icons/Saleschief-Logo.png" data-mce-selected="1">
                                                 </span>
                                             </p>
                                             <h1 style="text-align: center;" data-mce-style="text-align: center;">
@@ -196,7 +196,7 @@
             theme: 'modern',
             plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
             toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
-            image_advtab: true,
+            images_upload_url: '/courses/{{ $course_id }}/module/{{ $module->id }}/lesson/notes',
             templates: [
                 { title: 'Test template 1', content: 'Test 1' },
                 { title: 'Test template 2', content: 'Test 2' }

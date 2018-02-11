@@ -7,11 +7,24 @@
 @section('style')
     
     <style>
+
+        .course-image-box{
+            height: 180px; 
+        }
+
         img.course-image{
+            display: none;
             height: 180px; 
             width: 100%; 
-            display: block;
             background: linear-gradient(#ff5a4e, #ff3925);
+        }
+
+        .error-image{
+            margin-left: auto !important;
+            margin-right: auto !important;
+            width: 100% !important;
+            height: auto !important;
+            padding: 25% 43% !important;
         }
     </style>
 
@@ -94,16 +107,13 @@
                             @endif
                             
                             <div class="card ml-0 mr-0 ml-xl-4 mr-xl-4">
-                                <img class="card-img-top course-image"  alt="{{ $course->title }}" src="{{ $course->img }}">
+                                <div class = "course-image-box">
+                                    <img class="card-img-top course-image"  alt="{{ $course->title }}" src="{{ $course->img }}" img-died="video">
+                                </div>
                                 <div class="card-body">
                                     <h4 class="card-title res-text-6 mb-1">{{ $course->title }}</h4>
-                                    @if($course->state == 'Published')
-                                        <span class="badge badge-success mb-1">{{ $course->state }}</span>
-                                    @else
-                                        <span class="badge badge-secondary">{{ $course->state }}</span>
-                                    @endif
                                     
-                                    <p class="res-text-9 pb-3 res-brs-lg-b">
+                                    <p class="res-text-9 mt-1 pt-2 pb-2 res-brs-lg-b res-brs-lg-t">
                                         {{ $course->overview }}
                                     </p>
                                     <a href = "/courses/{{ $course->id }}/edit" class="btn btn-sm res-button app-red-btn float-right">
@@ -131,10 +141,9 @@
 
                         <div class="col-lg-4 offset-4">          
                             <div class="card" style="width: 20rem;">
-                                <img class="card-img-top course-image" alt="Inbound Marketing" src="/assets/temp/placeholder.png">
+                                <img class="card-img-top course-image" alt="Inbound Marketing" src="/assets/temp/placeholder.png" img-died="image">
                                 <div class="card-body">
-                                    <h4 class="card-title res-text-6 mb-1"><span class="badge badge-secondary">No Courses</span></h4>                        
-                                    <p class="res-text-9 pb-3 res-brs-lg-b">Get started by creating your first course and adding lessons.</p>
+                                    <p class="res-text-9 mt-1 pt-2 pb-2 res-brs-lg-b res-brs-lg-t">Get started by creating your first course and adding lessons.</p>
                                     <a href = "{{ route('course-create') }}" class="btn btn-sm res-button app-red-btn float-right">
                                         <i class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
                                         <span class="res-text-9 res-text-sm-7 res-text-md-9">Create Course</span>

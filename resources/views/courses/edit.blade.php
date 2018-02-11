@@ -60,6 +60,18 @@
             right: 50px;
         }
 
+        .error-image{
+            display: block !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            width: 100% !important;
+            height: auto !important;
+            padding: 25% 40% !important;
+        }
+
+        img.course-image{
+            background: linear-gradient(#ff5a4e, #ff3925);
+        }
 
     </style>
 
@@ -68,39 +80,39 @@
 
 @section('content')
 
-    <div class="col-md-12 res-pb-lg-10-2 res-brs-lg-b">
-
-        <div class="container res-pt-xl-10-2 mt-0">
+    <div class="col-md-12 res-pb-10-2 res-brs-t res-brs-lg-t-n res-brs-b">
+        <div class="container-fluid res-pt-10-2 mt-0">
             <div class="row">
                 <div class="col-12">
                     <div class="row">
-                        <div class="col-8">
-                            <h2 class = "res-text-7 res-text-sm-5 res-text-md-3">
-                                <i class="fa fa-crosshairs"></i>
-                                <span>{{ $course->title }}</span>
+                        <div class="col-12 col-sm-4 col-md-4 offset-lg-1 col-lg-6 pt-1 pt-lg-0">
+                            <h2 class="res-text-8 res-text-md-6 res-text-lg-3">
+                            <i class="fa fa-crosshairs"></i> 
+                            <span>Course 111</span></h2>
+                        </div> 
+                        <div class="col-12 col-sm-3 col-lg-2">
+                            <h2 class="res-mt-lg-10-1 res-text-7 res-text-md-8 res-text-sm-5">
+                                <i class="fa fa-users res-text-8"></i> 
+                                <span class="res-text-8">Enrolled:</span> 
+                                <span class="res-text-8">42</span>
                             </h2>
+                        </div> 
+                        <div class="col-12 col-sm-4 offset-sm-0 col-md-5 offset-md-0 offset-lg-0 col-lg-3 pr-0 pt-3 pt-sm-0 mt-2 mt-sm-0 res-brs-t res-brs-sm-t-n">
+                            <button type="button" class="btn btn-sm res-button app-red-btn float-right ml-2 mb-1" data-toggle="modal" data-target="#addModule">
+                                <i aria-hidden="true" class="fa fa-plus res-text-9"></i> 
+                                <span class="res-text-9">Add Module</span>
+                            </button> 
+                            <a href="/courses" class="btn btn-sm res-button app-red-btn float-right">
+                                <i aria-hidden="true" class="fa fa-arrow-circle-left res-text-9"></i> 
+                                <span class="res-text-9">Courses</span>
+                            </a>
                         </div>
-                        <div class="col-2">
-                            <h2 class = "res-mt-lg-10-1 res-text-7 res-text-md-8 res-text-sm-5">
-                                <i class="fa fa-users"></i>
-                                <span>Enrolled:</span>
-                                <span>42</span>
-                            </h2>
-                        </div>
-
-                        <div class="col-2">
-                            <button type="button" class="btn res-button app-red-btn" data-toggle="modal" data-target="#addModule">
-                                <i class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
-                                <span class = "res-text-9 res-text-sm-7 res-text-md-9">Add Module</span>
-                            </button>
-                        </div>
-
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
+
 
     <div class="container-fluid res-mt-lg-10-5 res-mb-lg-10-10">
 
@@ -123,6 +135,19 @@
                     </div>
 
                     <div class = "col-lg-12 master-path-guideline res-ml-lg-10-2">
+
+                        @if(!COUNT($modules))
+
+                            <div role="alert" class="alert alert-warning no-lessons pt-4 pb-4">
+                                <i aria-hidden="true" class="fa fa-book mr-2"></i> 
+                                <span>No Modules! Add a module.</span>
+                                <button type="button" data-toggle="modal" data-target="#addModule" class="btn btn-sm res-button app-red-btn float-right">
+                                    <i aria-hidden="true" class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9"></i> 
+                                    <span class="res-text-9 res-text-sm-7 res-text-md-9">Add Module</span>
+                                </button>
+                            </div>
+
+                        @endif
 
                         @foreach($modules as $mod_num => $module)
 
@@ -173,7 +198,8 @@
                                                                                     @if($video['status'] == 'available' && !empty($video['pictures']['sizes'][0]['link']))    
                                                                                         <img class="mt-3" alt="{{ $lesson->title }}" 
                                                                                              src="{{ $video['pictures']['sizes'][0]['link'] }}"  
-                                                                                             style="width: 100px;">
+                                                                                             style="width: 100px;"
+                                                                                             img-died="image">
                                                                                     @else
                                                                                         <div class="mt-3 p-4 app-red-gradient">
                                                                                             <i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw app-color-white"></i>
@@ -286,7 +312,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <img class="card-img-top course-image mb-3"  alt="{{ $course->title }}" src="{{ $course->img }}">
+                            <img class="card-img-top course-image mb-3"  alt="{{ $course->title }}" src="{{ $course->img }}" img-died="image">
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-btn">

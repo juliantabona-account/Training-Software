@@ -73,6 +73,8 @@ class CourseController extends Controller
     public function store(Request $request)
     {
 
+        $image_name = '';
+
         if(Input::file())
         {
 
@@ -95,6 +97,8 @@ class CourseController extends Controller
             $image_name = 'courses/crs_'.time().uniqid().'.'.$image->guessClientExtension();
             
             Storage::disk('s3')->put($image_name, file_get_contents($image), 'public');
+
+            $image_name = env('AWS_URL').$image_name;
         }
 
 
@@ -102,7 +106,7 @@ class CourseController extends Controller
 	                'title' => $request::input('course-title'),
 	                'overview' => $request::input('course-overview'),
 	                'announcement' => 'Welcome to "' . $request::input('course-title') . '". Complete lessons in their order to unlock other modules.',
-        		    'img' => env('AWS_URL').$image_name
+        		    'img' => $image_name
                 ]);
 
         $module = Module::create([
@@ -150,6 +154,7 @@ class CourseController extends Controller
     {
 
         $filename = '';
+        $image_name = '';
 
         if(Input::file())
         {
@@ -169,13 +174,17 @@ class CourseController extends Controller
             
             Storage::disk('s3')->put($image_name, file_get_contents($image), 'public');
 
+            $image_name = env('AWS_URL').$image_name;
+
         }
+
+
 
         $course = Course::find($course_id)->update([
 	                'title' => $request::input('course-title'),
 	                'overview' => $request::input('course-overview'),
 	                'announcement' => $request::input('course-announcement'),
-                    'img' => env('AWS_URL').$image_name
+                    'img' => $image_name
         		]);
 
         //Get The New Module Arrangement

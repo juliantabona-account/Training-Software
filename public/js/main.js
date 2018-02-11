@@ -370,10 +370,9 @@ function runQuestionsArrangement(){
         return arrangement;
 
     }));
-
-    console.log(JSON.stringify(JSON.decycle(question_collection, true)));        
+        
     $('.arrangement').val(JSON.stringify(JSON.decycle(question_collection, true)));
-
+    $('.arrangement_state').val(1);
 }
 
 /*
@@ -503,6 +502,30 @@ $('.collapse-lessons-btn').click(function(e) {
     }
 });
 
+/*
+
+  ADD DEFAULT COURSE IMAGE WHEN IMAGE ERROR APPEARS
+
+*/
+
+$("img").bind('load', function() {
+
+    $('img').each(function(){
+        
+        $(this).on("error", function () {
+            
+            var img_type = $(this).attr('img-died');
+            var placeholder = 'image_placeholder_icon';
+            
+            $(this).addClass('error-image')
+                   .attr('src', 'http://saleschief-bucket.s3.amazonaws.com/assets/icons/'+placeholder+'.png');
+
+        }); 
+
+        $(this).fadeIn(800);
+    });
+
+});
 
 /*
 

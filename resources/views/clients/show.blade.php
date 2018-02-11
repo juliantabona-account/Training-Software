@@ -125,9 +125,8 @@
 
                         <div class="card">
                             <div class="card-body">
-                                <img data-src="holder.js/200x200" 
-                                     class="rounded mb-2 profile-image" 
-                                     src="/assets/icons/profile-placeholder.jpg">
+                                <img class="rounded mb-2 profile-image" 
+                                     src="http://saleschief-bucket.s3.amazonaws.com/assets/icons/profile-placeholder.jpg" img-died="image">
                                      <p class = "ml-2 res-brs-t res-brs-b pb-3 pt-3 res-text-9 res-text-sm-8 res-text-md-9">I'm a passionate leader with a proven track record for translating complex ideas into slick, successful campaigns.</p>
                                 <dl class="dl-horizontal ml-2">
                                     <dt class = "float-left mr-2 res-text-9 res-text-sm-8 res-text-md-9">First Name:</dt> <dd class = "res-text-9 res-text-sm-8 res-text-md-9">Julian</dd>
@@ -224,7 +223,7 @@
                                         <div class="chat-discussion">
 
                                             <div class="chat-message left">
-                                                <img class="message-avatar" src="/assets/icons/profile-placeholder.jpg" alt="">
+                                                <img class="message-avatar" src="http://saleschief-bucket.s3.amazonaws.com/assets/icons/profile-placeholder.jpg" img-died="image">
                                                 <div class="message">
                                                     <a class="message-author res-text-9 res-text-sm-9 res-text-md-9" href="#"> Michael Smith </a>
                                                     <span class="message-date"> Mon Jan 26 2015 - 18:39:23 </span>
@@ -234,7 +233,7 @@
                                                 </div>
                                             </div>
                                             <div class="chat-message right">
-                                                <img class="message-avatar" src="/assets/icons/profile-placeholder.jpg" alt="">
+                                                <img class="message-avatar" src="http://saleschief-bucket.s3.amazonaws.com/assets/icons/profile-placeholder.jpg" img-died="image">
                                                 <div class="message">
                                                     <a class="message-author res-text-9 res-text-sm-9 res-text-md-9" href="#"> Karl Jordan </a>
                                                     <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
@@ -244,7 +243,7 @@
                                                 </div>
                                             </div>
                                             <div class="chat-message right">
-                                                <img class="message-avatar" src="/assets/icons/profile-placeholder.jpg" alt="">
+                                                <img class="message-avatar" src="http://saleschief-bucket.s3.amazonaws.com/assets/icons/profile-placeholder.jpg" img-died="image">
                                                 <div class="message">
                                                     <a class="message-author res-text-9 res-text-sm-9 res-text-md-9" href="#"> Michael Smith </a>
                                                     <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
@@ -254,7 +253,7 @@
                                                 </div>
                                             </div>
                                             <div class="chat-message left">
-                                                <img class="message-avatar" src="/assets/icons/profile-placeholder.jpg" alt="">
+                                                <img class="message-avatar" src="http://saleschief-bucket.s3.amazonaws.com/assets/icons/profile-placeholder.jpg" img-died="image">
                                                 <div class="message">
                                                     <a class="message-author res-text-9 res-text-sm-9 res-text-md-9" href="#"> Alice Jordan </a>
                                                     <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
@@ -265,7 +264,7 @@
                                                 </div>
                                             </div>
                                             <div class="chat-message right">
-                                                <img class="message-avatar" src="/assets/icons/profile-placeholder.jpg" alt="">
+                                                <img class="message-avatar" src="http://saleschief-bucket.s3.amazonaws.com/assets/icons/profile-placeholder.jpg" img-died="image">
                                                 <div class="message">
                                                     <a class="message-author res-text-9 res-text-sm-9 res-text-md-9" href="#"> Mark Smith </a>
                                                     <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>

@@ -62,6 +62,12 @@ class LessonController extends Controller
         return redirect('/courses/'.$course_id.'/edit');
     }
 
+    public function notesImageUpload(Request $request, $course_id, $module_id, $lesson_id)
+    {
+
+        return 'uploading...';
+    }
+
 
     public function edit($course_id, $module_id, $lesson_id)
     {
