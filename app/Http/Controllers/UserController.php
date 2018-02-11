@@ -28,7 +28,10 @@ class UserController extends Controller
 
     public function show($client_id)
     {
-        $client = User::find($client_id);
+
+        $client = User::where('id', $client_id)->with(array('company', 'lessonViews', 'testSubmittions', 'courses'=>function($query){
+            $query->with('moduleWithLessons');
+        }))->first();
 
         return view('clients.show', compact('client'));
     }

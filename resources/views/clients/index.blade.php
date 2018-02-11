@@ -77,32 +77,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($clients as $client)
                                     <tr>
-                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">Julian</td>
-                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">Tabona</td>
-                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">(+267) 75993221</td>
-                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">brandontabona@gmail.com</td>
-                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9"><a href= "#" class="label label-primary">Active</a></td>
+                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">{{ $client->first_name }}</td>
+                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">{{ $client->last_name }}</td>
+                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">{{ $client->mobile }}</td>
+                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">{{ $client->email }}</td>
+                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9"><a href= "#" class="label label-primary">{{ $client->status }}</a></td>
                                         <td class="text-right">
                                             <div class="btn-group">
-                                                <a href= "/clients/1" class="btn-primary btn btn-sm res-text-sm-9 res-text-md-9">View</a>
-                                                <a href= "/clients/1" class="btn-success btn btn-sm res-text-sm-9 res-text-md-9">Inbox</a>
+                                                <a href= "/clients/{{ $client->id }}" class="btn-primary btn btn-sm res-text-sm-9 res-text-md-9">View</a>
+                                                <a href= "/clients/{{ $client->id }}" class="btn-success btn btn-sm res-text-sm-9 res-text-md-9">Inbox</a>
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">Pinky</td>
-                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">Sesiane</td>
-                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">(+267) 74647644</td>
-                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">pinkysesiane@gmail.com</td>
-                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9"><a href= "#" class="label label-primary">InActive</a></td>
-                                        <td class="text-right">
-                                            <div class="btn-group">
-                                                <a href= "/clients/1" class="btn-primary btn btn-sm res-text-sm-9 res-text-md-9">View</a>
-                                                <a href= "/clients/1" class="btn-success btn btn-sm res-text-sm-9 res-text-md-9">Inbox</a>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr>

@@ -10,4 +10,9 @@ class Company extends Model
         'name', 'description', 'contact', 'img'
     ];
 
+    public function clients()
+    {
+        return $this->hasMany('App\User');
+    }
+
 }

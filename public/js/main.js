@@ -508,21 +508,30 @@ $('.collapse-lessons-btn').click(function(e) {
 
 */
 
+//Wait for all the images to load
 $("img").bind('load', function() {
 
+    //Run through each image
     $('img').each(function(){
-        
+
+        var isChecked = $(this).hasClass('error-image-checked');
+
         $(this).on("error", function () {
             
-            var img_type = $(this).attr('img-died');
-            var placeholder = 'image_placeholder_icon';
-            
-            $(this).addClass('error-image')
-                   .attr('src', 'http://saleschief-bucket.s3.amazonaws.com/assets/icons/'+placeholder+'.png');
+            if( isChecked == false ){
+                
+                var img_type = $(this).attr('img-died');
+                var placeholder = 'image_placeholder_icon';
 
+                $(this).addClass('error-image')
+                       .attr('src', 'http://saleschief-bucket.s3.amazonaws.com/assets/icons/'+placeholder+'.png');
+
+           }
         }); 
 
-        $(this).fadeIn(800);
+        $(this).addClass('error-image-checked').fadeIn(800);
+
+        
     });
 
 });
@@ -566,3 +575,13 @@ function readURL(input) {
 $("#imgInp").change(function(){
     readURL(this);
 });  
+
+/*
+
+  INITIATE TOOLTIPS
+
+*/
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})

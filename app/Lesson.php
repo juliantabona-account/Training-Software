@@ -21,4 +21,9 @@ class Lesson extends Model
         return $this->hasMany('App\Test');
     }
 
+    public function viewedUsers()
+    {
+        return $this->belongsToMany('App\User');
+    }
+
 }
