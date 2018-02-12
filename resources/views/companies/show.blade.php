@@ -19,24 +19,24 @@
                     <div class="row">
                         <div class="col-12 col-sm-4 col-md-3 offset-lg-3 pt-1 pt-lg-0">
                             <h2 class = "res-text-8 res-text-md-6 res-text-lg-3">
-                                <i class="fas fa-building"></i>
+                                <i class="fa fa-building"></i>
                                 <span>{{ $company->name }}</span>
                             </h2>
                         </div>
                         <div class="col-12 col-sm-5 col-md-7 col-lg-4 pt-1 pt-lg-0">
                             <a href = "{{ route('company-list') }}" class = "res-mt-lg-10-1 res-text-9 res-sm-text-9 res-text-md-8 text-secondary d-inline-block mr-4">
-                                <i class="fas fa-building"></i>
+                                <i class="fa fa-building"></i>
                                 <span>Companies</span>
                             </a>
                             <a href = "{{ route('client-list') }}" class = "res-mt-lg-10-1 res-text-9 res-sm-text-9 res-text-md-8 text-secondary d-inline-block">
-                                <i class="fas fa-users"></i>
+                                <i class="fa fa-users"></i>
                                 <span>Clients</span>
                             </a>
                         </div>
 
                         <div class="col-12 col-sm-3 col-md-2 pr-0 pt-3 pt-sm-0 mt-2 mt-sm-0 res-brs-t res-brs-sm-t-n">
                             <a href = "{{ route('client-create') }}" class="btn btn-sm res-button app-red-btn float-right">
-                                <i class="fas fa-plus res-text-9" aria-hidden="true"></i>
+                                <i class="fa fa-plus res-text-9" aria-hidden="true"></i>
                                 <span class = "res-text-9">Add Client</span>
                             </a>
                         </div>

@@ -38,11 +38,11 @@
                     <div class="row">
                         <div class="col-5 offset-3">
                             <h2 class = "res-text-7 res-text-sm-5 res-text-md-3 text-center">
-                                <i class="fas fa-cube"></i>
+                                <i class="fa fa-cube"></i>
                                 <span>Create Lesson</span>
                             </h2>
                             <h4 class = "res-text-8 res-text-sm-8 res-text-md-8 text-center">
-                                <i class="fas fa-cubes"></i>
+                                <i class="fa fa-cubes"></i>
                                 <span>{{ $module->title }}</span>
                             </h4>
                         </div>
@@ -50,7 +50,7 @@
 
                         <div class="col-2 offset-2">
                             <a href = "/courses/{{ $course_id }}/edit" class="btn res-button app-red-btn">
-                                <i class="fas fa-arrow-circle-left res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
+                                <i class="fa fa-arrow-circle-left res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
                                 <span class = "res-text-9 res-text-sm-7 res-text-md-9">Go Back</span>
                             </a>
                         </div>
@@ -88,10 +88,10 @@
 
                                     @if($status == 'available')
                                         <div role="alert" class="alert alert-warning mt-3 mb-0 lesson-notes-title">
-                                            <i class="fas fa-film"></i> 
+                                            <i class="fa fa-film"></i> 
                                             <span>Lesson Video</span>
                                             <a href = "/courses/{{ $course_id }}/module/{{ $module->id }}/lesson/{{ $lesson->id }}/video" class="btn btn-sm btn-success res-button float-right">
-                                                <i class="fas fa-film res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
+                                                <i class="fa fa-film res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
                                                 <span class = "res-text-9 res-text-sm-7 res-text-md-9">Change Video</span>
                                             </a>
                                         </div>
@@ -99,10 +99,10 @@
                                     @elseif($status == 'empty') 
 
                                         <div class="alert alert-warning" role="alert">
-                                            <i class="fas fa-film" aria-hidden="true"></i>
+                                            <i class="fa fa-film" aria-hidden="true"></i>
                                             <span>No Video</span>
                                             <button type="submit" class="btn btn-sm res-button app-red-btn float-right pr-2 pl-2">
-                                                <i class="fas fa-film res-text-9 res-text-sm-7 res-text-md-9 mr-1" aria-hidden="true"></i>
+                                                <i class="fa fa-film res-text-9 res-text-sm-7 res-text-md-9 mr-1" aria-hidden="true"></i>
                                                 <span class = "res-text-9 res-text-sm-7 res-text-md-9">Add Video</span>
                                             </button> 
                                         </div>
@@ -110,7 +110,7 @@
                                     @else
                                         <div class="card mt-4">
                                             <div class="card-body app-red-gradient pt-3 pb-3">
-                                                <i class="fas fa-circle-notch fa-spin fa-2x fa-fw app-color-white"></i>
+                                                <i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw app-color-white"></i>
                                                 <span style="color: #fff;">Video Converting...</span>                                              
                                             </div>
                                         </div>
@@ -118,12 +118,12 @@
 
                                     <div class = "mt-3 ml-5 mr-5 editor-loader">
                                         <div class="alert alert-warning" role="alert">
-                                            <i class="fas fa-circle-notch fa-spin fa-1x fa-fw"></i>
+                                            <i class="fa fa-circle-o-notch fa-spin fa-1x fa-fw"></i>
                                             <span>Loading Editor...</span>
                                         </div>
                                     </div>
                                     <div class="alert alert-warning lesson-notes-title" role="alert">
-                                        <i class="fas fa-file-alt"></i>
+                                        <i class="fa fa-file-o"></i>
                                         <span>Lesson Notes</span>
                                     </div>
                                     <textarea id = "lesson-notes" class = "mt-4" name = "lesson-notes">{{ $lesson->notes }}</textarea>
@@ -145,7 +145,7 @@
 
                                 <div class="card-footer">
                                     <button type="submit" class="btn res-button app-red-btn float-right mt-2 pr-5 pl-5">
-                                        <i class="fas fa-save res-text-9 res-text-sm-7 res-text-md-9 mr-1" aria-hidden="true"></i>
+                                        <i class="fa fa-save res-text-9 res-text-sm-7 res-text-md-9 mr-1" aria-hidden="true"></i>
                                         <span class = "res-text-9 res-text-sm-7 res-text-md-9">Save Lesson</span>
                                     </button>
                                 </div>

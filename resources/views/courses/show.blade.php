@@ -63,14 +63,14 @@
                     <div class="row">
                         <div class="col-8">
                             <h2 class = "res-text-7 res-text-sm-5 res-text-md-3">
-                                <i class="fas fa-crosshairs"></i>
+                                <i class="fa fa-crosshairs"></i>
                                 <span>{{ $course->title }}</span>
                             </h2>
                         </div>
 
                         <div class="col-2 offset-2">
                             <a href = "/courses/{{ $course->id }}/edit" class="btn res-button app-red-btn">
-                                <i class="fas fa-pencil-alt res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
+                                <i class="fa fa-pencil res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
                                 <span class = "res-text-9 res-text-sm-7 res-text-md-9">Edit Course</span>
                             </a>
                         </div>
@@ -93,11 +93,11 @@
 
                         <div class = "col-6 offset-6 mb-4">
                             <button type="button" class="btn btn-secondary btn-sm collapse-lessons-btn float-right">
-                                <i aria-hidden="true" class="fas fa-minus-circle res-text-9 res-text-sm-7 res-text-md-9"></i> 
+                                <i aria-hidden="true" class="fa fa-minus-circle res-text-9 res-text-sm-7 res-text-md-9"></i> 
                                 <span class="res-text-9 res-text-sm-7 res-text-md-9">Collapse Lessons</span>
                             </button>
                             <button type="button" class="btn btn-secondary btn-sm collapse-modules-btn float-right mr-2">
-                                <i aria-hidden="true" class="fas fa-minus-circle res-text-9 res-text-sm-7 res-text-md-9"></i> 
+                                <i aria-hidden="true" class="fa fa-minus-circle res-text-9 res-text-sm-7 res-text-md-9"></i> 
                                 <span class="res-text-9 res-text-sm-7 res-text-md-9">Collapse Modules</span>
                             </button>
                         </div>
@@ -117,7 +117,7 @@
                                             <span class="module-lesson-counter float-right">{{ COUNT($module->lessons) }}</span>
                                         </h2>
 
-                                        <div class = "module-path-guideline"><i class="fas fa-minus-circle" aria-hidden="true"></i></div>
+                                        <div class = "module-path-guideline"><i class="fa fa-minus-circle" aria-hidden="true"></i></div>
 
                                         <div class = "module-content res-pl-10-2">
 
@@ -126,7 +126,7 @@
                                                 @foreach($module->lessons as $les_num => $lesson)
 
                                                     <div class = "lesson-row">
-                                                        <div class = "lesson-path-guideline"><i class="far fa-circle" aria-hidden="true"></i></div>
+                                                        <div class = "lesson-path-guideline"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
                                                         <table class="table">
                                                             <tbody>
                                                                 <tr>
@@ -134,16 +134,12 @@
 
                                                                         @foreach($videos as $video)
                                                                             @if($video['uri'] == $lesson->video_uri)
-                                                                                @if($video['status'] == 'available' && !empty($video['pictures']['sizes'][0]['link']))    
-                                                                                    <img class="mt-3" alt="{{ $lesson->title }}" 
-                                                                                         src="{{ $video['pictures']['sizes'][0]['link'] }}"  
-                                                                                         style="width: 100px;"
-                                                                                         img-died="image">
-                                                                                @else
-                                                                                    <div class="mt-3 p-4 app-red-gradient">
-                                                                                        <i class="fas fa-circle-notch fa-spin fa-2x fa-fw app-color-white"></i>
-                                                                                    </div>
-                                                                                @endif
+                                                                                
+                                                                                <img class="mt-3" alt="{{ $lesson->title }}" 
+                                                                                     src="{{ $video['pictures']['sizes'][0]['link'] }}"  
+                                                                                     style="width: 100px;"
+                                                                                     img-died="video">
+
                                                                             @endif
                                                                         @endforeach
 
@@ -157,7 +153,7 @@
                                                                             <div class = "row lesson-editor">
                                                                                 <div class = "col-lg-6"> 
                                                                                     <div class="m-t-sm">
-                                                                                        <a href="#" class="text-muted res-text-lg-9 mr-3"><i class="fas fa-file-alt"></i> Take Test</a>
+                                                                                        <a href="#" class="text-muted res-text-lg-9 mr-3"><i class="fa fa-file-text-o"></i> Take Test</a>
                                                                                         <span class="badge badge-success mb-1">Completed!</span>
                                                                                     </div>
                                                                                 </div>
@@ -168,7 +164,7 @@
                                                                     <td class="desc table-action">
                                                                         
                                                                         <a href="/courses/1/lessons/1" class="btn res-button app-white-btn res-mt-lg-10-4 float-right">
-                                                                            <i aria-hidden="true" class="fas fa-play-circle res-text-9 res-text-sm-7 res-text-md-9 mr-1 text-success"></i>
+                                                                            <i aria-hidden="true" class="fa fa-play-circle res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>
                                                                             <span class = "res-text-9 res-text-sm-7 res-text-md-9">Start Lesson</span>
                                                                         </a>  
 
@@ -183,14 +179,14 @@
                                             @else
 
                                                 <div class="alert alert-warning no-lessons pt-4 pb-4" role="alert">
-                                                    <i class="fas fa-book mr-2" aria-hidden="true"></i>
+                                                    <i class="fa fa-book mr-2" aria-hidden="true"></i>
                                                     <span>No Lessons For Module {{ $mod_num + 1 }}</span>
                                                 </div>                                        
 
                                             @endif 
                                             @if(COUNT($module->lessons))
                                                 <div class="alert alert-info no-lessons pt-3 pb-3 mb-5" role="alert">
-                                                    <i class="fas fa-check-circle mr-2" aria-hidden="true"></i>
+                                                    <i class="fa fa-check-circle-o mr-2" aria-hidden="true"></i>
                                                     <span>End Of Module {{ $mod_num + 1 }}</span>
                                                 </div> 
                                             @endif
@@ -198,7 +194,7 @@
 
                                          @if($loop->last)
                                             <div class = "module-path-end-guideline">
-                                                <i class="fas fa-check-circle" aria-hidden="true"></i>
+                                                <i class="fa fa-check-circle-o" aria-hidden="true"></i>
                                                 <p class="res-text-9 res-text-sm-7 res-text-md-9 mb-2">Done</p>
                                             </div>  
                                          @endif 
@@ -213,7 +209,7 @@
 
                         <div class="card-body">
                             <h2 class = "res-text-8 mt-1">
-                                <i class="fas fa-flag mr-1" aria-hidden="true"></i>
+                                <i class="fa fa-flag mr-1" aria-hidden="true"></i>
                                 <span>Course Progress</span>
                             </h2>
                             <div class="progress">
@@ -228,7 +224,7 @@
                             <div class = "row">
                                 <div class = "col-lg-12"> 
                                     <h2 class = "res-text-8 mt-1">
-                                        <i class="fas fa-bullhorn mr-1" aria-hidden="true"></i>
+                                        <i class="fa fa-bullhorn mr-1" aria-hidden="true"></i>
                                         <span>Announcements</span>
                                     </h2>
                                 </div> 
@@ -241,7 +237,7 @@
 
                         <div class="card-footer">
                             <button type="submit" class="btn res-button app-red-btn float-right">
-                                <i class="fas fa-question-circle res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
+                                <i class="fa fa-question-circle res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
                                 <span class = "res-text-9 res-text-sm-7 res-text-md-9">Ask Question</span>
                             </button>
                         </div>

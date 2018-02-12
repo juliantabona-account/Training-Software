@@ -7,19 +7,19 @@
         <ul class="navbar-nav ml-auto pt-3">
             <li class="nav-item pt-3 pb-2 pl-3 p-md-2 active">
                 <a class="nav-link" href="#">
-                    <i class="fas fa-home" aria-hidden="true"></i>
+                    <i class="fa fa-home" aria-hidden="true"></i>
                     <span>Home</span>
                 </a>
             </li>
             <li class="nav-item pt-3 pb-2 pl-3 p-md-2">
                 <a class="nav-link" href="#">
-                    <i class="far fa-life-ring" aria-hidden="true"></i>
+                    <i class="fa fa-phone" aria-hidden="true"></i>
                     <span>Support</span>
                 </a>
             </li>
             <li class="nav-item pt-3 pb-2 pl-3 p-md-2">
                 <a class="nav-link" href="/login">
-                    <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
+                    <i class="fa fa-sign-in" aria-hidden="true"></i>
                     <span>Login</span>
                 </a>
             </li>

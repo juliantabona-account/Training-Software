@@ -46,17 +46,17 @@
                     <div class="row">
                         <div class="col-3 offset-3">
                             <h2 class = "res-text-7 res-text-sm-5 res-text-md-3">
-                                <i class="fas fa-user"></i>
+                                <i class="fa fa-user"></i>
                                 <span>Add Client</span>
                             </h2>
                         </div>
                         <div class="col-12 col-sm-5 col-md-7 col-lg-4 pt-1 pt-lg-0">
                             <a href = "{{ route('company-list') }}" class = "res-mt-lg-10-1 res-text-9 res-sm-text-9 res-text-md-8 text-secondary d-inline-block mr-4">
-                                <i class="fas fa-building"></i>
+                                <i class="fa fa-building"></i>
                                 <span>Companies</span>
                             </a>
                             <a href = "{{ route('client-list') }}" class = "res-mt-lg-10-1 res-text-9 res-sm-text-9 res-text-md-8 text-secondary d-inline-block">
-                                <i class="fas fa-users"></i>
+                                <i class="fa fa-users"></i>
                                 <span>Clients</span>
                             </a>
                         </div>
@@ -81,8 +81,13 @@
                             </div>
                             <div class="card-body">
                                 <h4 class="card-title res-text-6 mb-1">{{ $course->title }}</h4>
+                                @if($course->state == 'Published')
+                                    <span class="badge badge-success mb-1">{{ $course->state }}</span>
+                                @else
+                                    <span class="badge badge-secondary">{{ $course->state }}</span>
+                                @endif
                                 
-                                <p class="res-text-9 mt-1 pt-2 pb-2 res-brs-lg-b res-brs-lg-t">
+                                <p class="res-text-9 pb-3">
                                     {{ $course->overview }}
                                 </p>
                             </div>
@@ -92,7 +97,7 @@
                     <div class="col-lg-5">
                         @if(Session::has('status'))
                             <div class="alert alert-{{ Session::get('type') }}" role="alert">
-                                <span class = "res-text-9 res-text-sm-9 res-text-md-9"><i class="fas fa-user mr-1"></i> {{ Session::get('status') }}</span>
+                                <span class = "res-text-9 res-text-sm-9 res-text-md-9"><i class="fa fa-user mr-1"></i> {{ Session::get('status') }}</span>
                                 <button type="button" class="close mt-2 d-block res-text-9 res-text-sm-9 res-text-md-9" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -197,7 +202,7 @@
                                                                         {{ csrf_field() }}
                                                                         <input type = "hidden" :value = "result.id" name = "client-id">
                                                                         <button type = "submit" class="btn btn-sm btn-success float-right mr-1">
-                                                                            <i aria-hidden="true" class="fas fa-user-plus res-text-9"></i>
+                                                                            <i aria-hidden="true" class="fa fa-user-plus res-text-9"></i>
                                                                         </button>
                                                                     </form>
                                                                 </td>

@@ -23,14 +23,14 @@
                     <div class="row">
                         <div class="col-12 col-sm-4 col-md-4 offset-lg-3 pt-1 pt-lg-0">
                             <h2 class = "res-text-8 res-text-md-6 res-text-lg-3">
-                                <i class="fas fa-building"></i>
+                                <i class="fa fa-building"></i>
                                 <span>Edit Company</span>
                             </h2>
                         </div>
 
                         <div class="col-12 col-sm-3 offset-sm-5 col-md-2 offset-md-6 offset-lg-3 pr-0 pt-3 pt-sm-0 mt-2 mt-sm-0 res-brs-t res-brs-sm-t-n">
                             <a href = "{{ route('company-list') }}" class="btn btn-sm res-button app-red-btn float-right">
-                                <i class="fas fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
+                                <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
                                 <span class = "res-text-9">Companies</span>
                             </a>
                         </div>
