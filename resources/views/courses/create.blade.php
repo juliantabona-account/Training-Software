@@ -8,7 +8,6 @@
     
     <style>
 
-
     </style>
 
 @endsection
@@ -24,7 +23,7 @@
                     <div class="row">
                         <div class="col-5 offset-3">
                             <h2 class = "res-text-7 res-text-sm-5 res-text-md-3">
-                                <i class="fa fa-cubes"></i>
+                                <i class="fas fa-cubes"></i>
                                 <span>Create Course</span>
                             </h2>
                         </div>
@@ -32,7 +31,7 @@
 
                         <div class="col-2 offset-2">
                             <a href = "{{ route('course-list') }}" class="btn res-button app-red-btn">
-                                <i class="fa fa-arrow-circle-left res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
+                                <i class="fas fa-arrow-circle-left res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
                                 <span class = "res-text-9 res-text-sm-7 res-text-md-9">Go Back</span>
                             </a>
                         </div>
@@ -66,7 +65,7 @@
                                         <div class="input-group">
                                             <span class="input-group-btn">
                                                 <span class="btn btn-default btn-file form-control res-text-9 res-text-sm-8 res-text-md-9">
-                                                    <i class="fa fa-picture-o res-text-9 res-text-sm-8 res-text-md-9 mr-1" aria-hidden="true"></i> Upload <input type="file" id="imgInp" name = "course-image">
+                                                    <i class="far fa-image upload-image-icon res-text-9 res-text-sm-8 res-text-md-9 mr-1" aria-hidden="true"></i> Upload <input type="file" id="imgInp" name = "course-image">
                                                 </span>
                                             </span>
                                             <input type="text" class="form-control" readonly>

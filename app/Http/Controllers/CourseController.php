@@ -38,6 +38,14 @@ class CourseController extends Controller
         return view('courses.index', compact('courses', 'published_counter', 'draft_counter', 'filter'));
     }
 
+    public function enroll(Request $request)
+    {
+        $courses = Course::orderBy('created_at', 'desc')->get();
+        $client_id = $request::input('client-id');
+        
+        return view('courses.enroll', compact('courses', 'client_id'));
+    }
+
     public function show($course_id)
     {
         $course = Course::find($course_id);
@@ -73,6 +81,8 @@ class CourseController extends Controller
     public function store(Request $request)
     {
 
+        $image_name = '';
+
         if(Input::file())
         {
 
@@ -82,9 +92,21 @@ class CourseController extends Controller
                 $constraint->upsize();
             })->crop(318, 180, 0, 0);
 
+            if($image->guessClientExtension() == 'jpeg' || $image->guessClientExtension() == 'jpg'){
+                
+                Image::make($image)->encode('jpg', 60);
+            
+            }else if($image->guessClientExtension() == 'png'){
+                
+                Image::make($image)->encode('png', 60);
+            
+            }
+
             $image_name = 'courses/crs_'.time().uniqid().'.'.$image->guessClientExtension();
             
             Storage::disk('s3')->put($image_name, file_get_contents($image), 'public');
+
+            $image_name = env('AWS_URL').$image_name;
         }
 
 
@@ -92,7 +114,7 @@ class CourseController extends Controller
 	                'title' => $request::input('course-title'),
 	                'overview' => $request::input('course-overview'),
 	                'announcement' => 'Welcome to "' . $request::input('course-title') . '". Complete lessons in their order to unlock other modules.',
-        		    'img' => env('AWS_URL').$image_name
+        		    'img' => $image_name
                 ]);
 
         $module = Module::create([
@@ -140,6 +162,7 @@ class CourseController extends Controller
     {
 
         $filename = '';
+        $image_name = '';
 
         if(Input::file())
         {
@@ -159,20 +182,24 @@ class CourseController extends Controller
             
             Storage::disk('s3')->put($image_name, file_get_contents($image), 'public');
 
+            $image_name = env('AWS_URL').$image_name;
+
         }
+
+
 
         $course = Course::find($course_id)->update([
 	                'title' => $request::input('course-title'),
 	                'overview' => $request::input('course-overview'),
 	                'announcement' => $request::input('course-announcement'),
-                    'img' => env('AWS_URL').$image_name
+                    'img' => $image_name
         		]);
 
         //Get The New Module Arrangement
         $arrangement = json_decode( $request::input('arrangement') , true );
 
         //If We Have A New Arrangement Lets Continue 
-        if(COUNT($arrangement)){
+        if(isset($arrangement) && !empty($arrangement)){
 	        //For Each Module Lets Save The New Arrangement
 	        for($x = 0; $x < $arrangement['length']; $x++){
 
@@ -212,8 +239,15 @@ class CourseController extends Controller
 
     public function delete($course_id)
     {
+
         $course = Course::find($course_id);
-        Storage::delete('public/images/courses/'.$course->img);
+
+        $image = str_replace(env('AWS_URL'), '', $course->img);
+
+        if(Storage::disk('s3')->exists( $image )) {
+            Storage::disk('s3')->delete( $image );
+        }
+
         $course->delete();
 
         return redirect()->route('course-list');

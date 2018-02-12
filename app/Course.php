@@ -34,13 +34,4 @@ class Course extends Model
         			->with('lessonsAndTests');
     }
 
-    public function getImgAttribute($value)
-    {
-        if($value){
-            return $value;
-        }else{
-            return '/assets/temp/placeholder.png';
-        }
-    }
-
 }

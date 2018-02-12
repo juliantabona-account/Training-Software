@@ -41,18 +41,18 @@
                     <div class="row">
                         <div class="col-5 offset-3">
                             <h2 class = "res-text-7 res-text-sm-5 res-text-md-3 text-center">
-                                <i class="fa fa-cube"></i>
+                                <i class="fas fa-cube"></i>
                                 <span>Create Lesson</span>
                             </h2>
                             <h4 class = "res-text-8 res-text-sm-8 res-text-md-8 text-center">
-                                <i class="fa fa-cubes"></i>
+                                <i class="fas fa-cubes"></i>
                                 <span>{{ $module->title }}</span>
                             </h4>
                         </div>
 
                         <div class="col-2 offset-2">
                             <a href = "/courses/{{ $course_id }}/edit" class="btn res-button app-red-btn">
-                                <i class="fa fa-arrow-circle-left res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
+                                <i class="fas fa-arrow-circle-left res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
                                 <span class = "res-text-9 res-text-sm-7 res-text-md-9">Go Back</span>
                             </a>
                         </div>
@@ -91,7 +91,7 @@
                                     <div>
                                         <div class = "mt-3 ml-2 editor-loader">
                                             <div class="alert alert-warning" role="alert">
-                                                <i class="fa fa-circle-o-notch fa-spin fa-1x fa-fw"></i>
+                                                <i class="fas fa-circle-notch fa-spin fa-1x fa-fw"></i>
                                                 <span>Loading Editor...</span>
                                             </div>
                                         </div>
@@ -101,7 +101,7 @@
 
                                             <p style="text-align: center; font-size: 15px;" data-mce-style="text-align: center; font-size: 15px;">
                                                 <span style="color: rgb(0, 0, 0);" data-mce-style="color: #000000;">
-                                                    <img title="SALESFORCE LOGO" src="../../../../../../assets/icons/Saleschief-Logo.png" alt="SALESFORCE LOGO" width="180" height="auto" data-mce-src="../../../../../../assets/icons/Saleschief-Logo.png" data-mce-selected="1">
+                                                    <img title="SalesChief Logo" src="../../../../../../assets/icons/Saleschief-Logo.png" alt="SalesChief Logo" width="180" height="auto" data-mce-src="../../../../../../assets/icons/Saleschief-Logo.png" data-mce-selected="1">
                                                 </span>
                                             </p>
                                             <h1 style="text-align: center;" data-mce-style="text-align: center;">
@@ -164,7 +164,7 @@
 
                                 <div class="card-footer">
                                     <button type="submit" class="btn res-button app-red-btn mt-2 float-right">
-                                        <i class="fa fa-cloud-upload res-text-9 res-text-sm-7 res-text-md-9 mr-1" aria-hidden="true"></i>
+                                        <i class="fas fa-cloud-upload-alt res-text-9 res-text-sm-7 res-text-md-9 mr-1" aria-hidden="true"></i>
                                         <span class = "res-text-9 res-text-sm-7 res-text-md-9">Upload Lesson</span>
                                     </button>
                                 </div>
@@ -196,7 +196,7 @@
             theme: 'modern',
             plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
             toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
-            image_advtab: true,
+            images_upload_url: '/courses/{{ $course_id }}/module/{{ $module->id }}/lesson/notes',
             templates: [
                 { title: 'Test template 1', content: 'Test 1' },
                 { title: 'Test template 2', content: 'Test 2' }

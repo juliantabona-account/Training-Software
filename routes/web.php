@@ -22,6 +22,7 @@ Auth::routes();
 */
 Route::get('/courses', 'CourseController@index')->name('course-list');
 Route::post('/courses', 'CourseController@store')->name('course-save');
+Route::get('/courses/enroll', 'CourseController@enroll')->name('course-enroll');
 Route::get('/courses/create', 'CourseController@create')->name('course-create');
 Route::get('/courses/{course_id}', 'CourseController@show');
 Route::put('/courses/{course_id}', 'CourseController@update');
@@ -42,7 +43,7 @@ Route::get('/courses/{course_id}/module/{module_id}/edit', 'ModuleController@edi
 /* 
 	LESSONS - ADD, EDIT, UPDATE, DELETE
 */
-
+Route::post('/courses/{course_id}/module/{module_id}/lesson/notes', 'LessonController@notesImageUpload');
 Route::post('/courses/{course_id}/module/{module_id}/lesson', 'LessonController@store');
 Route::get('/courses/{course_id}/module/{module_id}/lesson/create', 'LessonController@create');
 Route::put('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}', 'LessonController@update');
@@ -51,6 +52,11 @@ Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/edit', 'L
 Route::post('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/video', 'LessonController@videoUpload')->name('lesson-video-save');
 Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/video', 'LessonController@video')->name('lesson-video');
 
+/* 
+	LESSON NOTES - ADD, EDIT, UPDATE, DELETE
+*/
+
+
 
 /* 
 	TESTS - ADD, EDIT, UPDATE, DELETE
@@ -58,12 +64,13 @@ Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/video', '
 Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests', 'TestController@index')->name('test-list');
 Route::post('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests', 'TestController@store')->name('test-save');
 Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests/create', 'TestController@create')->name('test-create');
-Route::put('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests/{test_id}', 'TestController@create');
+Route::put('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests/{test_id}', 'TestController@update');
+Route::delete('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests/{test_id}', 'TestController@delete');;
 Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests/{test_id}/edit', 'TestController@edit');
 
 
 /* 
-	CLIENTTS - ADD, EDIT, UPDATE, DELETE
+	CLIENTS - ADD, EDIT, UPDATE, DELETE
 */
 
 Route::get('/clients', 'UserController@index')->name('client-list');

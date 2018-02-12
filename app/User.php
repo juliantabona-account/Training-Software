@@ -46,4 +46,24 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Course')->withTimestamps();
     }
 
+    public function company()
+    {
+        return $this->belongsTo('App\Company');
+    }
+
+    public function lessonViews()
+    {
+        return $this->belongsToMany('App\Lesson')
+                    ->orderBy('lesson_user.created_at', 'desc')
+                    ->withTimestamps();
+    }
+
+    public function testSubmittions()
+    {
+        return $this->belongsToMany('App\Test')
+                    ->orderBy('test_user.created_at', 'asc')
+                    ->withPivot('pass_state', 'submittion')
+                    ->withTimestamps();
+    }
+
 }

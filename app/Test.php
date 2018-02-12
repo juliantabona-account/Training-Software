@@ -25,4 +25,8 @@ class Test extends Model
         return $this->belongsTo('App\Lesson');
     }
 
+    public function testedUsers()
+    {
+        return $this->belongsToMany('App\User');
+    }
 }

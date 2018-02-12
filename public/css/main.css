@@ -21,6 +21,10 @@ button{
     position:relative;
 }
 
+.flip-x{
+    transform: scaleX(-1);
+}
+
 /* RESPONSIVE MENU BUTTON */
 
 @media (max-width: 576px) { 
@@ -2850,14 +2854,6 @@ button{
     display: block;
 }
 
-#img-upload {
-    width: 125px;
-    margin-top: 10px;
-    padding: 5px;
-    border: 1px solid #d1d1d1;
-    display: none;
-}
-
 /* LESSONS/MODULES */
 
 .master-path-guideline{
@@ -2906,12 +2902,12 @@ button{
     background: #fff;
 }
 
-.module-path-guideline i,
-.module-path-end-guideline i {
+.module-path-guideline svg,
+.module-path-end-guideline svg {
     color: #ff3e3e;
 }
 
-.module-path-end-guideline i {
+.module-path-end-guideline svg {
     display: block;
     margin: 5px auto 0 !important;
     text-align: center !important;
@@ -2964,12 +2960,14 @@ button{
     background: #fff; 
 }
 
-.lesson-path-guideline i {
+.lesson-path-guideline svg {
     color: #ff3e3e;
 }
 
-
-
+.upload-image-icon{
+    width: 15px !important;
+    height: 25px !important;
+}
 
 
 

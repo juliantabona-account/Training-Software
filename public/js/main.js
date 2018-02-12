@@ -6,13 +6,13 @@ $(document).on("click",".add-true-false-btn",function() {
             '<input class = "question-type" type = "hidden" value = "truefalse">'+
             '<div class="lesson-row">'+
                 '<input class="avail_lesson" type="hidden" value="31">'+
-                '<div class="lesson-path-guideline"><i class="fa fa-circle-o" aria-hidden="true"></i></div>'+
+                '<div class="lesson-path-guideline"><i class="far fa-circle" aria-hidden="true"></i></div>'+
                 '<table class="table">'+
                     '<tbody>'+
                         '<tr>'+
                             '<td class="desc table-content">'+ 
                                 '<span class="question-number-tag res-text-9 res-text-sm-8 res-text-md-9">Question 1</span>'+ 
-                                '<i class="btn fa fa-arrows dragger-btn" aria-hidden="true"></i>'+
+                                '<i class="fas fa-arrows-alt dragger-btn" aria-hidden="true"></i>'+
                                 '<div class="lesson-content">'+
                                     '<div class="row">'+
                                         '<div class="col-12">'+
@@ -28,13 +28,13 @@ $(document).on("click",".add-true-false-btn",function() {
                                                 '<label class="form-check-label res-text-9 res-text-sm-8 res-text-md-9" for="inlineRadio2"> False </label>'+
                                             '</div>'+
                                             '<button type="button" class="add-multiple-choice-btn btn btn-sm btn-success float-right res-text-9 res-text-sm-8 res-text-md-9 res-pl-10-1 ml-2">'+
-                                                '<i aria-hidden="true" class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>Multiple Choice'+
+                                                '<i aria-hidden="true" class="fas fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>Multiple Choice'+
                                             '</button>'+   
                                             '<button type="button" class="add-true-false-btn btn btn-sm btn-success float-right res-text-9 res-text-sm-8 res-text-md-9 res-pl-10-1 ml-2">'+
-                                                '<i aria-hidden="true" class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>True/False'+
+                                                '<i aria-hidden="true" class="fas fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>True/False'+
                                             '</button>'+                                                                        
                                             '<button type="button" class="delete-question-btn btn btn-sm btn-danger res-pl-10-1 float-right res-text-9 res-text-sm-8 res-text-md-9">'+
-                                                '<i aria-hidden="true" class="fa fa-trash res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>'+
+                                                '<i aria-hidden="true" class="fas fa-trash-alt res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>'+
                                             '</button>'+
                                         '</div>'+
                                     '</div>'+
@@ -60,13 +60,13 @@ $(document).on("click",".add-multiple-choice-btn",function() {
             '<input class = "question-type" type = "hidden" value = "multiplechoice">'+
             '<div class="lesson-row">'+
                 '<input class="avail_lesson" type="hidden" value="31">'+
-                '<div class="lesson-path-guideline"><i class="fa fa-circle-o" aria-hidden="true"></i></div>'+
+                '<div class="lesson-path-guideline"><i class="far fa-circle" aria-hidden="true"></i></div>'+
                 '<table class="table">'+
                     '<tbody>'+
                         '<tr>'+
                             '<td class="desc table-content">'+ 
                                 '<span class="question-number-tag res-text-9 res-text-sm-8 res-text-md-9">Question 1</span>'+ 
-                                '<i class="btn fa fa-arrows dragger-btn" aria-hidden="true"></i>'+
+                                '<i class="fas fa-arrows-alt dragger-btn" aria-hidden="true"></i>'+
                                 '<div class="lesson-content">'+
                                     '<div class="row">'+
                                         '<div class="col-12">'+
@@ -80,10 +80,10 @@ $(document).on("click",".add-multiple-choice-btn",function() {
                                                         '<input type="text" name="multiple-choice-option" placeholder="Enter option 1" required="required" class="multiple-choice-option d-inline-block form-control res-text-9 res-text-md-9 res-text-sm-8 w-50">'+
                                                         '<div class = "multiple-choice-toolbox d-inline">'+
                                                             '<button type="button" class="btn btn-sm delete-multiple-choice-option-btn btn-danger ml-2 res-pl-10-1 res-text-9 res-text-sm-8 res-text-md-9">'+
-                                                                '<i aria-hidden="true" class="fa fa-trash res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>'+
+                                                                '<i aria-hidden="true" class="fas fa-trash-alt res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>'+
                                                             '</button>'+
                                                             '<button type="button" class="btn btn-sm add-multiple-choice-option-btn btn-success res-text-9 res-text-sm-8 res-text-md-9 res-pl-10-1 ml-2">'+
-                                                                '<i aria-hidden="true" class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>'+
+                                                                '<i aria-hidden="true" class="fas fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>'+
                                                             '</button>'+ 
                                                         '</div>'+
                                                      '</label>'+
@@ -94,10 +94,10 @@ $(document).on("click",".add-multiple-choice-btn",function() {
                                                         '<input type="text" name="multiple-choice-option" placeholder="Enter option 2" required="required" class="multiple-choice-option d-inline-block form-control res-text-9 res-text-md-9 res-text-sm-8 w-50">'+
                                                         '<div class = "multiple-choice-toolbox d-inline">'+
                                                             '<button type="button" class="btn btn-sm delete-multiple-choice-option-btn btn-danger ml-2 res-pl-10-1 res-text-9 res-text-sm-8 res-text-md-9">'+
-                                                                '<i aria-hidden="true" class="fa fa-trash res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>'+
+                                                                '<i aria-hidden="true" class="fas fa-trash-alt res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>'+
                                                             '</button>'+
                                                             '<button type="button" class="btn btn-sm add-multiple-choice-option-btn btn-success res-text-9 res-text-sm-8 res-text-md-9 res-pl-10-1 ml-2">'+
-                                                                '<i aria-hidden="true" class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>'+
+                                                                '<i aria-hidden="true" class="fas fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>'+
                                                             '</button>'+ 
                                                         '</div>'+
                                                      '</label>'+
@@ -105,13 +105,13 @@ $(document).on("click",".add-multiple-choice-btn",function() {
                                             '</div>'+
                                             '<div class = "pt-2 mt-3 res-brs-t">'+
                                                 '<button type="button" class="add-multiple-choice-btn btn btn-sm btn-success float-right res-text-9 res-text-sm-8 res-text-md-9 res-pl-10-1 ml-2">'+
-                                                    '<i aria-hidden="true" class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>Multiple Choice'+
+                                                    '<i aria-hidden="true" class="fas fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>Multiple Choice'+
                                                 '</button>'+   
                                                 '<button type="button" class="add-true-false-btn btn btn-sm btn-success float-right res-text-9 res-text-sm-8 res-text-md-9 res-pl-10-1 ml-2">'+
-                                                    '<i aria-hidden="true" class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>True/False'+
+                                                    '<i aria-hidden="true" class="fas fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>True/False'+
                                                 '</button>'+                                                                         
                                                 '<button type="button" class="delete-question-btn btn btn-sm btn-danger res-pl-10-1 float-right res-text-9 res-text-sm-8 res-text-md-9">'+
-                                                    '<i aria-hidden="true" class="fa fa-trash res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>'+
+                                                    '<i aria-hidden="true" class="fas fa-trash-alt res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>'+
                                                 '</button>'+
                                             '</div>'+
                                         '</div>'+
@@ -155,10 +155,10 @@ $(document).on("click",".add-multiple-choice-option-btn",function() {
                 '<input type="text" name="multiple-choice-option" placeholder="Enter option 1" required="required" class="multiple-choice-option d-inline-block form-control res-text-9 res-text-md-9 res-text-sm-8 w-50">'+
                 '<div class = "multiple-choice-toolbox d-inline">'+
                     '<button type="button" class="btn btn-sm delete-multiple-choice-option-btn btn-danger ml-2 res-pl-10-1 res-text-9 res-text-sm-8 res-text-md-9">'+
-                        '<i aria-hidden="true" class="fa fa-trash res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>'+
+                        '<i aria-hidden="true" class="fas fa-trash-alt res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>'+
                     '</button>'+
                     '<button type="button" class="btn btn-sm add-multiple-choice-option-btn btn-success res-text-9 res-text-sm-8 res-text-md-9 res-pl-10-1 ml-2">'+
-                        '<i aria-hidden="true" class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>'+
+                        '<i aria-hidden="true" class="fas fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>'+
                     '</button>'+ 
                 '</div>'+
              '</label>'+
@@ -250,7 +250,7 @@ $("ul.draggable").sortable({
             if( $(this).has('.no-lessons').length == 0){
                 $(this).append(
                     '<div class="alert alert-warning no-lessons pt-4 pb-4" role="alert">'+
-                        '<i class="fa fa-book mr-2" aria-hidden="true"></i>'+
+                        '<i class="fas fa-book mr-2" aria-hidden="true"></i>'+
                         '<span>No Lessons! Add a lesson.</span>'+
                     '</div>');
             }
@@ -275,7 +275,7 @@ $("ul.draggable").sortable({
 
                 $(this).append(
                     '<span href="#" class="new-zone-lesson res-text-sm-9">'+
-                             '<i class="fa fa-exclamation-circle mr-2" aria-hidden="true"></i> '+
+                             '<i class="fas fa-exclamation-circle mr-2" aria-hidden="true"></i> '+
                               '<span>from Module '+lesson_spotter_num+'</span>'+
                     '</span>');
                 }
@@ -370,10 +370,9 @@ function runQuestionsArrangement(){
         return arrangement;
 
     }));
-
-    console.log(JSON.stringify(JSON.decycle(question_collection, true)));        
+        
     $('.arrangement').val(JSON.stringify(JSON.decycle(question_collection, true)));
-
+    $('.arrangement_state').val(1);
 }
 
 /*
@@ -387,11 +386,11 @@ $('.module-path-guideline').click(function() {
 
     });
 
-    $(this).find('i').toggleClass("fa-minus-circle fa-plus-circle");
+    $(this).find('svg').toggleClass("fa-minus-circle fa-plus-circle");
 
     $(this).prev('h2').toggleClass("minimized-module-header");
 
-    if($(this).find('i').hasClass('fa-plus-circle')){
+    if($(this).find('svg').hasClass('fa-plus-circle')){
         
         $(this).parent().addClass('closed');
         $(this).prev('h2').addClass("minimized-module-header");
@@ -408,12 +407,12 @@ $('.module-path-guideline').click(function() {
     if(all_modules != closed_modules){
 
         $('.collapse-modules-btn').removeClass('active').addClass('btn-default').removeClass('btn-warning');
-        $('.collapse-modules-btn').find('i').removeClass("fa-plus-circle").addClass("fa-minus-circle");
+        $('.collapse-modules-btn').find('svg').removeClass("fa-plus-circle").addClass("fa-minus-circle");
 
     }else{
 
         $('.collapse-modules-btn').addClass('active').removeClass('btn-default').addClass('btn-warning').css('color', '#ffffff');
-        $('.collapse-modules-btn').find('i').removeClass("fa-minus-circle").addClass("fa-plus-circle");
+        $('.collapse-modules-btn').find('svg').removeClass("fa-minus-circle").addClass("fa-plus-circle");
 
     }
 
@@ -427,14 +426,14 @@ $('.collapse-modules-btn').click(function(e) {
 
         $('.module-row').removeClass('closed');
         $(this).removeClass('active').addClass('btn-default').removeClass('btn-warning');
-        $(this).find('i').removeClass("fa-plus-circle").addClass("fa-minus-circle");
+        $(this).find('svg').removeClass("fa-plus-circle").addClass("fa-minus-circle");
 
         $('.module-content').slideDown("slow");
 
-        $('.module-path-guideline').find('i').removeClass("fa-minus-circle");
-        $('.module-path-guideline').find('i').removeClass("fa-plus-circle");
+        $('.module-path-guideline').find('svg').removeClass("fa-minus-circle");
+        $('.module-path-guideline').find('svg').removeClass("fa-plus-circle");
 
-        $('.module-path-guideline').find('i').addClass("fa-minus-circle");
+        $('.module-path-guideline').find('svg').addClass("fa-minus-circle");
 
         $('.module-path-guideline').prev('h2').removeClass("minimized-module-header");
 
@@ -442,14 +441,14 @@ $('.collapse-modules-btn').click(function(e) {
 
         $('.module-row').addClass('closed');
         $(this).addClass('active').removeClass('btn-default').addClass('btn-warning').css('color', '#ffffff');
-        $(this).find('i').removeClass("fa-minus-circle").addClass("fa-plus-circle");
+        $(this).find('svg').removeClass("fa-minus-circle").addClass("fa-plus-circle");
 
         $('.module-content').slideUp("slow");
 
-        $('.module-path-guideline').find('i').removeClass("fa-minus-circle");
-        $('.module-path-guideline').find('i').removeClass("fa-plus-circle");
+        $('.module-path-guideline').find('svg').removeClass("fa-minus-circle");
+        $('.module-path-guideline').find('svg').removeClass("fa-plus-circle");
         
-        $('.module-path-guideline').find('i').addClass("fa-plus-circle");
+        $('.module-path-guideline').find('svg').addClass("fa-plus-circle");
         
         $('.module-path-guideline').prev('h2').addClass("minimized-module-header");
 
@@ -463,7 +462,7 @@ $('.collapse-lessons-btn').click(function(e) {
     if($(this).hasClass('active')){
 
         $(this).removeClass('active').addClass('btn-default').removeClass('btn-warning');
-        $(this).find('i').removeClass("fa-plus-circle").addClass("fa-minus-circle");
+        $(this).find('svg').removeClass("fa-plus-circle").addClass("fa-minus-circle");
 
         $('.module-row').addClass('closed');
         $('.module-content .lesson-row .table-video').slideDown("fast");
@@ -476,7 +475,7 @@ $('.collapse-lessons-btn').click(function(e) {
     }else{
         
         $(this).addClass('active').removeClass('btn-default').addClass('btn-warning').css('color', '#ffffff');
-        $(this).find('i').removeClass("fa-minus-circle").addClass("fa-plus-circle");
+        $(this).find('svg').removeClass("fa-minus-circle").addClass("fa-plus-circle");
 
         $('.module-row').removeClass('closed');
         $('.module-content .lesson-row .table-video').slideUp("fast");
@@ -492,7 +491,7 @@ $('.collapse-lessons-btn').click(function(e) {
 
             var question_text = $(this).find('.question').val();
             if(question_text == ''){
-                question_text = '<i class="fa fa-frown-o" aria-hidden="true"></i> No Question';
+                question_text = '<i class="fas fa-frown-o" aria-hidden="true"></i> No Question';
             }
             $(this).find('.table-content').prepend('<p class = "question-summary mt-4 mb-0 pl-1 res-text-9 res-text-md-9 res-text-sm-9">'+question_text+'</p>');
             $(this).find('.question-summary').hide().slideDown(1500)
@@ -503,6 +502,39 @@ $('.collapse-lessons-btn').click(function(e) {
     }
 });
 
+/*
+
+  ADD DEFAULT COURSE IMAGE WHEN IMAGE ERROR APPEARS
+
+*/
+
+//Wait for all the images to load
+$("img").one('load', function() {
+
+    //Run through each image
+    $('img').each(function(){
+
+        var isChecked = $(this).hasClass('error-image-checked');
+
+        $(this).on("error", function () {
+            
+            if( isChecked == false ){
+                
+                var img_type = $(this).attr('img-died');
+                var placeholder = 'image_placeholder_icon';
+
+                $(this).addClass('error-image')
+                       .attr('src', 'http://saleschief-bucket.s3.amazonaws.com/assets/icons/'+placeholder+'.png');
+
+           }
+        }); 
+
+        $(this).addClass('error-image-checked').fadeIn(800);
+
+        
+    });
+
+});
 
 /*
 
@@ -533,8 +565,16 @@ function readURL(input) {
         var reader = new FileReader();
         
         reader.onload = function (e) {
-            $('#img-upload').attr('src', e.target.result);
+            $('#img-upload').attr('src', e.target.result)
+            .css({
+                'width': '125px',
+                'margin-top': '10px',
+                'padding': '5px',
+                'border': '1px solid #d1d1d1',
+                'display': 'none'
+            });
         }
+
         
         reader.readAsDataURL(input.files[0]);
     }
@@ -543,3 +583,13 @@ function readURL(input) {
 $("#imgInp").change(function(){
     readURL(this);
 });  
+
+/*
+
+  INITIATE TOOLTIPS
+
+*/
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})

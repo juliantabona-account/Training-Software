@@ -10,13 +10,9 @@ class Company extends Model
         'name', 'description', 'contact', 'img'
     ];
 
-    public function getImgAttribute($value)
+    public function clients()
     {
-        if($value){
-            return '/assets/companies/' . $value;
-        }else{
-            return '/assets/temp/placeholder.png';
-        }
+        return $this->hasMany('App\User');
     }
 
 }
