@@ -97,14 +97,14 @@
                     <div class="row">
                         <div class="col-12 col-sm-4 col-md-4 offset-lg-3 pt-1 pt-lg-0">
                             <h2 class = "res-text-8 res-text-md-6 res-text-lg-3">
-                                <i class="fa fa-user"></i>
+                                <i class="fas fa-user"></i>
                                 <span>Profile / <a href = "/clients/{{ $client->id }}" class = "res-text-8 res-text-md-7 res-text-lg-5">{{ $client->first_name }}</a></span>
                             </h2>
                         </div>
 
                         <div class="col-12 col-sm-3 offset-sm-5 col-md-2 offset-md-6 offset-lg-3 pr-0 pt-3 pt-sm-0 mt-2 mt-sm-0 res-brs-t res-brs-sm-t-n">
                             <a href = "{{ route('client-list') }}" class="btn btn-sm res-button app-red-btn float-right">
-                                <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
+                                <i class="fas fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
                                 <span class = "res-text-9">Clients</span>
                             </a>
                         </div>
@@ -131,8 +131,8 @@
                                 <dl class="dl-horizontal ml-2">
                                     <dt class = "float-left mr-2 res-text-9 res-text-sm-8 res-text-md-9">First Name:</dt> <dd class = "res-text-9 res-text-sm-8 res-text-md-9">{{ $client->first_name }}</dd>
                                     <dt class = "float-left mr-2 res-text-9 res-text-sm-8 res-text-md-9">Last Name:</dt> <dd class = "res-text-9 res-text-sm-8 res-text-md-9">{{ $client->last_name }}</dd>
-                                    <dt class = "float-left mr-2 res-text-9 res-text-sm-8 res-text-md-9 pt-2"><i class="fa fa-phone"></i></dt> <dd class = "res-text-9 res-text-sm-8 res-text-md-9 res-brs-t pt-2">{{ $client->mobile }}</dd>
-                                    <dt class = "float-left mr-2 res-text-9 res-text-sm-8 res-text-md-9"><i class="fa fa-envelope"></i></dt> <dd class = "res-text-9 res-text-sm-8 res-text-md-9">{{ $client->email }}</dd>
+                                    <dt class = "float-left mr-2 res-text-9 res-text-sm-8 res-text-md-9 pt-2"><i class="fas fa-phone flip-x"></i></dt> <dd class = "res-text-9 res-text-sm-8 res-text-md-9 res-brs-t pt-2">{{ $client->mobile }}</dd>
+                                    <dt class = "float-left mr-2 res-text-9 res-text-sm-8 res-text-md-9"><i class="fas fa-envelope"></i></dt> <dd class = "res-text-9 res-text-sm-8 res-text-md-9">{{ $client->email }}</dd>
                                     <dt class = "float-left mr-2 res-text-9 res-text-sm-8 res-text-md-9">Company:</dt> <dd class = "res-text-9 res-text-sm-8 res-text-md-9"><a href = "/companies/{{ $client->company->id }}">{{ $client->company->name }}</a></dd>
                                     <dt class = "float-left mr-2 res-text-9 res-text-sm-8 res-text-md-9 pt-2">Gender:</dt> <dd class = "res-text-9 res-text-sm-8 res-text-md-9 res-brs-t pt-2">{{ $client->gender }}</dd>
                                     <dt class = "float-left mr-2 res-text-9 res-text-sm-8 res-text-md-9">Year Of Birth:</dt> <dd class = "res-text-9 res-text-sm-8 res-text-md-9">{{ $client->year_of_birth }}</dd>
@@ -150,10 +150,10 @@
 
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="progress-link" data-toggle="tab" href="#progressTab" role="tab"><i class="fa fa-bar-chart" aria-hidden="true"></i> Progress</a>
+                                        <a class="nav-link active" id="progress-link" data-toggle="tab" href="#progressTab" role="tab"><i class="far fa-chart-bar" aria-hidden="true"></i> Progress</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="discussion-link" data-toggle="tab" href="#discussionTab" role="tab"><i class="fa fa-comments" aria-hidden="true"></i> Discussions</a>
+                                        <a class="nav-link" id="discussion-link" data-toggle="tab" href="#discussionTab" role="tab"><i class="fas fa-comments" aria-hidden="true"></i> Discussions</a>
                                     </li>
                                 </ul>
 
@@ -164,7 +164,7 @@
                                             <div class="row mt-4">
                                                 <div class="col-8">
                                                     <div role="alert" class="alert alert-warning">
-                                                        <i class="fa fa-book mr-2"></i>
+                                                        <i class="fas fa-book mr-2"></i>
                                                         Not enrolled into any course
                                                     </div>
                                                 </div> 
@@ -174,7 +174,7 @@
                                                         <input type = "hidden" name = "client-id" value = "{{ $client->id }}">
                                                         <button type = "submit" class="btn btn-sm res-button app-red-btn float-right">
                                                             <span class = "res-text-9">Enroll Now</span>
-                                                            <i aria-hidden="true" class="fa fa-arrow-circle-right res-text-9 ml-1"></i> 
+                                                            <i aria-hidden="true" class="fas fa-arrow-circle-right res-text-9 ml-1"></i> 
                                                         </button>
                                                     </form>
                                                 </div>
@@ -186,13 +186,13 @@
                                             <div class = "row mt-4">
                                                 <div class = "col-8">
                                                     <div class="alert alert-warning" role="alert">
-                                                        <i class="fa fa-book"></i> {{ $course->title }}
+                                                        <i class="fas fa-book"></i> {{ $course->title }}
                                                     </div>
                                                 </div>
 
                                                 <div class = "col-4">
                                                     <a href="/advanced" class="btn res-button app-red-btn float-right">
-                                                        <i aria-hidden="true" class="fa fa-files-o res-text-9 mr-1"></i> 
+                                                        <i aria-hidden="true" class="fas fa-file-alt res-text-9 mr-1"></i> 
                                                         <span class="res-text-9">Advanced</span>
                                                     </a>
                                                 </div>
@@ -232,7 +232,7 @@
 
                                                                         }}">
                                                                        
-                                                                       <i class="fa fa-check" aria-hidden="true"></i>
+                                                                       <i class="fas fa-check" aria-hidden="true"></i>
                                                                     </a>
                                                                 @else
                                                                     ---
@@ -255,7 +255,7 @@
 
                                                                         }}">
                                                                        
-                                                                       <i class="fa fa-check" aria-hidden="true"></i>
+                                                                       <i class="fas fa-check" aria-hidden="true"></i>
                                                                     </a>
                                                                 @else
                                                                     ---
@@ -268,7 +268,7 @@
                                                             <td class = "res-text-9 res-text-sm-9 res-text-md-9"></td>
                                                             <td class = "res-text-9 res-text-sm-9 res-text-md-9"> 
                                                                 <div role="alert" class="alert alert-success p-1 pl-2">
-                                                                    <i class="fa fa-angle-double-right"></i> End Of Module {{ $module_count+1 }} - {{ $module->title }}
+                                                                    <i class="fas fa-angle-double-right"></i> End Of Module {{ $module_count+1 }} - {{ $module->title }}
                                                                 </div>
                                                             </td>
                                                             <td class = "res-text-9 res-text-sm-9 res-text-md-9"></td>
@@ -294,7 +294,7 @@
                                         <div class = "row mt-4">
                                             <div class = "col-8">
                                                 <div class="alert alert-primary" role="alert">
-                                                    <i class="fa fa-comments"></i> Discussions with Julian
+                                                    <i class="fas fa-comments"></i> Discussions with Julian
                                                 </div>
                                             </div>
                                         </div>

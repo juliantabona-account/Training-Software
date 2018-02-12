@@ -23,14 +23,14 @@
                     <div class="row">
                         <div class="col-12 col-sm-4 col-md-4 offset-lg-3 pt-1 pt-lg-0">
                             <h2 class = "res-text-8 res-text-md-6 res-text-lg-5">
-                                <i class="fa fa-film-o"></i>
+                                <i class="fas fa-film"></i>
                                 <span>Lesson Video</span>
                             </h2>
                         </div>
 
                         <div class="col-12 col-sm-3 offset-sm-5 col-md-2 offset-md-6 offset-lg-3 pr-0 pt-3 pt-sm-0 mt-2 mt-sm-0 res-brs-t res-brs-sm-t-n">
                             <a href = "/courses/{{ $course_id }}/edit" class="btn btn-sm res-button app-red-btn float-right">
-                                <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
+                                <i class="fas fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
                                 <span class = "res-text-9">Lessons</span>
                             </a>
                         </div>
@@ -52,7 +52,7 @@
                             <div class="card-body">
                                 <h1 class = "ml-2 pb-2 pt-1 res-text-9 res-text-sm-8 res-text-md-7">{{ $lesson->title }}</h1>
                                 <p class = "ml-2 res-brs-t pb-3 pt-3 res-text-9 res-text-sm-8 res-text-md-9">{{ $lesson->overview }}</p>
-                                <div class = "alert alert-warning res-brs-t"><span class = "mr-2">Choose A Video</span> <i aria-hidden="true" class="fa fa-arrow-circle-right res-text-9"></i></div>
+                                <div class = "alert alert-warning res-brs-t"><span class = "mr-2">Choose A Video</span> <i aria-hidden="true" class="fas fa-arrow-circle-right res-text-9"></i></div>
                             </div>
                         </div>
 
@@ -84,7 +84,7 @@
                                                                      style="width: 100px;"></td>
                                                     @else
                                                         <div class="mt-3 p-4 app-red-gradient">
-                                                            <i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw app-color-white ml-2"></i>
+                                                            <i class="fas fa-circle-notch fa-spin fa-2x fa-fw app-color-white ml-2"></i>
                                                         </div>
                                                     @endif
                                                 <td class = "res-text-9 res-text-sm-9 res-text-md-9 pt-5">{{ $video['name'] }}</td>

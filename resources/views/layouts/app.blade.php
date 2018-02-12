@@ -13,7 +13,7 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('fonts/font-awesome/css/font-awesome.min.css') }}">
+        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
         <!-- Linked Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">

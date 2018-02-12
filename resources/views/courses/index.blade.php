@@ -41,18 +41,18 @@
                     <div class="row">
                         <div class="col-12 col-sm-4 col-md-3 offset-lg-3 pt-1 pt-lg-0">
                             <h2 class = "res-text-8 res-text-md-6 res-text-lg-3">
-                                <i class="fa fa-book"></i>
+                                <i class="fas fa-book"></i>
                                 <span>All Courses</span>
                             </h2>
                         </div>
                         <div class="col-12 col-sm-5 col-md-7 col-lg-4 pt-1 pt-lg-0">
                             <a href = "/courses?filter=published" class = "res-mt-lg-10-1 res-text-9 res-sm-text-9 res-text-md-8 text-secondary d-inline-block mr-4">
-                                <i class="fa fa-check-square-o"></i>
+                                <i class="far fa-check-square"></i>
                                 <span>Published:</span>
                                 <span>{{ $published_counter }}</span>
                             </a>
                             <a href = "/courses?filter=draft" class = "res-mt-lg-10-1 res-text-9 res-sm-text-9 res-text-md-8 text-secondary d-inline-block">
-                                <i class="fa fa-pencil-square-o"></i>
+                                <i class="far fa-pen-square"></i>
                                 <span>Draft:</span>
                                 <span>{{ $draft_counter }}</span>
                             </a>
@@ -60,7 +60,7 @@
 
                         <div class="col-12 col-sm-3 col-md-2 pr-0 pt-3 pt-sm-0 mt-2 mt-sm-0 res-brs-t res-brs-sm-t-n">
                             <a href = "{{ route('course-create') }}" class="btn btn-sm res-button app-red-btn float-right">
-                                <i class="fa fa-plus res-text-9" aria-hidden="true"></i>
+                                <i class="fas fa-plus res-text-9" aria-hidden="true"></i>
                                 <span class = "res-text-9">Add Course</span>
                             </a>
                         </div>
@@ -81,7 +81,7 @@
                     <div class="row">
                         <div class="col-5 offset-3">
                             <div class="alert alert-warning" role="alert">
-                                <span class = "res-text-9 res-text-sm-9 res-text-md-9"><i class="fa fa-filter mr-1"></i> Diplaying {{ ucfirst($filter) }} Courses</span>
+                                <span class = "res-text-9 res-text-sm-9 res-text-md-9"><i class="fas fa-filter mr-1"></i> Diplaying {{ ucfirst($filter) }} Courses</span>
                                 <button type="button" class="close mt-2 d-block res-text-9 res-text-sm-9 res-text-md-9" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -99,7 +99,7 @@
 
                             @if(Session::has('status'))
                                 <div class="alert alert-{{ Session::get('type') }}" role="alert">
-                                    <span class = "res-text-9 res-text-sm-9 res-text-md-9"><i class="fa fa-user mr-1"></i> {{ Session::get('status') }}</span>
+                                    <span class = "res-text-9 res-text-sm-9 res-text-md-9"><i class="fas fa-user mr-1"></i> {{ Session::get('status') }}</span>
                                     <button type="button" class="close mt-2 d-block res-text-9 res-text-sm-9 res-text-md-9" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -117,18 +117,18 @@
                                         {{ $course->overview }}
                                     </p>
                                     <a href = "/courses/{{ $course->id }}/edit" class="btn btn-sm res-button app-red-btn float-right">
-                                        <i class="fa fa-pencil res-text-9" aria-hidden="true"></i>
+                                        <i class="fas fa-pencil-alt res-text-9" aria-hidden="true"></i>
                                         <span class = "res-text-9">Edit Course</span>
                                     </a>
                                     <form action = "/courses/{{ $course->id }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                         <button type = "submit" class="btn btn-sm btn-danger float-right mr-1">
-                                            <i class="fa fa-trash res-text-9" aria-hidden="true"></i>
+                                            <i class="fas fa-trash-alt res-text-9" aria-hidden="true"></i>
                                         </button>
                                     </form>
                                     <a href = "/courses/{{ $course->id }}/clients/create" class="btn btn-sm btn-success float-right mr-1">
-                                        <i class="fa fa-user-plus res-text-9" aria-hidden="true"></i>
+                                        <i class="fas fa-user-plus res-text-9" aria-hidden="true"></i>
                                     </a>
                                 </div>
                             </div>
@@ -145,7 +145,7 @@
                                 <div class="card-body">
                                     <p class="res-text-9 mt-1 pt-2 pb-2 res-brs-lg-b res-brs-lg-t">Get started by creating your first course and adding lessons.</p>
                                     <a href = "{{ route('course-create') }}" class="btn btn-sm res-button app-red-btn float-right">
-                                        <i class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
+                                        <i class="fas fa-plus res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
                                         <span class="res-text-9 res-text-sm-7 res-text-md-9">Create Course</span>
                                     </a>                           
                                 </div>

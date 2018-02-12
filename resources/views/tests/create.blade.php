@@ -49,8 +49,8 @@
             cursor: move !important;
             z-index: 100;
             position: absolute;
-            right: 5px;
-            top: 0px;
+            right: 15px;
+            top: 10px;
         }
 
         .question-number-tag {
@@ -86,18 +86,18 @@
                     <div class="row">
                         <div class="col-12 col-sm-4 col-md-4 offset-lg-3 pt-1 pt-lg-0">
                             <h2 class = "res-text-8 res-text-md-6 res-text-lg-3">
-                                <i class="fa fa fa-file-text-o"></i>
+                                <i class="fas fa-file-alt"></i>
                                 <span>Create Test</span>
                             </h2>
                         </div>
 
                         <div class="col-12 col-sm-6 offset-sm-2 col-md-4 offset-md-4 offset-lg-2 col-lg-3 pr-0 pt-3 pt-sm-0 mt-2 mt-sm-0 res-brs-t res-brs-sm-t-n">
                             <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests" class="btn btn-sm res-button app-red-btn float-right ml-2">
-                                <i class="fa fa-file-text-o res-text-9" aria-hidden="true"></i>
+                                <i class="fas fa-file-alt res-text-9" aria-hidden="true"></i>
                                 <span class = "res-text-9">View Tests</span>
                             </a>
                             <a href = "/courses/{{ $course_id }}/edit" class="btn btn-sm res-button app-red-btn float-right">
-                                <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
+                                <i class="fas fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
                                 <span class = "res-text-9">Lessons</span>
                             </a>
                         </div>
@@ -118,11 +118,11 @@
                     <div class = "col-12 mb-4">
                         <span class="question-count-tracker float-right p-1 pl-3 ml-2 res-brs-l">1 Question</span>
                         <button type="button" class="btn app-red-btn btn-sm collapse-lessons-btn float-right">
-                            <i aria-hidden="true" class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9"></i> 
+                            <i aria-hidden="true" class="fas fa-plus res-text-9 res-text-sm-7 res-text-md-9"></i> 
                             <span class="res-text-9 res-text-sm-7 res-text-md-9">Add Question</span>
                         </button>
                         <button type="button" class="btn btn-secondary btn-sm mr-2 collapse-lessons-btn float-right">
-                            <i aria-hidden="true" class="fa fa-minus-circle res-text-9 res-text-sm-7 res-text-md-9"></i> 
+                            <i aria-hidden="true" class="fas fa-minus-circle res-text-9 res-text-sm-7 res-text-md-9"></i> 
                             <span class="res-text-9 res-text-sm-7 res-text-md-9">Collapse Questions</span>
                         </button>
                     </div>
@@ -131,7 +131,7 @@
 
                         <div class = "module-row res-pl-10-1 pt-4"> 
 
-                            <div class = "module-path-guideline"><i class="fa fa-minus-circle" aria-hidden="true"></i></div>
+                            <div class = "module-path-guideline"><i class="fas fa-minus-circle" aria-hidden="true"></i></div>
 
                             <div class = "module-content res-pl-10-2">
 
@@ -144,13 +144,13 @@
                                         <input class = "question-type" type = "hidden" value = "truefalse">
                                         <div class="lesson-row">
                                             <input class="avail_lesson" type="hidden" value="31">
-                                            <div class="lesson-path-guideline"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
+                                            <div class="lesson-path-guideline"><i class="far fa-circle" aria-hidden="true"></i></div>
                                             <table class="table">
                                                 <tbody>
                                                     <tr>
                                                         <td class="desc table-content"> 
                                                             <span class="question-number-tag res-text-9 res-text-sm-8 res-text-md-9">Question 1</span> 
-                                                            <i class="btn fa fa-arrows dragger-btn" aria-hidden="true"></i>
+                                                            <i class="fas fa-arrows-alt dragger-btn" aria-hidden="true"></i>
                                                             <div class="lesson-content">
                                                                 <div class="row">
                                                                     <div class="col-12">
@@ -166,13 +166,13 @@
                                                                             <label class="form-check-label res-text-9 res-text-sm-8 res-text-md-9" for="questionChoice2"> False </label>
                                                                         </div>
                                                                         <button type="button" class="add-multiple-choice-btn btn btn-sm btn-success float-right res-text-9 res-text-sm-8 res-text-md-9 res-pl-10-1 ml-2">
-                                                                            <i aria-hidden="true" class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>Multiple Choice
+                                                                            <i aria-hidden="true" class="fas fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>Multiple Choice
                                                                         </button>
                                                                         <button type="button" class="add-true-false-btn btn btn-sm btn-success float-right res-text-9 res-text-sm-8 res-text-md-9 res-pl-10-1 ml-2">
-                                                                            <i aria-hidden="true" class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>True/False
+                                                                            <i aria-hidden="true" class="fas fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>True/False
                                                                         </button>                                                                        
                                                                         <button type="button" class="delete-question-btn btn btn-sm btn-danger res-pl-10-1 float-right res-text-9 res-text-sm-8 res-text-md-9">
-                                                                            <i aria-hidden="true" class="fa fa-trash res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>
+                                                                            <i aria-hidden="true" class="fas fa-trash-alt res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>
                                                                         </button>
                                                                     </div>
                                                                 </div>
@@ -205,7 +205,7 @@
                                 </div>
                                 <div class = "col-lg-6"> 
                                     <a href = "/courses/{{ $course_id }}" target="_blank" class="btn res-button app-white-btn float-right">
-                                        <i aria-hidden="true" class="fa fa-eye res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>
+                                        <i aria-hidden="true" class="fas fa-eye res-text-9 res-text-sm-7 res-text-md-9 mr-1 text-secondary"></i>
                                         <span class = "res-text-9 res-text-sm-7 res-text-md-9">Preview</span>
                                     </a> 
                                 </div> 
@@ -224,7 +224,7 @@
 
                         <div class="card-footer">
                             <button type = "submit" class="btn res-button app-red-btn float-right pr-5 pl-5">
-                                <i class="fa fa-floppy-o res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
+                                <i class="fas fa-save res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
                                 <span class = "res-text-9 res-text-sm-7 res-text-md-9">Save</span>
                             </button>
                         </div>

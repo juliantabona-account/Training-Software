@@ -35,18 +35,18 @@
                     <div class="row">
                         <div class="col-12 col-sm-4 col-md-4 offset-lg-3 pt-1 pt-lg-0">
                             <h2 class = "res-text-8 res-text-md-6 res-text-lg-3">
-                                <i class="fa fa-file-text-o"></i>
+                                <i class="fas fa-file-alt"></i>
                                 <span>Lesson Tests</span>
                             </h2>
                         </div>
 
                         <div class="col-12 col-sm-6 offset-sm-2 col-md-4 offset-md-4 offset-lg-2 col-lg-3 pr-0 pt-3 pt-sm-0 mt-2 mt-sm-0 res-brs-t res-brs-sm-t-n">
                             <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/create" class="btn btn-sm res-button app-red-btn float-right ml-2">
-                                <i class="fa fa-file-text-o res-text-9" aria-hidden="true"></i>
+                                <i class="fas fa-file-alt res-text-9" aria-hidden="true"></i>
                                 <span class = "res-text-9">Create Test</span>
                             </a>
                             <a href = "/courses/{{ $course_id }}/edit" class="btn btn-sm res-button app-red-btn float-right">
-                                <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
+                                <i class="fas fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
                                 <span class = "res-text-9">Lessons</span>
                             </a>
                         </div>
@@ -74,14 +74,14 @@
                                 <div class="card-body">
                                     <h4 class="card-title mb-3 pb-3 res-brs-b res-text-8">{{ $test->title }}</h4>
                                     <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}/edit" class="btn btn-sm res-button app-red-btn float-right">
-                                        <i class="fa fa-pencil res-text-9" aria-hidden="true"></i>
+                                        <i class="fas fa-pencil-alt res-text-9" aria-hidden="true"></i>
                                         <span class = "res-text-9">Edit Test</span>
                                     </a>
                                     <form action = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                         <button type = "submit" class="btn btn-sm btn-danger float-right mr-1">
-                                            <i class="fa fa-trash res-text-9" aria-hidden="true"></i>
+                                            <i class="fas fa-trash-alt res-text-9" aria-hidden="true"></i>
                                         </button>
                                     </form>
                                 </div>
@@ -100,7 +100,7 @@
                                     <h4 class="card-title res-text-6 mb-1"><span class="badge badge-secondary res-text-9">No Tests</span></h4>                        
                                     <p class="res-text-9 pb-3 res-brs-lg-b">Get started by creating your first test.</p>
                                     <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/create" class="btn btn-sm res-button app-red-btn float-right">
-                                        <i class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
+                                        <i class="fas fa-plus res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
                                         <span class="res-text-9 res-text-sm-7 res-text-md-9">Create Test</span>
                                     </a>                           
                                 </div>
