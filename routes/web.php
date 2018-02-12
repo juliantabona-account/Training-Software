@@ -22,6 +22,7 @@ Auth::routes();
 */
 Route::get('/courses', 'CourseController@index')->name('course-list');
 Route::post('/courses', 'CourseController@store')->name('course-save');
+Route::get('/courses/enroll', 'CourseController@enroll')->name('course-enroll');
 Route::get('/courses/create', 'CourseController@create')->name('course-create');
 Route::get('/courses/{course_id}', 'CourseController@show');
 Route::put('/courses/{course_id}', 'CourseController@update');
@@ -69,7 +70,7 @@ Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests/{te
 
 
 /* 
-	CLIENTTS - ADD, EDIT, UPDATE, DELETE
+	CLIENTS - ADD, EDIT, UPDATE, DELETE
 */
 
 Route::get('/clients', 'UserController@index')->name('client-list');

@@ -60,17 +60,19 @@
             right: 50px;
         }
 
+        img.course-image{
+            display: none;
+            height: 180px; 
+            width: 100%; 
+            background: linear-gradient(#ff5a4e, #ff3925);
+        }
+
         .error-image{
-            display: block !important;
             margin-left: auto !important;
             margin-right: auto !important;
             width: 100% !important;
             height: auto !important;
-            padding: 25% 40% !important;
-        }
-
-        img.course-image{
-            background: linear-gradient(#ff5a4e, #ff3925);
+            padding: 25% 43% !important;
         }
 
     </style>

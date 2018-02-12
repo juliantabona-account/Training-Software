@@ -8,13 +8,17 @@
     
     <style>
         img.test-image{
-            display: block !important;
+            display: none;
             margin-left: auto !important;
             margin-right: auto !important;
             width: 100% !important;
             height: auto !important;
             padding: 18% 40% !important;
             background: linear-gradient(#ff5a4e, #ff3925);
+        }
+
+        img.course-image{
+
         }
     </style>
 
@@ -91,9 +95,9 @@
 
                         <div class="col-lg-4 offset-4">          
                             <div class="card" style="width: 20rem;">
-                                <img class="card-img-top course-image" src="{{ env('APP_NO_IMAGE_ICON') }}" img-died="image">
+                                <img class="card-img-top test-image" src="{{ env('APP_NO_IMAGE_ICON') }}" img-died="image">
                                 <div class="card-body">
-                                    <h4 class="card-title res-text-6 mb-1"><span class="badge badge-secondary">No Tests</span></h4>                        
+                                    <h4 class="card-title res-text-6 mb-1"><span class="badge badge-secondary res-text-9">No Tests</span></h4>                        
                                     <p class="res-text-9 pb-3 res-brs-lg-b">Get started by creating your first test.</p>
                                     <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/create" class="btn btn-sm res-button app-red-btn float-right">
                                         <i class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>

@@ -509,7 +509,7 @@ $('.collapse-lessons-btn').click(function(e) {
 */
 
 //Wait for all the images to load
-$("img").bind('load', function() {
+$("img").one('load', function() {
 
     //Run through each image
     $('img').each(function(){

@@ -38,6 +38,14 @@ class CourseController extends Controller
         return view('courses.index', compact('courses', 'published_counter', 'draft_counter', 'filter'));
     }
 
+    public function enroll(Request $request)
+    {
+        $courses = Course::orderBy('created_at', 'desc')->get();
+        $client_id = $request::input('client-id');
+        
+        return view('courses.enroll', compact('courses', 'client_id'));
+    }
+
     public function show($course_id)
     {
         $course = Course::find($course_id);

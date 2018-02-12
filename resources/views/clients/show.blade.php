@@ -159,6 +159,27 @@
 
                                 <div class="tab-content">
                                     <div class="tab-pane fade show active" id="progressTab" role="tabpanel" aria-labelledby="progress-tab">
+                                        
+                                        @if(!COUNT($client->courses))
+                                            <div class="row mt-4">
+                                                <div class="col-8">
+                                                    <div role="alert" class="alert alert-warning">
+                                                        <i class="fa fa-book mr-2"></i>
+                                                        Not enrolled into any course
+                                                    </div>
+                                                </div> 
+                                                <div class="col-4">
+                                                    <form action = "{{ route('course-enroll') }}" method="GET">
+                                                        {{ csrf_field() }}
+                                                        <input type = "hidden" name = "client-id" value = "{{ $client->id }}">
+                                                        <button type = "submit" class="btn btn-sm res-button app-red-btn float-right">
+                                                            <span class = "res-text-9">Enroll Now</span>
+                                                            <i aria-hidden="true" class="fa fa-arrow-circle-right res-text-9 ml-1"></i> 
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @endif
 
                                         @foreach($client->courses as $course)
 
