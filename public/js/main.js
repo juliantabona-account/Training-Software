@@ -546,7 +546,13 @@ $(document).on('change', '.btn-file :file', function() {
     var input = $(this),
     label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
     input.trigger('fileselect', [label]);
-    $('#img-upload').css('display', 'block');
+    $('#img-upload').css({
+        'width': '125px',
+        'margin-top': '10px',
+        'padding': '5px',
+        'border': '1px solid #d1d1d1',
+        'display': 'block'
+    });
 });
 
 $('.btn-file :file').on('fileselect', function(event, label) {

@@ -23,10 +23,11 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('mobile')->nullable();
             $table->string('avatar')->nullable();
-            $table->string('status')->default('InActive');
-            $table->text('preferences');
-            $table->text('tutorial');
-            $table->string('password');
+            $table->boolean('status')->default(0);
+            $table->string('verifyToken')->nullable();
+            $table->text('preferences')->nullable();
+            $table->text('tutorial')->nullable();
+            $table->string('password')->nullable();
             $table->integer('company_id')->unsigned()->nullable();
             $table->rememberToken();
             $table->timestamps();

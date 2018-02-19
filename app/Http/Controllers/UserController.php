@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use Image;
+use Storage;
 use Request;
 use App\User;
 use App\Role;
 use App\Course;
+use Illuminate\Support\Str;
+use App\Mail\EnrollStudent;
+use App\Mail\AccountActivated;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Input;
 
 class UserController extends Controller
 {
@@ -72,10 +80,15 @@ class UserController extends Controller
 
                 //Create a new client
                 $client = User::create([
-                                    'name' => $request::input('first-name'),
+                                    'first_name' => $request::input('first-name'),
                                     'email' => $request::input('email'),
-                                    'password' => bcrypt($request::input('first-name'))
+                                    'verifyToken' => Str::random(40)
                                 ]);
+
+                //Send Verification Email
+        
+                Mail::to( $request::input('email') )->send(new EnrollStudent($client));
+
             }
         }
 
@@ -89,7 +102,7 @@ class UserController extends Controller
 
             if($isAlreadyMember){
 
-                $request::session()->flash('status', $client->name . ' is already a member for this course!');
+                $request::session()->flash('status', $client->first_name . ' is already a member for this course!');
                 $request::session()->flash('type', 'warning');
 
             }else{
@@ -101,7 +114,7 @@ class UserController extends Controller
                 //Assign the client to the associated course
                 $client->courses()->sync([$course_id], false);
 
-                $request::session()->flash('status', $client->name . ' has been successfully enrolled!');
+                $request::session()->flash('status', $client->first_name . ' has been successfully enrolled!');
                 $request::session()->flash('type', 'success');
 
             }
@@ -115,5 +128,109 @@ class UserController extends Controller
         }
         
     }
+
+
+    public function activate($client_email, $client_token)
+    {
+
+        $client = User::where('email', $client_email)->first();
+
+        if($client->email == $client_email && $client->verifyToken == $client_token){
+
+            //Verify Acccount
+            $verified = $client->update([
+                                'status' => 1,
+                                'verifyToken' => Null
+                            ]);    
+
+            if($verified){
+
+                $client = User::where('email', $client_email)->first();
+
+                //Send Account Verified Email
+
+                Mail::to( $client_email )->send(new AccountActivated($client));                
+
+                return redirect('/clients/account/setup/'.$client_email);
+
+            }            
+
+        }else{
+
+            echo 'Account activation link has expired!';
+
+        }
+        
+    }
+
+    public function setup($client_email)
+    {
+
+        $client = User::where('email', $client_email)->first();
+
+        if($client->status == 1 && $client->verifyToken == Null){
+
+            return view('clients.setup', compact('client'));           
+
+        }else{
+
+            echo 'Account Setup Restricted!';
+
+        }
+        
+    }
+
+    public function update(Request $request, $course_id)
+    {
+
+        $image_name = '';
+
+        if(Input::file())
+        {
+
+            $image = Input::file('profile-image');
+            
+            Image::make($image->getRealPath())->widen(318, function ($constraint) {
+                $constraint->upsize();
+            })->crop(80, 80, 0, 0);
+
+            if($image->guessClientExtension() == 'jpeg' || $image->guessClientExtension() == 'jpg'){
+                
+                Image::make($image)->encode('jpg', 60);
+            
+            }else if($image->guessClientExtension() == 'png'){
+                
+                Image::make($image)->encode('png', 60);
+            
+            }
+
+            $image_name = 'profiles/pr_'.time().uniqid().'.'.$image->guessClientExtension();
+            
+            Storage::disk('s3')->put($image_name, file_get_contents($image), 'public');
+
+            $image_name = env('AWS_URL').$image_name;
+        }
+
+        $client = User::where('email', $request::input('old_email'))->first(); 
+
+        $client->first_name = $request::input('first_name');
+        $client->last_name = $request::input('last_name');
+        $client->gender = $request::input('gender');
+        $client->year_of_birth = $request::input('year_of_birth');
+        $client->bio = $request::input('bio');
+        $client->email = $request::input('email');
+        $client->mobile = $request::input('mobile');
+        $client->avatar = $image_name;
+        $client->status = 1;
+        $client->verifyToken = Null;
+        $client->password = bcrypt( $request::input('password') );
+        $client->save();
+
+        Auth::login($client);
+
+        return redirect('/courses');
+
+    }
+
     
 }

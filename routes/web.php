@@ -11,6 +11,10 @@
 |
 */
 
+use App\Mail\EnrollStudent;
+use App\User;
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -20,6 +24,22 @@ Auth::routes();
 /* 
 	COURSES - CREATE, INDEX, SHOW, EDIT, UPDATE, DELETE
 */
+
+//[REMOVE THIS CODE IT JUST FOR TESTING EMAILS]
+//[REMOVE THIS CODE IT JUST FOR TESTING EMAILS]
+//[REMOVE THIS CODE IT JUST FOR TESTING EMAILS]	
+Route::get('/sendmail', function(){
+
+		$user = User::find(1);
+
+        //Mail user to activate account 
+        Mail::to('brandontabona@gmail.com')->send(new EnrollStudent($user));
+
+        echo 'Email sent successfully';
+
+});
+
+
 Route::get('/courses', 'CourseController@index')->name('course-list');
 Route::post('/courses', 'CourseController@store')->name('course-save');
 Route::get('/courses/enroll', 'CourseController@enroll')->name('course-enroll');
@@ -76,7 +96,10 @@ Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests/{te
 Route::get('/clients', 'UserController@index')->name('client-list');
 Route::post('/clients', 'UserController@store')->name('client-save');
 Route::get('/clients/create', 'UserController@create')->name('client-create');
-Route::get('/clients/{client_id}', 'UserController@show')->name('client-show');
+Route::get('/clients/{client_id}', 'UserController@show')->name('client-update');
+Route::put('/clients/{client_id}', 'UserController@update');
+Route::get('/clients/account/setup/{client_email}', 'UserController@setup')->name('client-setup');
+Route::get('/clients/activate/{client_email}/{client_token}', 'UserController@activate')->name('client-activate');
 
 /* 
 	COMPANIES - ADD, EDIT, UPDATE, DELETE
@@ -91,7 +114,7 @@ Route::delete('/companies/{company_id}', 'CompanyController@delete');
 Route::get('/companies/{company_id}/edit', 'CompanyController@edit');
 
 /* 
-	COMPANIES - ADD, EDIT, UPDATE, DELETE
+	ADMINS - ADD, EDIT, UPDATE, DELETE
 */
 
 Route::get('/admins/{admin_id}', 'AdminController@show')->name('admin-show');
