@@ -42,11 +42,35 @@
                                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
                                                 </div>
                                             </li>
-                                            <li class="nav-item pl-4 pt-2 pb-sm-1 p-lg-4">
-                                                <a class="nav-link d-lg-table-row" href="#">
-                                                    <i class="fa fa-envelope mr-2 mr-lg-0 res-text-9 res-text-md-8" aria-hidden="true"></i>
-                                                    <span class = "d-inline-block d-lg-none res-text-9 res-text-md-8">Messages</span>
+
+                                            <li class="nav-item dropdown dropdown-notifications open pl-4 pt-2 pb-sm-1 p-lg-4">
+                                                <a href="#notifications-panel" class="nav-link d-lg-table-row dropdown-toggle" data-toggle="dropdown">
+                                                    <?php 
+
+                                                        $totalUnreadMessages = collect($latestMessage)->map(function ($thread, $key) {
+                                                            return $thread->userUnreadMessagesCount(Auth::id());
+                                                        })->sum(); 
+                                                    ?>
+                                                    <i {{ $totalUnreadMessages ? 'data-count='.$totalUnreadMessages : '' }} class="fa fa-envelope mr-2 mr-lg-0 res-text-9 res-text-md-8{{ $totalUnreadMessages ? ' notification-icon' : '' }}" aria-label="Nofitication centre"></i>
                                                 </a>
+
+                                                <div class="dropdown-container">
+                                                    <ul class="dropdown-menu notifications">
+
+                                                        <li>        
+                                                            <div class="d-inline-block dropdown-toolbar pb-1 res-brs-b w-100">
+                                                                <div class="d-inline dropdown-toolbar-actions float-right mr-4 mt-2 res-text-9">
+                                                                    <a href="#"><i class="glyphicon glyphicon-search"></i> View All</a>
+                                                                </div>
+                                                            </div><!-- /dropdown-toolbar -->
+                                                        </li>
+
+                                                        @include('messenger.partials.flash')
+
+                                                        @each('messenger.partials.thread', $latestMessage, 'thread', 'messenger.partials.no-threads')
+
+                                                    </ul>
+                                                </div>
                                             </li>
                                             <li class="nav-item pl-4 pt-2 pb-sm-1 p-lg-4">
                                                 <a class="nav-link d-lg-table-row" href="#">
@@ -70,6 +94,7 @@
                                                     <span class = "res-text-9 res-text-md-8">Courses</span>
                                                 </a>
                                             </li>
+                                            @if(Auth::user()->hasRole('admin'))
                                             <li class="nav-item dropdown d-inline-block whitened pt-2 pb-1 res-pt-sm-10-2 res-pb-sm-10-1">
                                                 <a class="nav-link dropdown-toggle d-inline-block" href="#" id="CoursesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <span class = "res-text-9 res-text-md-8">Clients</span>
@@ -85,11 +110,14 @@
                                                     <span class = "res-text-9 res-text-md-8">Reports</span>
                                                 </a>
                                             </li>
-                                            <li class="nav-item d-inline-block whitened pt-2 pb-1 res-pt-sm-10-2 res-pb-sm-10-1">
+                                            @endif
+                                            @if(Auth::user()->hasRole('client'))
+                                            <li class="nav-item d-inline-block whitened pt-4 pb-1 res-pt-sm-10-2 res-pb-sm-10-1">
                                                 <a href="/courses" class="nav-link d-inline-block">
-                                                    <span class = "res-text-9 res-text-md-8">Settings</span>
+                                                    <span class = "res-text-9 res-text-md-8">Reports</span>
                                                 </a>
                                             </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>

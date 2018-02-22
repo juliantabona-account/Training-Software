@@ -6,11 +6,13 @@ use Laravel\Scout\Searchable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
+use Cmgmyr\Messenger\Traits\Messagable;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use Searchable;
+    use Messagable;
     use EntrustUserTrait; //For Assigning User Roles And Permissions
 
     /**

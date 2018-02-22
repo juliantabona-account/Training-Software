@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Mail\Mailable;
+use App\Mail\AccountActivated;
 use App\Mail\EnrollStudent;
 use App\User;
 
@@ -32,11 +34,21 @@ Route::get('/sendmail', function(){
 
 		$user = User::find(1);
 
+		echo 'Preparing to send...';
+
         //Mail user to activate account 
-        Mail::to('brandontabona@gmail.com')->send(new EnrollStudent($user));
+        Mail::to('brandontabona@gmail.com')->send(new AccountActivated($user));
 
         echo 'Email sent successfully';
 
+});
+
+Route::group(['prefix' => 'messages'], function () {
+    Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
+    Route::get('create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
+    Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
+    Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
+    Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
 });
 
 
@@ -84,10 +96,14 @@ Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/video', '
 Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests', 'TestController@index')->name('test-list');
 Route::post('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests', 'TestController@store')->name('test-save');
 Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests/create', 'TestController@create')->name('test-create');
+Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests/{test_id}', 'TestController@taketest');
 Route::put('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests/{test_id}', 'TestController@update');
-Route::delete('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests/{test_id}', 'TestController@delete');;
+Route::delete('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests/{test_id}', 'TestController@delete');
+Route::post('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests/{test_id}/mark', 'TestController@markTest');
 Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests/{test_id}/edit', 'TestController@edit');
 
+//markTtest
+//mark
 
 /* 
 	CLIENTS - ADD, EDIT, UPDATE, DELETE

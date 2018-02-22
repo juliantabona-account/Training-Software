@@ -67,14 +67,6 @@
                                 <span>{{ $course->title }}</span>
                             </h2>
                         </div>
-
-                        <div class="col-2 offset-2">
-                            <a href = "/courses/{{ $course->id }}/edit" class="btn res-button app-red-btn">
-                                <i class="fa fa-pencil res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
-                                <span class = "res-text-9 res-text-sm-7 res-text-md-9">Edit Course</span>
-                            </a>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -151,9 +143,12 @@
                                                                             <p class="res-text-9">{{ $lesson->overview }}</p>
 
                                                                             <div class = "row lesson-editor">
-                                                                                <div class = "col-lg-6"> 
-                                                                                    <div class="m-t-sm">
-                                                                                        <a href="#" class="text-muted res-text-lg-9 mr-3"><i class="fa fa-file-text-o"></i> Take Test</a>
+                                                                                <div class = "col-lg-6">  
+
+                                                                                    <div class="m-t-sm"> 
+                                                                                        @if(COUNT($lesson->tests))
+                                                                                        <a href="/courses/{{ $course->id }}/module/{{ $module->id }}/lesson/{{ $lesson->id }}/tests" class="badge badge-primary res-text-lg-9 mr-3"><i class="fa fa-file-text-o"></i> Take Test</a>
+                                                                                         @endif
                                                                                         <span class="badge badge-success mb-1">Completed!</span>
                                                                                     </div>
                                                                                 </div>

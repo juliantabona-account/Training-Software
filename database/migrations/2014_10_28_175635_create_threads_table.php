@@ -1,10 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
+use Cmgmyr\Messenger\Models\Models;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateCourseModuleTable extends Migration
+class CreateThreadsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +14,9 @@ class CreateCourseModuleTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_module', function (Blueprint $table) {
+        Schema::create(Models::table('threads'), function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('course_id')->unsigned();
-            $table->integer('module_id')->unsigned();
+            $table->string('subject');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateCourseModuleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('course_module');
+        Schema::dropIfExists(Models::table('threads'));
     }
 }

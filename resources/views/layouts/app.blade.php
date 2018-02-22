@@ -18,6 +18,7 @@
         <!-- Linked Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/bootstrap-4/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/bootstrap-notifications.css') }}" rel="stylesheet">
         <link href="{{ asset('css/default-navbar.css') }}" rel="stylesheet">
         <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 

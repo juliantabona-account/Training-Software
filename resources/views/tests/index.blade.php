@@ -39,12 +39,14 @@
                                 <span>Lesson Tests</span>
                             </h2>
                         </div>
-
+                        
                         <div class="col-12 col-sm-6 offset-sm-2 col-md-4 offset-md-4 offset-lg-2 col-lg-3 pr-0 pt-3 pt-sm-0 mt-2 mt-sm-0 res-brs-t res-brs-sm-t-n">
+                            @if(Auth::user()->hasRole('admin'))
                             <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/create" class="btn btn-sm res-button app-red-btn float-right ml-2">
                                 <i class="fa fa-file-text-o res-text-9" aria-hidden="true"></i>
                                 <span class = "res-text-9">Create Test</span>
                             </a>
+                            @endif
                             <a href = "/courses/{{ $course_id }}/edit" class="btn btn-sm res-button app-red-btn float-right">
                                 <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
                                 <span class = "res-text-9">Lessons</span>
@@ -73,6 +75,7 @@
                                 <img class="card-img-top test-image"  alt="{{ $test->title }}" src="{{ env('APP_TEST_ICON') }}" img-died="image">
                                 <div class="card-body">
                                     <h4 class="card-title mb-3 pb-3 res-brs-b res-text-8">{{ $test->title }}</h4>
+                                    @if(Auth::user()->hasRole('admin'))
                                     <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}/edit" class="btn btn-sm res-button app-red-btn float-right">
                                         <i class="fa fa-pencil res-text-9" aria-hidden="true"></i>
                                         <span class = "res-text-9">Edit Test</span>
@@ -84,6 +87,13 @@
                                             <i class="fa fa-trash res-text-9" aria-hidden="true"></i>
                                         </button>
                                     </form>
+                                    @endif
+                                    @if(Auth::user()->hasRole('client'))
+                                    <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}" class="btn btn-sm btn-success res-button float-right">
+                                        <i class="fa fa-pencil res-text-9" aria-hidden="true"></i>
+                                        <span class = "res-text-9">Take Test</span>
+                                    </a>
+                                    @endif
                                 </div>
                             </div>
 

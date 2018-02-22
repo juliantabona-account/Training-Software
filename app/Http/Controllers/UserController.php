@@ -14,6 +14,12 @@ use App\Mail\EnrollStudent;
 use App\Mail\AccountActivated;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Input;
+use Carbon\Carbon;
+use Cmgmyr\Messenger\Models\Message;
+use Cmgmyr\Messenger\Models\Participant;
+use Cmgmyr\Messenger\Models\Thread;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -41,7 +47,12 @@ class UserController extends Controller
             $query->with('moduleWithLessons');
         }))->first();
 
-        return view('clients.show', compact('client'));
+        $thread = new Thread();
+        $threads =  Thread::between([$client_id, Auth::id()])->get();
+
+//        return $threads;
+
+        return view('clients.show', compact('client', 'threads'));
     }
 
     public function create()
@@ -64,11 +75,15 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+
+
         
         if($request::has('client-id')){
 
             //Get existing client
             $client = User::find($request::input('client-id'));
+
+            return 'stage 1!';
 
         }else{
 
@@ -85,9 +100,12 @@ class UserController extends Controller
                                     'verifyToken' => Str::random(40)
                                 ]);
 
+                
+
                 //Send Verification Email
-        
-                Mail::to( $request::input('email') )->send(new EnrollStudent($client));
+                $email = Mail::to( $request::input('email') )->send(new EnrollStudent($client));
+
+                return dd($email);
 
             }
         }

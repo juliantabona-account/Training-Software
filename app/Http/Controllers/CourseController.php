@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Image;
 use Request;
 use Storage;
@@ -49,7 +50,8 @@ class CourseController extends Controller
     public function show($course_id)
     {
         $course = Course::find($course_id);
-        $modules = Course::find($course_id)->moduleWithLessons()->get();
+        //$modules = Course::find($course_id)->moduleWithLessons()->get();
+        $modules = Course::find($course_id)->modules()->get();
 
         $video_uris = [];
 
@@ -129,7 +131,8 @@ class CourseController extends Controller
     public function edit($course_id)
     {
         $course = Course::find($course_id);
-        $modules = Course::find($course_id)->moduleWithLessons()->get();
+        //$modules = Course::find($course_id)->moduleWithLessons()->get();
+        $modules = Course::find($course_id)->modules()->get();
 
         $moduleCount = $course->modules->count();
         $lessonCount = $course->modules->reduce(function ($count, $module) {

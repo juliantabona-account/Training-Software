@@ -166,6 +166,8 @@ return [
         Vinkla\Vimeo\VimeoServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Cmgmyr\Messenger\MessengerServiceProvider::class,
+
 
         /*
          * Package Service Providers...
@@ -179,6 +181,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        //Custom Service Providers
+        App\Providers\MessengerServiceProvider::class,
 
     ],
 
