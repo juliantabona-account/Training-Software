@@ -4,12 +4,13 @@
 
 .notification {
   display: block;
-  padding: 0.8em;
+  padding: 0.4em 0.8em;
   border-width: 0 0 1px 0;
   border-style: solid;
   border-color: #e9ecef;
   background-color: #ffffff;
   color: #212529;
+  margin-bottom: 0px;
   text-decoration: none; }
   .notification:last-child {
     border-bottom: 0;
@@ -84,6 +85,10 @@
 .notification .media-body {
   padding-top: 0; }
 
+.notification .timestamp{
+    font-size: 0.6em;
+}
+
 .btn-lg .notification-icon:after {
   margin-left: -0.5895rem;
   margin-top: -0.5895rem;
@@ -103,3 +108,5 @@
 
 .btn-xs .notification-icon {
   margin-right: 0.245625rem; }
+
+

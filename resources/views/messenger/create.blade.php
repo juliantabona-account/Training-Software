@@ -5,40 +5,147 @@
 @endsection
 
 @section('style')
+    
+    <style>
+
+        .profile-image{
+
+            width: 30px;
+            height: 30px;
+            border-radius: 100% !important;
+            border: 2px solid #e4e4e4;
+            padding: 4px;
+
+        }
+
+        .ais-no-results span{
+            display:none;
+        }
+
+    </style>
 
 @endsection
 
+
 @section('content')
-    <h1>Create a new message</h1>
-    <form action="{{ route('messages.store') }}" method="post">
-        {{ csrf_field() }}
-        <div class="col-md-6">
-            <!-- Subject Form Input -->
-            <div class="form-group">
-                <label class="control-label">Subject</label>
-                <input type="text" class="form-control" name="subject" placeholder="Subject"
-                       value="{{ old('subject') }}">
-            </div>
 
-            <!-- Message Form Input -->
-            <div class="form-group">
-                <label class="control-label">Message</label>
-                <textarea name="message" class="form-control">{{ old('message') }}</textarea>
-            </div>
+    <div class="col-md-12 res-pb-lg-10-2 res-brs-lg-b">
 
-            @if($users->count() > 0)
-                <div class="checkbox">
-                    @foreach($users as $user)
-                        <label title="{{ $user->name }}"><input type="checkbox" name="recipients[]"
-                                                                value="{{ $user->id }}">{!!$user->first_name!!}</label>
-                    @endforeach
+        <div class="container res-pt-xl-10-2 mt-0">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-5 offset-3">
+                            <h2 class = "res-text-7 res-text-sm-5 res-text-md-3">
+                                <i class="fa fa-envelope"></i>
+                                <span>Create Discussion</span>
+                            </h2>
+                        </div>
+
+
+                        <div class="col-2 offset-2">
+                            <a href = "{{ route('messages') }}" class="btn res-button app-red-btn">
+                                <i class="fa fa-arrow-circle-left res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
+                                <span class = "res-text-9 res-text-sm-7 res-text-md-9">View Discussions</span>
+                            </a>
+                        </div>
+
+                    </div>
                 </div>
-            @endif
-    
-            <!-- Submit Form Input -->
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary form-control">Submit</button>
             </div>
         </div>
-    </form>
+
+    </div>
+
+    <div class="container-fluid res-mt-lg-10-3 res-mb-lg-10-5 p-0 app-bg-1">
+        <div class="app-white-overlay-1">
+            <div class="container res-mt-lg-10-3 res-mb-lg-10-5">
+                <div class="row">
+
+                    <div class="col-lg-6 offset-lg-3">
+                        
+                        <form action="{{ route('messages.store') }}" method="post">
+                            {{ csrf_field() }}
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <input type = "text" class="form-control res-text-9 res-text-sm-8 res-text-md-9" name="subject" placeholder="Subject" value="{{ old('subject') }}" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea id = "message" class="form-control res-text-9 res-text-sm-8 res-text-md-9" name = "message" rows="4" placeholder = "Messsage" required>{{ old('message') }}</textarea>
+                                    </div>
+
+                                        <div class="form-group">
+                                            <div class="input-group">
+
+                                                  <ais-index
+                                                        app-id="{{ env('ALGOLIA_APP_ID') }}"
+                                                        api-key="{{ env('ALGOLIA_SECRET') }}"
+                                                        index-name="users"
+                                                        :auto-search=false
+                                                        style = "width: 100%;"
+                                                        name="recipients[]"
+                                                        >
+
+                                                    <ais-stats>
+                                                      <template slot-scope="{ totalResults, processingTime, query }">
+                                                        <div class = "alert alert-warning res-text-9 res-text-sm-8 res-text-md-9">
+                                                            Found @{{ totalResults }} results matching <i>@{{ query }}</i>
+                                                        </div>
+                                                      </template>
+                                                    </ais-stats>
+
+                                                    <ais-input placeholder="Search client to receive message..." class="form-control res-text-9 res-text-sm-8 res-text-md-9" style = "width: 100%;height:34px;"></ais-input>
+
+                                                    <ais-results inline-template>
+                                                      <table class = "table table-hover">
+                                                        <tbody>
+                                                          <tr v-for="result in results" :key="result.objectID">
+                                                                @if(@(result.id) != Auth::id())
+                                                                    <td class = "res-text-9 res-text-sm-8 res-text-md-9"><img class="rounded mb-2 profile-image" 
+                                                                             src="http://saleschief-bucket.s3.amazonaws.com/assets/icons/profile-placeholder.jpg" img-died="image">
+                                                                    </td>
+                                                                    <td class = "res-text-9 res-text-sm-8 res-text-md-9">@{{ result.first_name }} @{{ result._name }}</td>
+                                                                    <td class = "res-text-9 res-text-sm-8 res-text-md-9">@{{ result.email }}</td>
+                                                                    <td class = "res-text-9 res-text-sm-8 res-text-md-9">
+                                                                        <div class="checkbox">
+                                                                            <label title="@{{ result.first_name }}">
+                                                                                <input type="radio" name="recipients[]" value="@{{ result.id }}">
+                                                                            </label>
+                                                                        </div>
+                                                                    </td>
+                                                                @endif
+                                                          </tr>
+                                                        </tbody>
+                                                      </table>
+                                                    </ais-results>
+                                                    <ais-no-results>
+                                                       <template slot-scope="props">
+                                                            <span class = "res-text-9 res-text-sm-8 res-text-md-9">No clients found for <i>@{{ props.query }}</i></span>
+                                                       </template>
+                                                    </ais-no-results>
+                                                  </ais-index>
+
+                                            </div>
+                                        </div>
+
+                                    <button type="submit" class="btn res-button app-red-btn float-right mt-2 pr-5 pl-5">
+                                        <span class = "res-text-9 res-text-sm-7 res-text-md-9">Send</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </form>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 @endsection

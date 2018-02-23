@@ -6,13 +6,13 @@
     <div class="collapse navbar-collapse" id="appMenuDrop">
         <ul class="navbar-nav ml-auto pt-3">
             <li class="nav-item pt-3 pb-2 pl-3 p-md-2 active">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/">
                     <i class="fa fa-home" aria-hidden="true"></i>
                     <span>Home</span>
                 </a>
             </li>
             <li class="nav-item pt-3 pb-2 pl-3 p-md-2">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/support">
                     <i class="fa fa-phone" aria-hidden="true"></i>
                     <span>Support</span>
                 </a>

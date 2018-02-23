@@ -95,6 +95,7 @@
                                                     <form action = "{{ route('lesson-video-save', [$course_id, $module_id, $lesson_id]) }}" method="POST">
                                                         {{ csrf_field() }}
                                                         <input type = "hidden" value = "{{ $video['uri'] }}" name = "video">
+                                                        <input type = "hidden" value = "{{ $video['name'] }}" name = "name">
                                                         <button type = "submit" class="btn btn-sm btn-success float-right mr-1 res-text-9 res-text-sm-9 res-text-md-9">
                                                             Use Video
                                                         </button>

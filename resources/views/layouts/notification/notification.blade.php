@@ -1,0 +1,1 @@
+@include('layouts.notification.partials.'. strtolower(explode("\\", $notification->notifiable_type)[1]) .'.'.snake_case(class_basename($notification->type))) 

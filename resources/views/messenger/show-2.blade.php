@@ -9,8 +9,8 @@
     <style>
         .profile-image{
 
-            width: 80px;
-            height: 80px;
+            width: 30px;
+            height: 30px;
             border-radius: 100% !important;
             border: 2px solid #e4e4e4;
             padding: 4px;
@@ -90,6 +90,10 @@
 
         }
 
+        .thread-body .notification-meta span.timestamp {
+            font-size: 0.6em !important;
+        }
+
     </style>
 
 @endsection
@@ -105,15 +109,15 @@
                     <div class="row">
                         <div class="col-12 col-sm-4 col-md-4 offset-lg-3 pt-1 pt-lg-0">
                             <h2 class = "res-text-8 res-text-md-6 res-text-lg-3">
-                                <i class="fa fa-envelope"></i>
-                                <span>Messages</a></span>
+                                <i class="fa fa-comments"></i>
+                                <span>Discussions</a></span>
                             </h2>
                         </div>
 
                         <div class="col-12 col-sm-3 offset-sm-5 col-md-2 offset-md-6 offset-lg-3 pr-0 pt-3 pt-sm-0 mt-2 mt-sm-0 res-brs-t res-brs-sm-t-n">
-                            <a href = "{{ route('client-list') }}" class="btn btn-sm res-button app-red-btn float-right">
+                            <a href = "{{ route('messages.create') }}" class="btn btn-sm res-button app-red-btn float-right">
                                 <i class="fa fa-plus res-text-9" aria-hidden="true"></i>
-                                <span class = "res-text-9">New Message</span>
+                                <span class = "res-text-9">New Discussion</span>
                             </a>
                         </div>
 
@@ -133,7 +137,7 @@
 
                         <div class="card thread-body">
                         	<div class="card-heading">
-                        		<h2 class = "res-text-8 pt-3 pl-3 pb-3 bg-primary text-white mb-0">Recent Messages</h2>
+                        		<h2 class = "res-text-8 pt-3 pl-3 pb-3 bg-primary text-white mb-0">Recent Discussions {{ $threads ? '('.COUNT($threads).')': '' }}</h2>
                         	</div>
                             <div class="card-body pt-2 pl-0 pr-0">
 
@@ -154,12 +158,23 @@
 
                                 <div class="chat-discussion">
 
-							        <h1 class = "res-text-8">{{ $thread->subject }}</h1>
+							        <h1 class = "alert alert-info res-text-8">{{ $thread->subject }}</h1>
 							        @each('messenger.partials.messages', $thread->messages, 'message')
 
                                 </div>
 
-                                @include('messenger.partials.form-message')
+								<form action="{{ route('messages.update', $thread->id) }}" method="post">
+								    {{ method_field('put') }}
+								    {{ csrf_field() }}
+
+								    <div class="input-group">
+								        <input id="btn-input" type="text" class="form-control res-text-9 res-text-sm-9 res-text-md-9 p-3" placeholder="Say something..." name="message" value = "{{ old('message') }}"/>
+								        <span class="input-group-btn">
+								            <button class="btn app-red-btn btn-sm res-text-9 res-text-sm-9 res-text-md-9 p-3">Send</button>
+								        </span>
+								    </div>
+
+								</form>
 
                             </div>
                         </div>

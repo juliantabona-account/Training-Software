@@ -46,20 +46,7 @@
                             </h2>
                         </div>
                         @if(Auth::user()->hasRole('admin'))
-                            <div class="col-12 col-sm-5 col-md-7 col-lg-4 pt-1 pt-lg-0">
-                                <a href = "/courses?filter=published" class = "res-mt-lg-10-1 res-text-9 res-sm-text-9 res-text-md-8 text-secondary d-inline-block mr-4">
-                                    <i class="fa fa-check-square-o"></i>
-                                    <span>Published:</span>
-                                    <span>{{ $published_counter }}</span>
-                                </a>
-                                <a href = "/courses?filter=draft" class = "res-mt-lg-10-1 res-text-9 res-sm-text-9 res-text-md-8 text-secondary d-inline-block">
-                                    <i class="fa fa-pencil-square-o"></i>
-                                    <span>Draft:</span>
-                                    <span>{{ $draft_counter }}</span>
-                                </a>
-                            </div>
-
-                            <div class="col-12 col-sm-3 col-md-2 pr-0 pt-3 pt-sm-0 mt-2 mt-sm-0 res-brs-t res-brs-sm-t-n">
+                            <div class="col-12 offset-sm-5 col-sm-3 offset-md-7 col-md-2 offset-lg-4 pr-0 pt-3 pt-sm-0 mt-2 mt-sm-0 res-brs-t res-brs-sm-t-n">
                                 <a href = "{{ route('course-create') }}" class="btn btn-sm res-button app-red-btn float-right">
                                     <i class="fa fa-plus res-text-9" aria-hidden="true"></i>
                                     <span class = "res-text-9">Add Course</span>
@@ -138,11 +125,15 @@
                             <div class="card" style="width: 20rem;">
                                 <img class="card-img-top course-image" alt="Inbound Marketing" src="/assets/temp/placeholder.png" img-died="image">
                                 <div class="card-body">
-                                    <p class="res-text-9 mt-1 pt-2 pb-2 res-brs-lg-b res-brs-lg-t">Get started by creating your first course and adding lessons.</p>
-                                    <a href = "{{ route('course-create') }}" class="btn btn-sm res-button app-red-btn float-right">
-                                        <i class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
-                                        <span class="res-text-9 res-text-sm-7 res-text-md-9">Create Course</span>
-                                    </a>                           
+                                    @if( Auth::user()->hasRole('admin') )
+                                        <p class="res-text-9 mt-1 pt-2 pb-2 res-brs-lg-b res-brs-lg-t">Get started by creating your first course and adding lessons.</p>
+                                        <a href = "{{ route('course-create') }}" class="btn btn-sm res-button app-red-btn float-right">
+                                            <i class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
+                                            <span class="res-text-9 res-text-sm-7 res-text-md-9">Create Course</span>
+                                        </a> 
+                                    @else
+                                        <p class="res-text-9 mt-1 pt-2 pb-2 res-brs-lg-b res-brs-lg-t">You don't have any active classes at the moment. Contact Us to enroll today!</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -152,7 +143,5 @@
             </div>
         </div>
     </div>
-
-
 
 @endsection

@@ -15,6 +15,7 @@
         "laravel/scout": "^3.0",
         "laravel/tinker": "~1.0",
         "league/flysystem-aws-s3-v3": "~1.0",
+        "nexmo/laravel": "^1.1",
         "symfony/routing": "v3.3.0",
         "vinkla/vimeo": "^3.7",
         "zizaco/entrust": "5.2.x-dev"

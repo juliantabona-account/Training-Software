@@ -38,7 +38,7 @@
     }
 }
 
-#app-main-navbar a{
+#app-main-navbar a.primary-link{
     color:#404040 !important;
     padding: 0 15px 5px !important;
     border-bottom: 1px dotted transparent;
@@ -95,4 +95,9 @@
 #app-main-navbar .notification-title a,
 #app-main-navbar .notification-desc a{
     padding-left: 0 !important;
+}
+
+#app-main-navbar a.view-all-btn {
+    color: #fff !important;
+    padding: 2px 15px 2px !important;
 }

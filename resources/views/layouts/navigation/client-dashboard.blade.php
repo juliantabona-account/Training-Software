@@ -16,7 +16,7 @@
                                     <div class = "col-12 col-sm-5 col-md-4 col-lg-7 pl-0 pr-0 res-brs-sm-r res-brs-lg-r-n">
                                         <ul class="navbar-nav res-ml-lg-10-7 res-brs-lg-l res-brs-lg-r">
                                             <li class="nav-item pl-4 pt-3 pl-sm-5 p-lg-4 res-brs-b res-brs-sm-b-n">
-                                                <a class="nav-link d-lg-table-row" href="/courses">
+                                                <a class="nav-link d-lg-table-row primary-link" href="/courses">
                                                     <i class="fa fa-th-large mr-1 res-text-9 res-text-md-8" aria-hidden="true"></i>
                                                     <span class = "res-text-9 res-text-md-8">Home</span>
                                                 </a>
@@ -27,9 +27,9 @@
                                     <div class = "col-12 col-sm-7 col-md-8 col-lg-5 pl-0">
                                         <ul class="navbar-nav ml-auto">
                                             <li class="nav-item dropdown pl-4 pt-3 pb-sm-1 p-lg-4 res-brs-lg-r">
-                                                <a class="nav-link dropdown-toggle d-lg-table-row" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <a class="nav-link dropdown-toggle d-lg-table-row primary-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="fa fa-user-circle-o mr-2 res-text-9 res-text-md-8" aria-hidden="true"></i>
-                                                    <span class = "res-text-9 res-text-md-8">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
+                                                    <span class = "res-text-9 res-text-md-8 primary-link">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
                                                 </a>
                                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                     <a class="dropdown-item res-text-9 res-text-md-8" href="/admins/1">Profile</a>
@@ -44,14 +44,14 @@
                                             </li>
 
                                             <li class="nav-item dropdown dropdown-notifications open pl-4 pt-2 pb-sm-1 p-lg-4">
-                                                <a href="#notifications-panel" class="nav-link d-lg-table-row dropdown-toggle" data-toggle="dropdown">
+                                                <a href="#notifications-panel" class="nav-link d-lg-table-row dropdown-toggle primary-link" data-toggle="dropdown">
                                                     <?php 
 
                                                         $totalUnreadMessages = collect($latestMessage)->map(function ($thread, $key) {
                                                             return $thread->userUnreadMessagesCount(Auth::id());
                                                         })->sum(); 
                                                     ?>
-                                                    <i {{ $totalUnreadMessages ? 'data-count='.$totalUnreadMessages : '' }} class="fa fa-envelope mr-2 mr-lg-0 res-text-9 res-text-md-8{{ $totalUnreadMessages ? ' notification-icon' : '' }}" aria-label="Nofitication centre"></i>
+                                                    <i {{ $totalUnreadMessages ? 'data-count='.$totalUnreadMessages : '' }} class="fa fa-comments mr-2 mr-lg-0 res-text-7{{ $totalUnreadMessages ? ' notification-icon' : '' }}" aria-label="Nofitication centre"></i>
                                                 </a>
 
                                                 <div class="dropdown-container">
@@ -59,8 +59,16 @@
 
                                                         <li>        
                                                             <div class="d-inline-block dropdown-toolbar pb-1 res-brs-b w-100">
+
                                                                 <div class="d-inline dropdown-toolbar-actions float-right mr-4 mt-2 res-text-9">
-                                                                    <a href="#"><i class="glyphicon glyphicon-search"></i> View All</a>
+                                                                    <a href="{{ route('messages') }}" class = "btn btn-sm btn-primary res-text-9 view-all-btn">
+                                                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                                                        View All
+                                                                    </a>
+                                                                </div>
+                                                                <div class="d-inline dropdown-toolbar-actions float-right mr-4 mt-2 res-text-9">
+                                                                    <i class="fa fa-comments text-info mr-2 mr-lg-0 res-text-7"></i>
+                                                                    <span class = "res-text-8">Latest Discussions</span>
                                                                 </div>
                                                             </div><!-- /dropdown-toolbar -->
                                                         </li>
@@ -72,15 +80,44 @@
                                                     </ul>
                                                 </div>
                                             </li>
-                                            <li class="nav-item pl-4 pt-2 pb-sm-1 p-lg-4">
-                                                <a class="nav-link d-lg-table-row" href="#">
-                                                    <i class="fa fa-bell mr-2 mr-lg-0 res-text-9 res-text-md-8" aria-hidden="true"></i>
-                                                    <span class = "d-inline-block d-lg-none res-text-9 res-text-md-8">Notifications</span>
+
+                                            <li class="nav-item dropdown dropdown-notifications open pl-4 pt-2 pb-sm-1 p-lg-4">
+                                                <a href="#notifications-panel" class="nav-link d-lg-table-row dropdown-toggle primary-link" data-toggle="dropdown">
+                                                    <?php 
+                                                        $totalUnreadNotifications = count(Auth::user()->unreadNotifications);
+                                                    ?>
+                                                    <i {{ $totalUnreadNotifications ? 'data-count='.$totalUnreadNotifications : '' }} class="fa fa-bell mr-2 mr-lg-0 res-text-9 res-text-md-8{{ $totalUnreadNotifications ? ' notification-icon' : '' }}" aria-label="Nofitication centre"></i>
                                                 </a>
+
+                                                <div class="dropdown-container">
+                                                    <ul class="dropdown-menu notifications">
+
+                                                        <li>        
+                                                            <div class="d-inline-block dropdown-toolbar pb-1 res-brs-b w-100">
+                                                                <div class="d-inline dropdown-toolbar-actions float-right mr-4 mt-2 res-text-9">
+                                                                    <a href="{{ route('messages') }}" class = "btn btn-sm btn-primary res-text-9 view-all-btn">
+                                                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                                                        View All
+                                                                    </a>
+                                                                </div>
+                                                                <div class="d-inline dropdown-toolbar-actions float-right mr-4 mt-2 res-text-9">
+                                                                    <i class="fa fa-bell text-info mr-2 mr-lg-0 res-text-8"></i>
+                                                                    <span class = "res-text-8">Latest Notfications</span>
+                                                                </div>
+                                                            </div><!-- /dropdown-toolbar -->
+                                                        </li>
+
+                                                        @include('layouts.notification.partials.flash')
+
+                                                        @each('layouts.notification.notification', Auth::user()->unreadNotifications, 'notification', 'layouts.notification.partials.no-notifications')
+
+                                                    </ul>
+                                                </div>
                                             </li>
+                                            
                                             <li class="nav-item pl-4 pt-2 pb-sm-1 p-lg-4 res-brs-t res-brs-md-t-n res-brs-lg-r">
-                                                <a class="nav-link d-lg-table-row" href="#">
-                                                    <i class="fa fa-info-circle mr-2 mr-lg-0 res-text-9 res-text-md-8" aria-hidden="true"></i>
+                                                <a class="nav-link d-lg-table-row primary-link" href="#">
+                                                    <i class="fa fa-info-circle mr-2 mr-lg-0 res-text-9 res-text-md-7" aria-hidden="true"></i>
                                                     <span class = "d-inline-block d-lg-none res-text-9 res-text-md-8">Help</span>
                                                 </a>
                                             </li>

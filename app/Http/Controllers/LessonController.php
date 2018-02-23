@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Request;
 use App\Module;
 use App\Lesson;
+use App\Course;
 use Vinkla\Vimeo\Facades\Vimeo;
+use App\Notifications\LessonCreated;
+use App\Notifications\LessonUpdated;
+use App\Notifications\LessonTrashed;
+use App\Notifications\VideoAssigned;
 
 class LessonController extends Controller
 {
@@ -47,6 +53,12 @@ class LessonController extends Controller
                             'notes' => $request::input('lesson-notes')
                         ]);
 
+        $course = Course::find($course_id);
+
+        if($uploadLesson){
+            Auth::user()->notify(new LessonCreated($uploadLesson, $course));
+        }
+
         return redirect('/courses/'.$course_id.'/module/'.$module_id.'/lesson/'.$uploadLesson->id.'/video');
     }
 
@@ -58,6 +70,10 @@ class LessonController extends Controller
         $lesson = Lesson::find($lesson_id)->update([
                     'video_uri' => $request::input('video')
                 ]);
+
+        $lesson = Lesson::find($lesson_id);
+
+        Auth::user()->notify(new VideoAssigned( $lesson, $request::input('name') ));
 
         return redirect('/courses/'.$course_id.'/edit');
     }
@@ -91,11 +107,17 @@ class LessonController extends Controller
                     'notes' => $request::input('lesson-notes')
                 ]);
 
+        if($lesson){
+            Auth::user()->notify(new LessonUpdated(Lesson::find( $lesson_id )));
+        }
+
         return redirect('/courses/'.$course_id.'/module/'.$module_id.'/lesson/'.$lesson_id.'/edit');
     }
 
     public function delete($course_id, $module_id, $lesson_id)
     {
+        Auth::user()->notify(new LessonTrashed( Lesson::find($lesson_id) ));
+        
         Lesson::find($lesson_id)->delete();
 
         return redirect('/courses/'.$course_id.'/edit');

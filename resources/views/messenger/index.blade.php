@@ -15,6 +15,10 @@
 
         }
 
+        .thread-body .notification-meta span.timestamp {
+            font-size: 0.6em !important;
+        }
+
     </style>
 
 @endsection
@@ -30,15 +34,15 @@
                     <div class="row">
                         <div class="col-12 col-sm-4 col-md-4 offset-lg-3 pt-1 pt-lg-0">
                             <h2 class = "res-text-8 res-text-md-6 res-text-lg-3">
-                                <i class="fa fa-envelope"></i>
-                                <span>Messages</a></span>
+                                <i class="fa fa-comments"></i>
+                                <span>Discussions</a></span>
                             </h2>
                         </div>
 
                         <div class="col-12 col-sm-3 offset-sm-5 col-md-2 offset-md-6 offset-lg-3 pr-0 pt-3 pt-sm-0 mt-2 mt-sm-0 res-brs-t res-brs-sm-t-n">
-                            <a href = "{{ route('client-list') }}" class="btn btn-sm res-button app-red-btn float-right">
+                            <a href = "{{ route('messages.create') }}" class="btn btn-sm res-button app-red-btn float-right">
                                 <i class="fa fa-plus res-text-9" aria-hidden="true"></i>
-                                <span class = "res-text-9">New Message</span>
+                                <span class = "res-text-9">New Discussion</span>
                             </a>
                         </div>
 
@@ -58,7 +62,7 @@
 
                         <div class="card">
                         	<div class="card-heading">
-                        		<h2 class = "res-text-8 pt-3 pl-3 pb-3 bg-primary text-white mb-0">Recent Messages</h2>
+                        		<h2 class = "res-text-8 pt-3 pl-3 pb-3 bg-primary text-white mb-0">Recent Discussions {{ $threads ? '('.COUNT($threads).')': '' }}</h2>
                         	</div>
                             <div class="card-body thread-body pt-2 pl-0 pr-0">
 
@@ -73,7 +77,7 @@
 
                         <div class="card">
                         	<div class="card-heading">
-                        		<h2 class = "res-text-8 pt-3 pl-3 pb-3 bg-primary text-white mb-0">Discussions With Julian</h2>
+                        		<h2 class = "res-text-8 pt-3 pl-3 pb-3 bg-primary text-white mb-0">Discussions</h2>
                         	</div>
                             <div class="card-body pt-2 pl-0 pr-0">
 
@@ -81,7 +85,7 @@
 
                                     <div class = "alert alert-warning m-2 p-4">
                                         <i aria-hidden="true" class="fa fa-arrow-circle-left res-text-9"></i>
-                                        <span class = "mr-2">Pick a thread to read...</span> 
+                                        <span class = "mr-2">Pick a discussion to read...</span> 
                                     </div>
 
                                 </div>
