@@ -38,7 +38,7 @@ class CourseController extends Controller
 
             }else{
 
-                $courses = Course::all();
+                $courses = Course::orderBy('created_at', 'desc')->get();
 
             }
 
@@ -245,7 +245,9 @@ class CourseController extends Controller
 
             }
 
-
+            if($image_name == ''){
+                $image_name = $request::input('course-image');
+            }
 
             $course = Course::find($course_id)->update([
                         'title' => $request::input('course-title'),

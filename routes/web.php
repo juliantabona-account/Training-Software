@@ -141,9 +141,12 @@ Route::get('/clients', 'UserController@index')->name('client-list')->middleware(
 Route::post('/clients', 'UserController@store')->name('client-save')->middleware('onlyadmin');
 Route::get('/clients/create', 'UserController@create')->name('client-create')->middleware('onlyadmin');
 Route::get('/clients/{client_id}', 'UserController@show')->name('client-update')->middleware('onlyadmin');
-Route::put('/clients/{client_id}', 'UserController@update')->middleware('onlyadmin');
+Route::put('/clients/{client_id}', 'UserController@update')->name('client-save-update')->middleware('onlyadmin');
 Route::get('/clients/account/setup/{client_email}', 'UserController@setup')->name('client-setup')->middleware('guest');
 Route::get('/clients/activate/{client_email}/{client_token}', 'UserController@activate')->name('client-activate');
+
+Route::get('/users/{user_id}', 'UserController@profile')->name('user-profile')->middleware('auth');
+Route::put('/users/{user_id}/password/update', 'UserController@updatePassword')->name('user-password-update')->middleware('auth');
 
 /* 
 	COMPANIES - ADD, EDIT, UPDATE, DELETE
@@ -161,13 +164,16 @@ Route::get('/companies/{company_id}/edit', 'CompanyController@edit')->middleware
 	ADMINS - ADD, EDIT, UPDATE, DELETE
 */
 
-Route::get('/admins/{admin_id}', 'AdminController@show')->name('admin-show')->middleware('onlyadmin');
+
 
 /* 
 	SEARCH - ADD, EDIT, UPDATE, DELETE
 */
 
 Route::post('/search/{id}/module', 'ModuleController@store');
+
+Route::get('/notifications', 'NotificationController@getAllNotifications')->name('get-all-notifications');
+Route::post('/notifications/mark', 'NotificationController@markAllAsRead')->name('mark-as-read');
 
 
 

@@ -90,7 +90,7 @@
                         <div class="col-12 col-sm-4 col-md-4 offset-lg-1 col-lg-6 pt-1 pt-lg-0">
                             <h2 class="res-text-8 res-text-md-6 res-text-lg-3">
                             <i class="fa fa-crosshairs"></i> 
-                            <span>Course 111</span></h2>
+                            <span>{{ $course->title }}</span></h2>
                         </div> 
                         <div class="col-12 col-sm-3 col-lg-2">
                             <h2 class="res-mt-lg-10-1 res-text-7 res-text-md-8 res-text-sm-5">
@@ -299,6 +299,7 @@
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                     <input class = "arrangement" type = "hidden" name = "arrangement">
+                    <input type = "hidden" name = "course-image" value = "{{ $course->img }}">
                     <div class="card ml-3 mt-0">
                         <div class="card-header">
                             <div class = "row">

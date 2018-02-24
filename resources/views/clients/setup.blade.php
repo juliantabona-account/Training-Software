@@ -181,7 +181,7 @@
 
                                                 <select id="year_of_birth" class="form-control res-text-9{{ $errors->has('year_of_birth') ? ' is-invalid' : '' }}" name="year_of_birth">
                                                     @for ($years = $startYears; $years < $endYears; $years++)
-                                                        <option value = "{{ $years }}" {{old('gender') == "Male" ? 'selected':''}}>{{ $years }}</option>
+                                                        <option value = "{{ $years }}" {{old('year_of_birth') == $years ? 'selected':''}}>{{ $years }}</option>
                                                     @endfor
 
                                                 </select>
@@ -253,7 +253,7 @@
                             <h3>Account Password</h3>
                             <p class = "res-text-9">Upload a profile picture if you have one. This will help make your account unique. If you don't have any skip this step</p>
 
-                                <div class="row">
+                            <div class="row">
                                 <div class="col-md-12">
                                     <fieldset class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                         <label for="password">Password</label>

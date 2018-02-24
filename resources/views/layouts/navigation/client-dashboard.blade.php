@@ -32,7 +32,7 @@
                                                     <span class = "res-text-9 res-text-md-8 primary-link">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
                                                 </a>
                                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                    <a class="dropdown-item res-text-9 res-text-md-8" href="/admins/1">Profile</a>
+                                                    <a class="dropdown-item res-text-9 res-text-md-8" href="/users/{{ Auth::id() }}">Profile</a>
                                                     <a class="dropdown-item res-text-9 res-text-md-8" href="/admins/1">Settings</a>
                                                     <div class="dropdown-divider"></div>
                                                     <a href="{{ route('logout') }}" class="dropdown-item res-text-9 res-text-md-8" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" > 
@@ -59,24 +59,20 @@
 
                                                         <li>        
                                                             <div class="d-inline-block dropdown-toolbar pb-1 res-brs-b w-100">
-
-                                                                <div class="d-inline dropdown-toolbar-actions float-right mr-4 mt-2 res-text-9">
-                                                                    <a href="{{ route('messages') }}" class = "btn btn-sm btn-primary res-text-9 view-all-btn">
-                                                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                                                        View All
+                                                                <div class="d-inline dropdown-toolbar-actions float-right mt-2 res-text-9">
+                                                                    <a href="{{ route('messages') }}" class="btn btn-sm btn-secondary res-text-9 view-all-btn">
+                                                                        <i aria-hidden="true" class="fa fa-eye"></i>
+                                                                            View All
                                                                     </a>
-                                                                </div>
-                                                                <div class="d-inline dropdown-toolbar-actions float-right mr-4 mt-2 res-text-9">
-                                                                    <i class="fa fa-comments text-info mr-2 mr-lg-0 res-text-7"></i>
-                                                                    <span class = "res-text-8">Latest Discussions</span>
                                                                 </div>
                                                             </div><!-- /dropdown-toolbar -->
                                                         </li>
 
-                                                        @include('messenger.partials.flash')
+                                                        <ul class = "notification-scrollbox p-0">
+                                                            @include('messenger.partials.flash')
 
-                                                        @each('messenger.partials.thread', $latestMessage, 'thread', 'messenger.partials.no-threads')
-
+                                                            @each('messenger.partials.thread', $latestMessage, 'thread', 'messenger.partials.no-threads')
+                                                        </ul>
                                                     </ul>
                                                 </div>
                                             </li>
@@ -94,23 +90,28 @@
 
                                                         <li>        
                                                             <div class="d-inline-block dropdown-toolbar pb-1 res-brs-b w-100">
-                                                                <div class="d-inline dropdown-toolbar-actions float-right mr-4 mt-2 res-text-9">
-                                                                    <a href="{{ route('messages') }}" class = "btn btn-sm btn-primary res-text-9 view-all-btn">
-                                                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                                                        View All
+                                                                <div class="d-inline dropdown-toolbar-actions float-right mt-2 res-text-9">
+                                                                    <a href="{{ route('get-all-notifications') }}" class="btn btn-sm btn-secondary res-text-9 view-all-btn">
+                                                                        <i aria-hidden="true" class="fa fa-eye"></i>
+                                                                            View History
                                                                     </a>
-                                                                </div>
-                                                                <div class="d-inline dropdown-toolbar-actions float-right mr-4 mt-2 res-text-9">
-                                                                    <i class="fa fa-bell text-info mr-2 mr-lg-0 res-text-8"></i>
-                                                                    <span class = "res-text-8">Latest Notfications</span>
+                                                                    @if($totalUnreadNotifications)
+                                                                        <form action = "{{ route('mark-as-read') }}" method="POST" class = "d-inline">
+                                                                            {{ csrf_field() }}
+                                                                            <button type="submit" class="btn btn-sm btn-success res-text-9 view-all-btn">
+                                                                                <i aria-hidden="true" class="fa fa-check"></i>
+                                                                                    Mark As Read
+                                                                            </button>
+                                                                        </form>
+                                                                    @endif
                                                                 </div>
                                                             </div><!-- /dropdown-toolbar -->
                                                         </li>
+                                                        <ul class = "notification-scrollbox p-0">
+                                                            @include('layouts.notification.partials.flash')
 
-                                                        @include('layouts.notification.partials.flash')
-
-                                                        @each('layouts.notification.notification', Auth::user()->unreadNotifications, 'notification', 'layouts.notification.partials.no-notifications')
-
+                                                            @each('layouts.notification.notification', Auth::user()->unreadNotifications, 'notification', 'layouts.notification.partials.no-notifications')
+                                                        </ul>
                                                     </ul>
                                                 </div>
                                             </li>

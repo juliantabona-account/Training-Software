@@ -20,6 +20,7 @@ use Cmgmyr\Messenger\Models\Participant;
 use Cmgmyr\Messenger\Models\Thread;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -50,9 +51,16 @@ class UserController extends Controller
         $thread = new Thread();
         $threads =  Thread::between([$client_id, Auth::id()])->get();
 
-//        return $threads;
-
         return view('clients.show', compact('client', 'threads'));
+    }
+
+    public function profile()
+    {
+
+        $user = User::find(Auth::user()->id);
+
+        return view('users.show', compact('user'));
+
     }
 
     public function create()
@@ -83,8 +91,6 @@ class UserController extends Controller
             //Get existing client
             $client = User::find($request::input('client-id'));
 
-            return 'stage 1!';
-
         }else{
 
             //Check if user has been created before
@@ -104,8 +110,6 @@ class UserController extends Controller
 
                 //Send Verification Email
                 $email = Mail::to( $request::input('email') )->send(new EnrollStudent($client));
-
-                return dd($email);
 
             }
         }
@@ -244,9 +248,29 @@ class UserController extends Controller
         $client->password = bcrypt( $request::input('password') );
         $client->save();
 
-        Auth::login($client);
+        if( $request::input('url') ){
 
-        return redirect('/courses');
+            return redirect('/users/'.Auth::id());
+
+        }else{
+
+            Auth::login($client);
+
+            return redirect('/courses');
+
+        }
+
+    }
+
+    public function updatePassword(Request $request)
+    {
+
+        $user = User::where('id', Auth::id())->first(); 
+
+        $user->password = bcrypt( $request::input('new-password') );
+        $user->save();
+
+        return redirect('users/'.Auth::id());
 
     }
 
