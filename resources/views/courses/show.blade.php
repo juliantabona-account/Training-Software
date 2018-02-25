@@ -95,7 +95,11 @@
                         </div>
 
                         <div class = "col-lg-12 master-path-guideline res-ml-lg-10-2">
+                            @php
+                                
+                                $totalPassedTests = 0;
 
+                            @endphp
                             @foreach($modules as $mod_num => $module)
 
                                 @if($loop->last)
@@ -143,13 +147,43 @@
                                                                             <p class="res-text-9">{{ $lesson->overview }}</p>
 
                                                                             <div class = "row lesson-editor">
-                                                                                <div class = "col-lg-6">  
+                                                                                <div class = "col-lg-12">  
 
                                                                                     <div class="m-t-sm"> 
+
+                                                                                        @if( in_array($lesson->id, collect($viewedLessons)->toArray()) )
+                                                                                            <span class="badge badge-success mb-1"><i aria-hidden="true" class="fa fa-check"></i> Viewed</span>
+                                                                                        @else
+                                                                                            <span class="badge badge-secondary mb-1"><i aria-hidden="true" class="fa fa-eye"></i> Not Viewed</span>
+                                                                                        @endif
+
                                                                                         @if(COUNT($lesson->tests))
-                                                                                        <a href="/courses/{{ $course->id }}/module/{{ $module->id }}/lesson/{{ $lesson->id }}/tests" class="badge badge-primary res-text-lg-9 mr-3"><i class="fa fa-file-text-o"></i> Take Test</a>
-                                                                                         @endif
-                                                                                        <span class="badge badge-success mb-1">Completed!</span>
+
+                                                                                            @php
+                                                                                                
+                                                                                                $testStatus = true;
+                                                                                                $testCompleted = 0;
+
+                                                                                            @endphp
+
+                                                                                            @foreach($lesson->tests as $test)
+                                                                                                @foreach($test->reports as $report)
+                                                                                                     @if($loop->last && $report->test_score == 100)
+                                                                                                        @php ($testCompleted += 1)
+                                                                                                        @php ($totalPassedTests += 1)
+                                                                                                     @else
+                                                                                                        @php ($testStatus = false)
+                                                                                                     @endif
+                                                                                                @endforeach
+                                                                                            @endforeach
+
+                                                                                            @if($testCompleted == COUNT($lesson->tests))
+                                                                                                <span class="badge badge-success mb-1"><i aria-hidden="true" class="fa fa-check"></i> Passed Tests {{ $testCompleted }}/{{ COUNT($lesson->tests) }}</span>
+                                                                                            @elseif($testCompleted < COUNT($lesson->tests))
+                                                                                                <span class="badge badge-warning mb-1">Passed Tests {{ $testCompleted }}/{{ COUNT($lesson->tests) }}</span>
+                                                                                            @endif
+
+                                                                                        @endif
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -157,12 +191,24 @@
 
                                                                     </td>
                                                                     <td class="desc table-action">
-                                                                        
-                                                                        <a href="/courses/1/lessons/1" class="btn res-button app-white-btn res-mt-lg-10-4 float-right">
+                                                                        <a href="/courses/{{ $course->id }}/module/{{ $module->id }}/lesson/{{ $lesson->id }}" class="btn res-button app-white-btn res-mt-lg-10-4 float-right">
                                                                             <i aria-hidden="true" class="fa fa-play-circle res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>
-                                                                            <span class = "res-text-9 res-text-sm-7 res-text-md-9">Start Lesson</span>
+                                                                            @if( in_array($lesson->id, collect($viewedLessons)->toArray()) )
+                                                                                <span class = "res-text-9 res-text-sm-7 res-text-md-9">Review Lesson</span>
+                                                                            @else
+                                                                                <span class = "res-text-9 res-text-sm-7 res-text-md-9">Start Lesson</span>
+                                                                            @endif
                                                                         </a>  
 
+                                                                        @if(COUNT($lesson->tests) && $testCompleted == COUNT($lesson->tests)) 
+                                                                            <a href="/courses/{{ $course->id }}/module/{{ $module->id }}/lesson/{{ $lesson->id }}/tests" class="badge badge-success res-text-lg-9 mr-3 mt-4">
+                                                                                <i class="fa fa-file-text-o"></i> Test Results
+                                                                            </a>
+                                                                        @elseif(COUNT($lesson->tests) && $testCompleted < COUNT($lesson->tests))
+                                                                            <a href="/courses/{{ $course->id }}/module/{{ $module->id }}/lesson/{{ $lesson->id }}/tests" class="badge badge-primary res-text-lg-9 mr-3 mt-4">
+                                                                                <i class="fa fa-file-text-o"></i> Take Test
+                                                                            </a>
+                                                                        @endif
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
@@ -208,7 +254,13 @@
                                 <span>Course Progress</span>
                             </h2>
                             <div class="progress">
-                              <div class="progress-bar progress-bar-striped" style="width:40%">40%</div>
+
+
+                                
+
+                                <div class="progress-bar progress-bar-striped" style="width:{{ round(((COUNT($viewedLessons) + $totalPassedTests) / ($totalLessons+$totalTests)) *100) }}%">
+                                    {{ round(((COUNT($viewedLessons) + $totalPassedTests) / ($totalLessons+$totalTests)) *100) }}%
+                                </div>
                             </div>
                         </div>
 
@@ -220,7 +272,7 @@
                                 <div class = "col-lg-12"> 
                                     <h2 class = "res-text-8 mt-1">
                                         <i class="fa fa-bullhorn mr-1" aria-hidden="true"></i>
-                                        <span>Announcements</span>
+                                        <span>Announcement</span>
                                     </h2>
                                 </div> 
                             </div>

@@ -77,7 +77,7 @@
                                     <h4 class="card-title res-text-6 res-brs-lg-b mb-2 pb-2">{{ $company->name }}</h4>
                                     <a href = "{{ route('company-show', [$company->id]) }}" class="btn btn-sm res-button app-red-btn float-right">
                                         <i class="fa fa-eye res-text-9" aria-hidden="true"></i>
-                                        <span class = "res-text-9">Members</span>
+                                        <span class = "res-text-9">View</span>
                                     </a>
                                     <form action = "/companies/{{ $company->id }}" method="POST">
                                         {{ csrf_field() }}

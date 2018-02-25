@@ -98,52 +98,45 @@
 
                                         <textarea id = "lesson-notes" class = "mt-4" name = "lesson-notes">
 
-
                                             <p style="text-align: center; font-size: 15px;" data-mce-style="text-align: center; font-size: 15px;">
                                                 <span style="color: rgb(0, 0, 0);" data-mce-style="color: #000000;">
                                                     <img title="SalesChief Logo" src="../../../../../../assets/icons/Saleschief-Logo.png" alt="SalesChief Logo" width="180" height="auto" data-mce-src="../../../../../../assets/icons/Saleschief-Logo.png" data-mce-selected="1">
                                                 </span>
                                             </p>
-                                            <h1 style="text-align: center;" data-mce-style="text-align: center;">
-                                                <span style="color: rgb(0, 0, 0);" data-mce-style="color: #000000;">Welcome 
-                                                    <span class="mce-spellchecker-ignore" data-mce-bogus="1" data-mce-word="SalesChief" data-mce-index="0">SalesChief</span>
-                                                </span>
-                                            </h1>
-                                            <h3 style="text-align: left;" data-mce-style="text-align: left;">
-                                                <span style="color: rgb(0, 0, 0);" data-mce-style="color: #000000;"> 
-                                                    <!--StartFragment-->
-                                                </span>
+                                            <h3 style="text-align: center;" data-mce-style="text-align: center;">
+                                                <strong>
+                                                    <span style="color: #000000;" data-mce-style="color: #000000;">Welcome SalesChief </span>
+                                                </strong>
                                             </h3>
+                                            <h3 style="text-align: left;" data-mce-style="text-align: left;">
+                                                <span style="color: #000000;" data-mce-style="color: #000000;"> <!--StartFragment--> </span>
+                                            </h3>
+                                            <h4><br></h4>
                                             <h4>
                                                 <strong>
-                                                    <span style="color: rgb(0, 0, 0);" data-mce-style="color: #000000;">SUMMARY</span>
+                                                    <span style="color: #000000;" data-mce-style="color: #000000;">SUMMARY</span> 
                                                 </strong>
                                             </h4>
                                             <h3 style="text-align: left;" data-mce-style="text-align: left;">
-                                                <span style="color: rgb(0, 0, 0);" data-mce-style="color: #000000;">
-                                                    <!--EndFragment--> 
-                                                </span>
+                                                <span style="color: #000000;" data-mce-style="color: #000000;"> <!--EndFragment--> </span>
                                             </h3>
-                                            <h4 data-mce-style="text-align: left;" style="text-align: left;">
-                                                <span style="color: rgb(128, 128, 128);" data-mce-style="color: #808080;">
-                                                    <strong>In todays lesson we focus on the important of sales and why every institution needs to have a strong and well structured sales strategy. Our goal is to learn the power of Sales!</strong>
-                                                </span>
-                                            </h4>
+                                            <p style="text-align: left;" data-mce-style="text-align: left;">
+                                                <span style="color: #000000;" data-mce-style="color: #000000;"> In todays lesson we focus on the important of sales and why every institution needs to have a strong and well structured sales strategy. Our goal is to learn the power of Sales! </span>
+                                            </p>
                                             <h4>
-                                                <strong><span style="color: rgb(0, 0, 0);" data-mce-style="color: #000000;">Our Focus Points</span></strong>
+                                                <strong>
+                                                    <span style="color: #000000;" data-mce-style="color: #000000;">Our Focus Points</span>
+                                                </strong>
                                             </h4>
-                                            <p>
-                                                <span style="color: rgb(128, 128, 128);" data-mce-style="color: #808080;"><strong>1) Why sales are very important</strong></span>
+                                            <p style="padding-left: 30px;" data-mce-style="padding-left: 30px;">
+                                                <span style="color: #000000;" data-mce-style="color: #000000;">1) Why sales are very important</span>
                                             </p>
-                                            <p>
-                                                <span style="color: rgb(128, 128, 128);" data-mce-style="color: #808080;"><strong>2) How sales performance are measured</strong></span>
+                                            <p style="padding-left: 30px;" data-mce-style="padding-left: 30px;">
+                                                <span style="color: #000000;" data-mce-style="color: #000000;">2) How sales performance are measured</span>
                                             </p>
-                                            <p>
-                                                <span style="color: rgb(128, 128, 128);" data-mce-style="color: #808080;"><strong>3) How to create a strong/reliable sales strategy</strong></span>
-                                            </p>
-                                            <p><!--EndFragment--> </p><p><br data-mce-bogus="1"></p>
-
-
+                                            <p style="padding-left: 30px;" data-mce-style="padding-left: 30px;">
+                                                <span style="color: #000000;" data-mce-style="color: #000000;">3) How to create a strong/reliable sales strategy</span>
+                                            </p> 
 
                                         </textarea>
                                     </div>

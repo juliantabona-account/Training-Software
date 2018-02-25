@@ -268,7 +268,7 @@
                 <form action = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
-                    <input class = "arrangement" type = "hidden" name = "arrangement" value = "{{ $test->marking_key }}">
+                    <input class = "question_arrangement" type = "hidden" name = "question_arrangement" value = "{{ $test->marking_key }}">
                     <input class = "arrangement_state" type = "hidden" name = "arrangement_state" value = "0">
                     <div class="card ml-3 mt-0">
                         <div class="card-header">

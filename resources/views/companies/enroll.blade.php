@@ -12,11 +12,11 @@
             cursor: pointer;
         }
 
-        .course-image-box{
+        .company-image-box{
             height: 180px; 
         }
 
-        img.course-image{
+        img.company-image{
             display: none;
             height: 180px; 
             width: 100%; 
@@ -47,7 +47,7 @@
                         <div class="col-3 offset-3">
                             <h2 class = "res-text-7 res-text-sm-5 res-text-md-3">
                                 <i class="fa fa-user"></i>
-                                <span>Add Client</span>
+                                <span>{{ $company->name }}/Add Client</span>
                             </h2>
                         </div>
                         <div class="col-12 col-sm-5 col-md-7 col-lg-4 pt-1 pt-lg-0">
@@ -76,15 +76,21 @@
                     <div class="col-lg-4">
                         
                         <div class="card" style="width: 20rem;">
-                            <div class = "course-image-box">
-                                <img class="card-img-top course-image"  alt="{{ $course->title }}" src="{{ $course->img }}" img-died="video">
+                            <div class = "company-image-box">
+                                <img class="card-img-top company-image"  alt="{{ $company->name }}" src="{{ $company->img }}" img-died="video">
                             </div>
                             <div class="card-body">
-                                <h4 class="card-title res-text-6 mb-1">{{ $course->title }}</h4>
-                                
+                                <h4 class="card-title res-text-6 mb-1">{{ $company->name }}</h4>
+                                @if($company->description != '')
                                 <p class="res-text-9 mt-1 pt-2 pb-2 res-brs-lg-b res-brs-lg-t">
-                                    {{ $course->overview }}
+                                    {{ $company->description }}
                                 </p>
+                                @endif
+                                @if($company->contact != '')
+                                <p class="res-text-9 mt-1 pt-2 pb-2 res-brs-lg-b res-brs-lg-t">
+                                    Contact: {{ $company->contact }}
+                                </p>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -101,60 +107,19 @@
 
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="new-tab-link" data-toggle="tab" href="#newTab" role="tab">New Client</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="existing-tab-link" data-toggle="tab" href="#existingTab" role="tab">Existing Client</a>
+                                <a class="nav-link active" id="existing-tab-link" data-toggle="tab" href="#existingTab" role="tab">Existing Client</a>
                             </li>
                         </ul>
 
                         <div class="tab-content">
-                            <div class="tab-pane fade show active" id="newTab" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="tab-pane fade show active" id="existingTab" role="tabpanel">
 
-                                <form action = "{{ route('client-save') }}" method="POST">
+                                <form action = "{{ route('company-enroll-save', [$company->id]) }}" method="POST">
                                     
                                     {{ csrf_field() }}
 
-                                        <input type = "hidden" name = "course_id" value = "{{ $course->id }}">
-                                        <input type = "hidden" name = "url" value = "{{ route('client-enroll', [$course->id]) }}">
-
-                                        <div class="card">
-
-                                            <div class="card-header">
-                                                <h2 class = "res-text-8 res-text-sm-8 res-text-md-8 mt-2"><strong>Client Details</strong></h2>
-                                                <p class = "res-text-9 res-text-sm-9 res-text-md-9 mb-1">Enter the clients first name, email and company to send them login details to join "{{ $course->title }}"</p>
-                                                <a href = "/members"><span class="badge btn-success mb-1">{{ $totalClients }} {{ $totalClients == 1 ? "Member" : "Members" }}</span></a>
-                                            </div>
-
-
-                                            <div class="card-body">
-
-                                                <div class="form-group">
-                                                    <input type = "text" class="form-control res-text-9 res-text-sm-8 res-text-md-9" name = "first-name" placeholder = "Enter First Name" required>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <input type = "email" class="form-control res-text-9 res-text-sm-8 res-text-md-9" name = "email" placeholder = "Enter Email" required>
-                                                </div>
-
-                                                <button type="submit" class="btn res-button app-red-btn float-right mt-2 pr-5 pl-5">
-                                                    <span class = "res-text-9 res-text-sm-7 res-text-md-9">Enroll Client</span>
-                                                </button>
-
-                                            </div>
-
-                                        </div>
-                                </form>
-
-                            </div>
-                            <div class="tab-pane fade" id="existingTab" role="tabpanel">
-
-                                <form action = "{{ route('client-save') }}" method="POST">
-                                    
-                                    {{ csrf_field() }}
-
-                                    <input type = "hidden" name = "course_id" value = "{{ $course->id }}">
-                                    <input type = "hidden" name = "url" value = "{{ route('client-enroll', [$course->id]) }}">
+                                    <input type = "hidden" name = "company_id" value = "{{ $company->id }}">
+                                    <input type = "hidden" name = "url" value = "{{ route('company-enroll', [$company->id]) }}">
 
                                     <div class="card">
 
@@ -194,13 +159,10 @@
                                                                 <td class = "res-text-9 res-text-sm-8 res-text-md-9">@{{ result.last_name }}</td>
                                                                 <td class = "res-text-9 res-text-sm-8 res-text-md-9">@{{ result.email }}</td>
                                                                 <td class = "res-text-9 res-text-sm-8 res-text-md-9">
-                                                                    <form action = "{{ route('client-save', [$course->id]) }}" method="POST">
-                                                                        {{ csrf_field() }}
-                                                                        <input type = "hidden" :value = "result.id" name = "client-id">
-                                                                        <button type = "submit" class="btn btn-sm btn-success float-right mr-1">
-                                                                            <i aria-hidden="true" class="fa fa-user-plus res-text-9"></i>
-                                                                        </button>
-                                                                    </form>
+                                                                    <input type = "hidden" :value = "result.id" name = "client-id">
+                                                                    <button type = "submit" class="btn btn-sm btn-success float-right mr-1">
+                                                                        <i aria-hidden="true" class="fa fa-user-plus res-text-9"></i>
+                                                                    </button>
                                                                 </td>
 
                                                               </tr>

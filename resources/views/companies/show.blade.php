@@ -35,9 +35,9 @@
                         </div>
 
                         <div class="col-12 col-sm-3 col-md-2 pr-0 pt-3 pt-sm-0 mt-2 mt-sm-0 res-brs-t res-brs-sm-t-n">
-                            <a href = "{{ route('client-create') }}" class="btn btn-sm res-button app-red-btn float-right">
+                            <a href = "{{ route('company-enroll', [$company->id]) }}" class="btn btn-sm res-button app-red-btn float-right">
                                 <i class="fa fa-plus res-text-9" aria-hidden="true"></i>
-                                <span class = "res-text-9">Add Client</span>
+                                <span class = "res-text-9">Assign Client</span>
                             </a>
                         </div>
 
@@ -59,7 +59,13 @@
                         <div class="card">
 
                             <div class="card-header">
-                                <h2 class = "res-text-8 res-text-sm-8 res-text-md-7 mt-2"><strong>Client Details <span class="badge badge-success mb-1">23 Members</span></strong></h2>  
+                                <h2 class = "res-text-8 res-text-sm-8 res-text-md-7 mt-2">
+                                    <strong>Client Details 
+                                        @if(COUNT($company->clients))
+                                            <span class="badge badge-success mb-1">{{ COUNT($company->clients) == 1 ? COUNT($company->clients) . ' Member': COUNT($company->clients). ' Members' }}</span>
+                                        @endif
+                                    </strong>
+                                </h2>  
                             </div>
 
 
@@ -77,32 +83,34 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+
+                                    @forelse($company->clients as $client)
                                     <tr>
-                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">Julian</td>
-                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">Tabona</td>
-                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">(+267) 75993221</td>
-                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">brandontabona@gmail.com</td>
-                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9"><a href= "#" class="label label-primary">Active</a></td>
+                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">{{ $client->first_name }}</td>
+                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">{{ $client->last_name }}</td>
+                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">{{ $client->mobile }}</td>
+                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">{{ $client->email }}</td>
+                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9"><a href= "#" class="label label-primary">{{ $client->status }}</a></td>
                                         <td class="text-right">
                                             <div class="btn-group">
-                                                <a href= "/clients/1" class="btn-primary btn btn-sm res-text-sm-9 res-text-md-9">View</a>
-                                                <a href= "/clients/1" class="btn-success btn btn-sm res-text-sm-9 res-text-md-9">Inbox</a>
+                                                <a href= "/clients/{{ $client->id }}" class="btn-primary btn btn-sm res-text-sm-9 res-text-md-9">View</a>
+                                                <a href= "/clients/{{ $client->id }}" class="btn-success btn btn-sm res-text-sm-9 res-text-md-9">Inbox</a>
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">Pinky</td>
-                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">Sesiane</td>
-                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">(+267) 74647644</td>
-                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">pinkysesiane@gmail.com</td>
-                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9"><a href= "#" class="label label-primary">InActive</a></td>
-                                        <td class="text-right">
-                                            <div class="btn-group">
-                                                <a href= "/clients/1" class="btn-primary btn btn-sm res-text-sm-9 res-text-md-9">View</a>
-                                                <a href= "/clients/1" class="btn-success btn btn-sm res-text-sm-9 res-text-md-9">Inbox</a>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    @empty
+                                        
+                                        <p class = "alert alert-warning p-3 m-2">
+                                            <span>No Clients Added</span>
+                                            <a href="{{ route('company-enroll', [$company->id]) }}" class="btn btn-success btn-sm res-button float-right">
+                                                <i aria-hidden="true" class="fa fa-plus res-text-9 text-white"></i> 
+                                                <span class="res-text-9 text-white">Assign Client</span>
+                                            </a>
+                                        </p>
+
+
+                                    @endforelse
+
                                 </tbody>
                                 <tfoot>
                                     <tr>

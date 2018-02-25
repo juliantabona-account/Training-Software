@@ -79,14 +79,14 @@
                                         <div class="form-group">
                                             <div class="input-group">
 
-                                                  <ais-index
-                                                        app-id="{{ env('ALGOLIA_APP_ID') }}"
-                                                        api-key="{{ env('ALGOLIA_SECRET') }}"
-                                                        index-name="users"
-                                                        :auto-search=false
-                                                        style = "width: 100%;"
-                                                        name="recipients[]"
-                                                        >
+                                                <ais-index
+                                                    app-id="{{ env('ALGOLIA_APP_ID') }}"
+                                                    api-key="{{ env('ALGOLIA_SECRET') }}"
+                                                    index-name="users"
+                                                    :auto-search=false
+                                                    style = "width: 100%;"
+                                                    name="recipients[]"
+                                                    >
 
                                                     <ais-stats>
                                                       <template slot-scope="{ totalResults, processingTime, query }">
@@ -101,22 +101,20 @@
                                                     <ais-results inline-template>
                                                       <table class = "table table-hover">
                                                         <tbody>
-                                                          <tr v-for="result in results" :key="result.objectID">
-                                                                @if(@(result.id) != Auth::id())
-                                                                    <td class = "res-text-9 res-text-sm-8 res-text-md-9"><img class="rounded mb-2 profile-image" 
-                                                                             src="http://saleschief-bucket.s3.amazonaws.com/assets/icons/profile-placeholder.jpg" img-died="image">
-                                                                    </td>
-                                                                    <td class = "res-text-9 res-text-sm-8 res-text-md-9">@{{ result.first_name }} @{{ result._name }}</td>
-                                                                    <td class = "res-text-9 res-text-sm-8 res-text-md-9">@{{ result.email }}</td>
-                                                                    <td class = "res-text-9 res-text-sm-8 res-text-md-9">
-                                                                        <div class="checkbox">
-                                                                            <label title="@{{ result.first_name }}">
-                                                                                <input type="radio" name="recipients[]" value="@{{ result.id }}">
-                                                                            </label>
-                                                                        </div>
-                                                                    </td>
-                                                                @endif
-                                                          </tr>
+                                                            <tr v-for="result in results" :key="result.objectID">
+                                                                <td class = "res-text-9 res-text-sm-8 res-text-md-9"><img class="rounded mb-2 profile-image" 
+                                                                         src="http://saleschief-bucket.s3.amazonaws.com/assets/icons/profile-placeholder.jpg" img-died="image">
+                                                                </td>
+                                                                <td class = "res-text-9 res-text-sm-8 res-text-md-9">@{{ result.first_name }} @{{ result.last_name }}</td>
+                                                                <td class = "res-text-9 res-text-sm-8 res-text-md-9">@{{ result.email }}</td>
+                                                                <td class = "res-text-9 res-text-sm-8 res-text-md-9">
+                                                                    <div class="checkbox">
+                                                                        <label :title="result.first_name">
+                                                                            <input type="radio" name="recipients[]" :value="result.id">
+                                                                        </label>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
                                                         </tbody>
                                                       </table>
                                                     </ais-results>

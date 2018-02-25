@@ -106,6 +106,7 @@ Route::get('/courses/{course_id}/module/{module_id}/edit', 'ModuleController@edi
 Route::post('/courses/{course_id}/module/{module_id}/lesson/notes', 'LessonController@notesImageUpload')->middleware('onlyadmin');
 Route::post('/courses/{course_id}/module/{module_id}/lesson', 'LessonController@store')->middleware('onlyadmin');
 Route::get('/courses/{course_id}/module/{module_id}/lesson/create', 'LessonController@create')->middleware('onlyadmin');
+Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}', 'LessonController@show')->middleware('auth');
 Route::put('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}', 'LessonController@update')->middleware('onlyadmin');
 Route::delete('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}', 'LessonController@delete')->middleware('onlyadmin');
 Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/edit', 'LessonController@edit')->middleware('onlyadmin');
@@ -121,7 +122,7 @@ Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/video', '
 /* 
 	TESTS - ADD, EDIT, UPDATE, DELETE
 */
-Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests', 'TestController@index')->name('test-list');
+Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests', 'TestController@index')->name('test-list')->middleware('auth');
 Route::post('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests', 'TestController@store')->name('test-save')->middleware('onlyadmin');
 Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests/create', 'TestController@create')->name('test-create')->middleware('onlyadmin');
 Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests/{test_id}', 'TestController@taketest')->middleware('auth');
@@ -159,6 +160,8 @@ Route::get('/companies/{company_id}', 'CompanyController@show')->name('company-s
 Route::put('/companies/{company_id}', 'CompanyController@update')->middleware('onlyadmin');
 Route::delete('/companies/{company_id}', 'CompanyController@delete')->middleware('onlyadmin');
 Route::get('/companies/{company_id}/edit', 'CompanyController@edit')->middleware('onlyadmin');
+Route::get('/companies/{company_id}/clients/create', 'CompanyController@enroll')->name('company-enroll')->middleware('onlyadmin');
+Route::post('/companies/{company_id}/clients/create', 'CompanyController@enrollSave')->name('company-enroll-save')->middleware('onlyadmin');
 
 /* 
 	ADMINS - ADD, EDIT, UPDATE, DELETE

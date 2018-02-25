@@ -32,6 +32,12 @@
             opacity: 1 !important;
         }
 
+        .correct-answer-mark{
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+
     </style>
 
 @endsection
@@ -57,10 +63,17 @@
                                 <i class="fa fa-file-text-o res-text-9" aria-hidden="true"></i>
                                 <span class = "res-text-9">View Tests</span>
                             </a>
-                            <a href = "/courses/{{ $course_id }}/edit" class="btn btn-sm res-button app-red-btn float-right">
-                                <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
-                                <span class = "res-text-9">Lessons</span>
-                            </a>
+                            @if(Auth::user()->hasRole('admin'))
+                                <a href = "/courses/{{ $course_id }}/edit" class="btn btn-sm res-button app-red-btn float-right">
+                                    <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
+                                    <span class = "res-text-9">Lessons</span>
+                                </a>
+                            @else
+                                <a href = "/courses/{{ $course_id }}" class="btn btn-sm res-button app-red-btn float-right">
+                                    <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
+                                    <span class = "res-text-9">Lessons</span>
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -94,6 +107,10 @@
                                 </button>
                             </div>
                         @endif
+
+                        <div class="alert alert-info">
+                            <p class = "m-0">{{ $test->notes }}</p>
+                        </div>
 
                         <div class = "module-row res-pl-10-1 pt-4"> 
 
@@ -135,6 +152,32 @@
                                                                         </div>
                                                                     </div>
                                                                 </td>
+                                                                <?php
+
+                                                                    if(COUNT($test->reports)){
+
+                                                                        $correct_order = collect($main['answers']);
+
+                                                                        $client_order = collect($test['reports'][0]['sheet'][$key]['answers']);
+
+
+                                                                        if($correct_order == $client_order){  
+                                                                            $mark_result = true;
+                                                                        }else{  
+                                                                            $mark_result = false;
+                                                                        }
+
+                                                                    }
+                                                                ?>
+
+                                                                @if(COUNT($test->reports) && $mark_result)
+                                                                
+                                                                    <i aria-hidden="true" class="fa fa-check res-text-5 text-success correct-answer-mark"></i>                                                                
+                                                                @elseif(COUNT($test->reports) && !$mark_result)
+
+                                                                    <i aria-hidden="true" class="fa fa-close res-text-5 text-danger correct-answer-mark"></i>                                                                
+
+                                                                @endif
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -162,9 +205,7 @@
                                                                                     @foreach($main['answers'] as $key2 => $answer)
                                                                                         <div class="form-check abc-radio abc-radio-success ml-2">
                                                                                             <input class="form-check-input" type="radio" id="questionChoiceText{{ $key }}{{ $key2 }}" value="true" name="questionChoiceText{{ $key }}{{ $key2 }}">
-                                                                                            <label class="form-check-label res-text-9 res-text-sm-8 res-text-md-9" for="questionChoice{{ $key }}{{ $key2 }}">
-                                                                                                <input type="text" id = "questionChoice{{ $key }}{{ $key2 }}" name="questionChoice{{ $key }}" value = "{{ $answer['choice'] }}" placeholder="Enter option 1" required="required" class="multiple-choice-option d-inline-block form-control res-text-9 res-text-md-9 res-text-sm-8 w-50">
-                                                                                             </label>
+                                                                                            <label class="form-check-label res-text-9 res-text-sm-8 res-text-md-9" for="questionChoiceText{{ $key }}{{ $key2 }}">{{ $answer['choice'] }}</label>
                                                                                         </div>
                                                                                     @endforeach
                                                                                 </div>
@@ -172,6 +213,39 @@
                                                                         </div>
                                                                     </div>
                                                                 </td>
+
+                                                                <?php
+                                                                    if(COUNT($test->reports)){
+                                                                        $correct_order = collect($main['answers'])->map(function ($possible_answer) {
+                                                                            
+                                                                            return $possible_answer['correct'];
+
+                                                                        });
+
+                                                                        $client_order = collect($test['reports'][0]['sheet'][$key]['answers'])->map(function ($possible_answer) {
+                                                                            
+                                                                            return $possible_answer['correct'];
+
+                                                                        });
+
+
+                                                                        if($correct_order == $client_order){  
+                                                                            $mark_result = true;
+                                                                        }else{  
+                                                                            $mark_result = false;
+                                                                        }
+                                                                    }
+                                                                ?>
+
+
+                                                                @if(COUNT($test->reports) && $mark_result)
+                                                                
+                                                                    <i aria-hidden="true" class="fa fa-check res-text-5 text-success correct-answer-mark"></i>                                                                
+                                                                @elseif(COUNT($test->reports) && !$mark_result)
+
+                                                                    <i aria-hidden="true" class="fa fa-close res-text-5 text-danger correct-answer-mark"></i>                                                                
+
+                                                                @endif
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -194,43 +268,78 @@
             <div class = "col-lg-3">
                 <form action = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}/mark" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <input class = "arrangement" type = "hidden" name = "arrangement" value = "{{ $test->marking_key }}">
+                    <input class = "question_arrangement" type = "hidden" name = "question_arrangement" value = "{{ $test->marking_key }}">
                     <input class = "arrangement_state" type = "hidden" name = "arrangement_state" value = "0">
                     <div class="card ml-3 mt-0">
                         <div class="card-header">
                             <div class = "row">
-                                <div class = "col-lg-6"> 
+                                <div class = "col-lg-12"> 
                                     <h2 class = "res-text-6 mt-1">Overview</h2>
+                                    @if( COUNT($test->reports) )
+                                        <h3 class = "res-text-9 mt-1 float-right"><i class="fa fa-repeat"></i> Test Revisions: {{ COUNT($test->reports) - 1 }}</h3>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                         <div class="card-body"> 
-
-                            <div class="form-group">
+                            @if( COUNT($test->reports) )
+                                @if( $score != $currentscore )
+                                    <div class="alert alert-warning" role="alert">
+                                        <span class = "res-text-9 res-text-sm-9 res-text-md-8"><i class="fa fa-filter mr-1"></i> Highest Score </span>
+                                    
+                                        <div class="progress">
+                                          <div class="progress-bar bg-warning" style="width:{{ $score }}%">{{ $score }}%</div>
+                                        </div>
+                                    </div>
+                                @endif
                                 <div class="alert alert-info" role="alert">
-                                    <span class = "res-text-9 res-text-sm-9 res-text-md-8"><i class="fa fa-filter mr-1"></i> Highest Score {{ $score }}%</span>
+                                    <span class = "res-text-9 res-text-sm-9 res-text-md-8"><i class="fa fa-filter mr-1"></i> Current Score</span>
+                                    <div class="progress">
+                                      <div class="progress-bar" style="width:{{ $currentscore }}%">{{ $currentscore }}%</div>
+                                    </div>
                                 </div>
 
-                            </div> 
+                                <p class = "res-text-9 badge{{ $currentscore > 80 ? ' badge-success': ' badge-warning' }}">
+                                    Status: {{ $currentscore > 80 ? 'Passed': 'Fail' }}
+                                    @if($currentscore > 80)
+                                        <i aria-hidden="true" class="fa fa-check"></i>
+                                    @endif
+                                </p>
+                                <p class = "res-text-9">{{ $currentscore > 80 ? 'You passed the test. You may now proceed with the rest of the course material': 'You failed the test. You need to retry until your Current Score is 100%' }}</p>
+                            @else
 
-                              <div class="form-group">
                                 <div class="alert alert-warning" role="alert">
-                                    <span class = "res-text-9 res-text-sm-9 res-text-md-8"><i class="fa fa-filter mr-1"></i> Current Score {{ $currentscore }}%</span>
+                                    <span class = "res-text-9 res-text-sm-9 res-text-md-8"><i class="fa fa-info-circle mr-1"></i> Answer all question and submit the test.</span>
                                 </div>
-                                
-                            </div>
-                            <div class="form-group"> 
-                               <p>{{ $test->title }}</p>
-                            </div>
-                            <div class="form-group">
-                                <p>{{ $test->notes }}</p>
-                            </div>
+
+                            @endif
+
                         </div>
 
                         <div class="card-footer">
-                            <button type = "submit" class="btn res-button app-red-btn float-right pr-5 pl-5">
-                                <span class = "res-text-9 res-text-sm-7 res-text-md-9">Submit Answers</span>
-                            </button>
+                            @if(COUNT($test->reports) && $currentscore > 80)
+
+                                @if(Auth::user()->hasRole('admin'))
+                                    <a href = "/courses/{{ $course_id }}/edit" class="btn btn-sm res-button app-red-btn float-right">
+                                        <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
+                                        <span class = "res-text-9">Back To Lessons</span>
+                                    </a>
+                                @else
+                                    <a href = "/courses/{{ $course_id }}" class="btn btn-sm res-button app-red-btn float-right">
+                                        <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
+                                        <span class = "res-text-9">Back To Lessons</span>
+                                    </a>
+                                @endif
+
+
+
+                            @else
+
+                                <button type = "submit" class="btn res-button app-red-btn float-right pr-5 pl-5">
+                                    <span class = "res-text-9 res-text-sm-7 res-text-md-9">Submit Answers</span>
+                                </button>
+                        
+                            @endif
                         </div>
                     </div>
                 </form>

@@ -47,7 +47,7 @@
                                 <span class = "res-text-9">Create Test</span>
                             </a>
                             @endif
-                            <a href = "/courses/{{ $course_id }}/edit" class="btn btn-sm res-button app-red-btn float-right">
+                            <a href = "/courses/{{ $course_id }}" class="btn btn-sm res-button app-red-btn float-right">
                                 <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
                                 <span class = "res-text-9">Lessons</span>
                             </a>
@@ -76,23 +76,62 @@
                                 <div class="card-body">
                                     <h4 class="card-title mb-3 pb-3 res-brs-b res-text-8">{{ $test->title }}</h4>
                                     @if(Auth::user()->hasRole('admin'))
-                                    <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}/edit" class="btn btn-sm res-button app-red-btn float-right">
-                                        <i class="fa fa-pencil res-text-9" aria-hidden="true"></i>
-                                        <span class = "res-text-9">Edit Test</span>
-                                    </a>
-                                    <form action = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}" method="POST">
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
-                                        <button type = "submit" class="btn btn-sm btn-danger float-right mr-1">
-                                            <i class="fa fa-trash res-text-9" aria-hidden="true"></i>
-                                        </button>
-                                    </form>
+                                        <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}/edit" class="btn btn-sm res-button app-red-btn float-right">
+                                            <i class="fa fa-pencil res-text-9" aria-hidden="true"></i>
+                                            <span class = "res-text-9">Edit Test</span>
+                                        </a>
+                                        <form action = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}" method="POST">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <button type = "submit" class="btn btn-sm btn-danger float-right mr-1">
+                                                <i class="fa fa-trash res-text-9" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
                                     @endif
                                     @if(Auth::user()->hasRole('client'))
-                                    <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}" class="btn btn-sm btn-success res-button float-right">
-                                        <i class="fa fa-pencil res-text-9" aria-hidden="true"></i>
-                                        <span class = "res-text-9">Take Test</span>
-                                    </a>
+
+                                        @if( COUNT($test->reports) )
+
+                                            @foreach( $testScores as $key => $testScore )
+
+                                                @if (array_key_exists($test->id, $testScore))
+
+                                                    <div class="alert alert-warning" role="alert">
+                                                        @if($testScore[$test->id]['score'] != $testScore[$test->id]['currentscore'])
+                                                            <span class = "res-text-9 res-text-sm-9 res-text-md-8">Highest Score </span>
+                                                            <div class="progress mb-2">
+                                                              <div class="progress-bar bg-warning" style="width:{{ $testScore[$test->id]['score'] }}%">{{ $testScore[$test->id]['score'] }}%</div>
+                                                            </div>
+                                                        @endif
+                                                        <span class = "res-text-9 res-text-sm-9 res-text-md-8">Current Score</span>
+                                                        <div class="progress">
+                                                          <div class="progress-bar" style="width:{{ $testScore[$test->id]['currentscore'] }}%">{{ $testScore[$test->id]['currentscore'] }}%</div>
+                                                        </div>
+                                                    </div>
+
+                                                    @if($testScore[$test->id]['currentscore'] < 100)
+                                                        <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}" class="btn btn-sm btn-success res-button float-right">
+                                                            <i class="fa fa-file-text-o"></i>
+                                                            <span class = "res-text-9">Complete Test</span>
+                                                        </a>
+                                                    @else
+                                                        <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}" class="btn btn-sm btn-success res-button float-right">
+                                                            <span class = "res-text-9">View Test</span>
+                                                        </a>
+                                                    @endif
+
+                                                @endif
+
+                                            @endforeach
+                                        @else
+
+                                        <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}" class="btn btn-sm btn-success res-button float-right">
+                                            <i class="fa fa-pencil res-text-9" aria-hidden="true"></i>
+                                            <span class = "res-text-9">Take Test</span>
+                                        </a>
+
+                                        @endif
+
                                     @endif
                                 </div>
                             </div>

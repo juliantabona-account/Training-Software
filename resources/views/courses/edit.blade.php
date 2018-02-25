@@ -298,7 +298,8 @@
                 <form action = "/courses/{{ $course->id }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
-                    <input class = "arrangement" type = "hidden" name = "arrangement">
+                    <input class = "lesson_arrangement" type = "hidden" name = "lesson_arrangement">
+                    <input class = "arrangement_state" type = "hidden" name = "arrangement_state" value = "0">
                     <input type = "hidden" name = "course-image" value = "{{ $course->img }}">
                     <div class="card ml-3 mt-0">
                         <div class="card-header">

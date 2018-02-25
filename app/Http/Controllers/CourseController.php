@@ -72,12 +72,19 @@ class CourseController extends Controller
 
     public function show($course_id)
     {
-        try{
+        //try{
             $course = Course::find($course_id);
             //$modules = Course::find($course_id)->moduleWithLessons()->get();
-            $modules = Course::find($course_id)->modules()->get();
+            //$modules = Course::find($course_id)->modules()->get();
+
+            $modules = Course::find($course_id)->modules()->with(array('lessons'=>function($query){
+                $query->with(array('tests'=>function($query){
+                    $query->with('reports');
+                }));
+            }))->get();
 
             $video_uris = [];
+            $totalLessons = 0;
 
             $video_uris = collect($modules)->map(function ($module) use ($video_uris) {
 
@@ -94,12 +101,32 @@ class CourseController extends Controller
             }else{
             	$videos = [];
             } 
-        }catch(Exception $e){
-            return view('error.connection_fail');
-        }
-            
 
-        return view('courses.show', compact('course','modules', 'videos'));
+            $totalLessons = collect($modules)->map(function ($module) use ($video_uris) {
+
+                return COUNT($module->lessons);
+
+            })->sum();
+
+            $viewedLessons = array_unique(collect(Auth::user()->lessonViews)->map(function ($viewedLesson){
+
+                                return $viewedLesson->pivot->lesson_id;
+
+                            })->toArray());
+
+            $totalTests = collect($modules)->map(function ($module) {
+
+                return collect($module->lessons)->map(function ($lesson) {
+                    return COUNT($lesson->tests);
+                })->sum();
+
+            })->sum();
+
+        //}catch(Exception $e){
+        //    return view('error.connection_fail');
+        //}
+
+        return view('courses.show', compact('course','modules', 'videos', 'viewedLessons', 'totalLessons', 'totalTests'));
     }
 
     public function create()
@@ -257,7 +284,8 @@ class CourseController extends Controller
                     ]);
 
             //Get The New Module Arrangement
-            $arrangement = json_decode( $request::input('arrangement') , true );
+
+            $arrangement = json_decode( $request::input('lesson_arrangement') , true );
 
             //If We Have A New Arrangement Lets Continue 
             if(isset($arrangement) && !empty($arrangement)){

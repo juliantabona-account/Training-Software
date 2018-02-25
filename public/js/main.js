@@ -330,8 +330,11 @@ function runLessonsArrangement(){
         return arrangement;
 
     });
+
+    console.log(JSON.stringify(JSON.decycle(lesson_collection, true)));
     
-    $('.arrangement').val(JSON.stringify(JSON.decycle(lesson_collection, true)));
+    $('.lesson_arrangement').val(JSON.stringify(JSON.decycle(lesson_collection, true)));
+    $('.arrangement_state').val(1);
 
 }
 
@@ -371,7 +374,9 @@ function runQuestionsArrangement(){
 
     }));
         
-    $('.arrangement').val(JSON.stringify(JSON.decycle(question_collection, true)));
+    console.log(JSON.stringify(JSON.decycle(question_collection, true)));
+
+    $('.question_arrangement').val(JSON.stringify(JSON.decycle(question_collection, true)));
     $('.arrangement_state').val(1);
 }
 

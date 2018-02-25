@@ -8,6 +8,11 @@
     
     <style>
 
+        #lesson-notes h1, #lesson-notes h2, #lesson-notes h3, 
+        #lesson-notes h4, #lesson-notes h5, #lesson-notes h6,
+        #lesson-notes span, #lesson-notes b, #lesson-notes i{
+            font-family: Open Sans, sans-serif !important;
+        }
 
         #vimeo_player {
             background: #e0e0e0 !important;
@@ -191,8 +196,7 @@
                 { title: 'Test template 2', content: 'Test 2' }
             ],
             content_css: [
-                '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-                '//www.tinymce.com/css/codepen.min.css'
+
             ],
             setup: function (ed) {
                 ed.on('LoadContent', function(e) {

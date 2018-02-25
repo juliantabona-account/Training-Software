@@ -30,7 +30,23 @@ class LessonController extends Controller
     	$module = Module::find($module_id);
 
         return view('lessons.create', compact('course_id', 'module'));
-    }   
+    }
+
+    public function show($course_id, $module_id, $lesson_id)
+    {
+        $lesson = Lesson::find($lesson_id);
+        $module = Module::find($module_id);
+        
+        Auth::user()->lessonViews()->attach($lesson_id);
+        
+        if($lesson->video_uri){
+            $status = Vimeo::request('/videos/'.str_replace('/videos/', '', $lesson->video_uri).'?fields=status')['body']['status'];
+        }else{
+            $status = 'empty';
+        }
+        
+        return view('lessons.show', compact('course_id', 'module', 'lesson', 'status'));
+    }  
 
     public function video($course_id, $module_id, $lesson_id)
     {

@@ -61,12 +61,19 @@ class User extends Authenticatable
                     ->withTimestamps();
     }
 
-    public function testSubmittions()
+    public function testReports()
     {
-        return $this->belongsToMany('App\Test')
-                    ->orderBy('test_user.created_at', 'asc')
-                    ->withPivot('pass_state', 'submittion')
-                    ->withTimestamps();
+        return $this->hasMany('App\Report', 'client_id');
+
     }
+
+    //public function testSubmittions()
+    //{
+    //    return $this->belongsToMany('App\Test')
+    //                ->orderBy('test_user.created_at', 'asc')
+    //                ->withPivot('pass_state', 'submittion')
+    //                ->withTimestamps();
+    //}
+
 
 }
