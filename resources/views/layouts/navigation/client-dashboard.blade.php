@@ -29,9 +29,9 @@
                                             <li class="nav-item dropdown pl-4 pt-3 pb-sm-1 p-lg-4 res-brs-lg-r">
                                                 <a class="nav-link dropdown-toggle d-lg-table-row primary-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     @if( Auth::user()->img )
-                                                        <i class="fa fa-user-circle-o mr-2 res-text-9 res-text-md-8" aria-hidden="true"></i>
+                                                        <img src = "{{ Auth::user()->avatar }}" style = "width: 30px !important;border-radius: 50%;margin: 0 5px 0px 0;">
                                                     @else
-                                                        <img src = "{{ Auth::user()->img }}" style = "width: 30px;border-radius: 50%;margin: 0 5px 0px 0;">
+                                                        <i class="fa fa-user-circle-o mr-2 res-text-9 res-text-md-8" aria-hidden="true"></i>  
                                                     @endif
                                                     <span class = "res-text-9 res-text-md-8 primary-link">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
                                                 </a>
