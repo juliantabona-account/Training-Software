@@ -199,16 +199,20 @@ class UserController extends Controller
     public function setup($client_email)
     {
         $client = User::where('email', $client_email)->first();
-       // echo 'Setting up account';
-        //return $client;
+
+        //Check if the user is activated
         if($client->status == 1 && $client->verifyToken == Null){
+            if(empty($client->password)){
+                return view('clients.setup', compact('client')); 
+            }          
 
-            return view('clients.setup', compact('client'));           
+        }
 
+        //Check if the user is logged in
+        if(Auth::check()){
+            return redirect()->route('user-profile', Auth::id());
         }else{
-
-            echo 'Account Setup Restricted!';
-
+            return redirect('/login');
         }
         
     }
