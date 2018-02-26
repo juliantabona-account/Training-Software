@@ -182,6 +182,10 @@ class UserController extends Controller
 
                 Mail::to( $client_email )->send(new AccountActivated($client));                
 
+                Session::flush();
+                
+                Auth::login($client->id);
+
                 return redirect('/clients/account/setup/'.$client_email);
 
             }            
