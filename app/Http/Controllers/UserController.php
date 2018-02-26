@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use Image;
 use Storage;
+use Session;
 use Request;
 use App\User;
 use App\Role;
@@ -176,13 +177,15 @@ class UserController extends Controller
 
             if($verified){
 
-                $client = User::where('email', $client_email)->first();
+                $request->session()->flush();
+
+                $client = User::where('email', $client_email)->first();               
+                
+                Auth::login($client);
 
                 //Send Account Verified Email
 
-                Mail::to( $client_email )->send(new AccountActivated($client));                
-
-                //Auth::login($client);
+                Mail::to( $client_email )->send(new AccountActivated($client)); 
 
                 return redirect('/clients/account/setup/'.$client_email);
 
