@@ -10,7 +10,6 @@ use Cmgmyr\Messenger\Traits\Messagable;
 
 class User extends Authenticatable
 {
-    use AuthenticableTrait;
     use Notifiable;
     use Searchable;
     use Messagable;
