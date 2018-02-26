@@ -182,7 +182,7 @@ class UserController extends Controller
 
                 Mail::to( $client_email )->send(new AccountActivated($client));                
 
-                Auth::login($client->id);
+                Auth::login($client);
 
                 return redirect('/clients/account/setup/'.$client_email);
 
@@ -198,6 +198,7 @@ class UserController extends Controller
 
     public function setup($client_email)
     {
+        return 'Lets setup account';
 
         $client = User::where('email', $client_email)->first();
 
