@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Auth;
 use Image;
 use Storage;
-use Session;
 use Request;
 use App\User;
 use App\Role;
