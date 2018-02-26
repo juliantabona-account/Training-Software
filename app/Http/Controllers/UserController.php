@@ -198,8 +198,6 @@ class UserController extends Controller
 
     public function setup($client_email)
     {
-        return 'Lets setup account';
-
         $client = User::where('email', $client_email)->first();
 
         if($client->status == 1 && $client->verifyToken == Null){
