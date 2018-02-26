@@ -252,6 +252,9 @@ class UserController extends Controller
 
         $client = User::where('email', $request::input('old_email'))->first(); 
 
+        echo 'uploading data';
+        return $client;
+
         $client->first_name = $request::input('first_name');
         $client->last_name = $request::input('last_name');
         $client->gender = $request::input('gender');
