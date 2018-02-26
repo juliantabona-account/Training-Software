@@ -4,13 +4,11 @@ namespace App;
 
 use Laravel\Scout\Searchable;
 use Illuminate\Notifications\Notifiable;
-//use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Cmgmyr\Messenger\Traits\Messagable;
 
-class User extends Eloquent implements Authenticatable
+class User extends Authenticatable
 {
     use AuthenticableTrait;
     use Notifiable;
