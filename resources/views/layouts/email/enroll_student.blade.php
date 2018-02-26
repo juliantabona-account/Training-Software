@@ -67,7 +67,7 @@
 																<td style="padding: 0; margin: 0;" width="540">
 														<![endif]-->
 														<div style="padding-right: 30px; padding-left: 30px; margin-bottom: 40px;">
-															<a href="http://127.0.0.1:8000/clients/activate/{{ $user->email }}/{{ $user->verifyToken }}" class="sm_auto_width sm_block button_link" 
+															<a href="{{ env('APP_DOMAIN') }}/clients/activate/{{ $user->email }}/{{ $user->verifyToken }}" class="sm_auto_width sm_block button_link" 
 															   style="min-width: 234px;border-radius: 0px;padding: 10px;background-color: #c72424;font-size: 20px;color: #ffffff;display: inline-block;text-align: center;vertical-align: top;font-weight: 100;text-decoration: none!important;" target="_blank">
 																Activate Account
 															</a>

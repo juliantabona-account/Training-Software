@@ -44,8 +44,17 @@ class UserController extends Controller
     public function show($client_id)
     {
 
-        $client = User::where('id', $client_id)->with(array('company', 'lessonViews', 'testSubmittions', 'courses'=>function($query){
-            $query->with('moduleWithLessons');
+        $client = User::where('id', $client_id)->with(array('company', 'lessonViews', 
+
+        'testReports'=>function($query){
+            $query->with('test');
+        }, 
+        'courses'=>function($query){
+            $query->with(array('modules'=>function($query){
+                $query->with(array('lessons'=>function($query){
+                    $query->with('tests');
+                }));
+            }));
         }))->first();
 
         $thread = new Thread();

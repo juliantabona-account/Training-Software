@@ -82,7 +82,7 @@ class MessagesController extends Controller
             'subject' => $input['subject'],
         ]);
         // Message
-        Message::create([
+        $message = Message::create([
             'thread_id' => $thread->id,
             'user_id' => Auth::id(),
             'body' => $input['message'],
@@ -97,7 +97,8 @@ class MessagesController extends Controller
         if (Input::has('recipients')) {
             $thread->addParticipant($input['recipients']);
         }
-        return redirect()->route('messages');
+        
+        return redirect('/messages/'.$message->id);
     }
     /**
      * Adds a new message to a current thread.

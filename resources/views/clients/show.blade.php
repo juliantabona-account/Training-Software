@@ -241,7 +241,7 @@
                                                             </td>
                                                             <td class = "res-text-9 res-text-sm-9 res-text-md-9">
                                                                 
-                                                                @if( in_array( $lesson->id, collect( $client->testSubmittions )->map(function ($testSubmitted) { return $testSubmitted->lesson_id; })->toArray() ) && $client->testSubmittions->last()->pivot->pass_state == 'Pass' )
+                                                                @if( in_array( $lesson->id, collect( $client->testReports )->map(function ($testReport) { return $testReport->test->lesson_id; })->toArray() ) && $client->testReports->last()->test_score == 100 )
                                                                     <a href="#" data-toggle="tooltip" data-placement="top" 
                                                                        title="Last tested on 
 
@@ -249,7 +249,7 @@
 
                                                                             Carbon\Carbon::parse(
 
-                                                                                    $client->testSubmittions->last()->pivot->created_at
+                                                                                    $client->testReports->last()->created_at
 
                                                                                 )->format('M j Y @ G:i A')
 
@@ -258,7 +258,11 @@
                                                                        <i class="fa fa-check" aria-hidden="true"></i>
                                                                     </a>
                                                                 @else
-                                                                    ---
+                                                                    @if(COUNT($lesson->tests))
+                                                                        <span href="#" data-toggle="tooltip" data-placement="top" title="{{ COUNT($lesson->tests) == 1 ? COUNT($lesson->tests) . ' test not submitted' : COUNT($lesson->tests) . ' tests not submitted' }}">
+                                                                            ---
+                                                                        </span>
+                                                                    @endif
                                                                 @endif
 
                                                             </td>
@@ -294,74 +298,42 @@
                                         <div class = "row mt-4">
                                             <div class = "col-8">
                                                 <div class="alert alert-primary" role="alert">
-                                                    <i class="fa fa-comments"></i> Discussions with Julian
+                                                    <i class="fa fa-comments"></i> Discussions with {{ $client->first_name }} {{ $client->last_name }}
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="chat-discussion">
 
-                                            <div class="chat-message left">
-                                                <img class="message-avatar" src="http://saleschief-bucket.s3.amazonaws.com/assets/icons/profile-placeholder.jpg" img-died="image">
-                                                <div class="message">
-                                                    <a class="message-author res-text-9 res-text-sm-9 res-text-md-9" href="#"> Michael Smith </a>
-                                                    <span class="message-date"> Mon Jan 26 2015 - 18:39:23 </span>
-                                                    <span class="message-content res-text-9 res-text-sm-9 res-text-md-9">
-                                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="chat-message right">
-                                                <img class="message-avatar" src="http://saleschief-bucket.s3.amazonaws.com/assets/icons/profile-placeholder.jpg" img-died="image">
-                                                <div class="message">
-                                                    <a class="message-author res-text-9 res-text-sm-9 res-text-md-9" href="#"> Karl Jordan </a>
-                                                    <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
-                                                    <span class="message-content res-text-9 res-text-sm-9 res-text-md-9">
-                                                    Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover.
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="chat-message right">
-                                                <img class="message-avatar" src="http://saleschief-bucket.s3.amazonaws.com/assets/icons/profile-placeholder.jpg" img-died="image">
-                                                <div class="message">
-                                                    <a class="message-author res-text-9 res-text-sm-9 res-text-md-9" href="#"> Michael Smith </a>
-                                                    <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
-                                                    <span class="message-content res-text-9 res-text-sm-9 res-text-md-9">
-                                                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="chat-message left">
-                                                <img class="message-avatar" src="http://saleschief-bucket.s3.amazonaws.com/assets/icons/profile-placeholder.jpg" img-died="image">
-                                                <div class="message">
-                                                    <a class="message-author res-text-9 res-text-sm-9 res-text-md-9" href="#"> Alice Jordan </a>
-                                                    <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
-                                                    <span class="message-content res-text-9 res-text-sm-9 res-text-md-9">
-                                                    All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                                                        It uses a dictionary of over 200 Latin words.
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="chat-message right">
-                                                <img class="message-avatar" src="http://saleschief-bucket.s3.amazonaws.com/assets/icons/profile-placeholder.jpg" img-died="image">
-                                                <div class="message">
-                                                    <a class="message-author res-text-9 res-text-sm-9 res-text-md-9" href="#"> Mark Smith </a>
-                                                    <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
-                                                    <span class="message-content res-text-9 res-text-sm-9 res-text-md-9">
-                                                    All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                                                        It uses a dictionary of over 200 Latin words.
-                                                    </span>
+                                            @each('messenger.partials.thread_2', $threads, 'thread', 'messenger.partials.no-threads')
+                                           
+                                        </div>
+
+                                        <form action="{{ route('messages.store') }}" method="post">
+                                            {{ csrf_field() }}
+
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <input type = "text" class="form-control res-text-9 res-text-sm-8 res-text-md-9" name="subject" placeholder="Subject" value="{{ old('subject') }}" required />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <textarea id = "message" class="form-control res-text-9 res-text-sm-8 res-text-md-9" name = "message" rows="4" placeholder = "Messsage" required>{{ old('message') }}</textarea>
+                                                    </div>
+
+                                                        <div class="form-group">
+                                                            <div class="input-group">
+                                                                <input type="hidden" name="recipients[]" value="{{ $client->id }}">
+                                                            </div>
+                                                        </div>
+
+                                                    <button type="submit" class="btn res-button app-red-btn float-right mt-2 pr-5 pl-5">
+                                                        <span class = "res-text-9 res-text-sm-7 res-text-md-9">Send</span>
+                                                    </button>
                                                 </div>
                                             </div>
 
-                                        </div>
-
-                                        <div class="input-group">
-                                            <input id="btn-input" type="text" class="form-control res-text-9 res-text-sm-9 res-text-md-9" placeholder="Say something..." />
-                                            <span class="input-group-btn">
-                                                <button class="btn app-red-btn btn-sm res-text-9 res-text-sm-9 res-text-md-9">Send</button>
-                                            </span>
-                                        </div>
+                                        </form>
 
                                     </div>
                                 </div>

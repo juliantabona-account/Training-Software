@@ -87,7 +87,7 @@
         <div class="row res-mt-10-5 res-mb-10-10 col-">
             <div class="col-sm-11 offset-sm-1">
 
-                <form method="POST" action="{{ route('client-update', [$client->id]) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('client-save-update', [$client->id]) }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
 
