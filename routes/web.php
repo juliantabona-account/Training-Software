@@ -143,7 +143,7 @@ Route::post('/clients', 'UserController@store')->name('client-save')->middleware
 Route::get('/clients/create', 'UserController@create')->name('client-create')->middleware('onlyadmin');
 Route::get('/clients/{client_id}', 'UserController@show')->name('client-update')->middleware('onlyadmin');
 Route::put('/clients/{client_id}', 'UserController@update')->name('client-save-update')->middleware('onlyadmin');
-Route::get('/clients/account/setup/{client_email}', 'UserController@setup')->name('client-setup')->middleware('auth');
+Route::get('/clients/account/setup/{client_email}', 'UserController@setup')->name('client-setup');
 Route::get('/clients/activate/{client_email}/{client_token}', 'UserController@activate')->name('client-activate');
 
 Route::get('/users/{user_id}', 'UserController@profile')->name('user-profile')->middleware('auth');
