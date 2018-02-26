@@ -133,7 +133,12 @@
                                     <dt class = "float-left mr-2 res-text-9 res-text-sm-8 res-text-md-9">Last Name:</dt> <dd class = "res-text-9 res-text-sm-8 res-text-md-9">{{ $client->last_name }}</dd>
                                     <dt class = "float-left mr-2 res-text-9 res-text-sm-8 res-text-md-9 pt-2"><i class="fa fa-phone"></i></dt> <dd class = "res-text-9 res-text-sm-8 res-text-md-9 res-brs-t pt-2">{{ $client->mobile }}</dd>
                                     <dt class = "float-left mr-2 res-text-9 res-text-sm-8 res-text-md-9"><i class="fa fa-envelope"></i></dt> <dd class = "res-text-9 res-text-sm-8 res-text-md-9">{{ $client->email }}</dd>
-                                    <dt class = "float-left mr-2 res-text-9 res-text-sm-8 res-text-md-9">Company:</dt> <dd class = "res-text-9 res-text-sm-8 res-text-md-9"><a href = "/companies/{{ $client->company->id }}">{{ $client->company->name }}</a></dd>
+                                    <dt class = "float-left mr-2 res-text-9 res-text-sm-8 res-text-md-9">Company:</dt> <dd class = "res-text-9 res-text-sm-8 res-text-md-9">
+                                    @if($client->company_id)
+                                        <a href = "/companies/{{ $client->company->id }}">{{ $client->company->name }}</a></dd>
+                                    @else
+                                        <span>Not Assigned</span>
+                                    @endif
                                     <dt class = "float-left mr-2 res-text-9 res-text-sm-8 res-text-md-9 pt-2">Gender:</dt> <dd class = "res-text-9 res-text-sm-8 res-text-md-9 res-brs-t pt-2">{{ $client->gender }}</dd>
                                     <dt class = "float-left mr-2 res-text-9 res-text-sm-8 res-text-md-9">Year Of Birth:</dt> <dd class = "res-text-9 res-text-sm-8 res-text-md-9">{{ $client->year_of_birth }}</dd>
                                     <dt class = "float-left mr-2 res-text-9 res-text-sm-8 res-text-md-9">Created At:</dt> <dd class = "res-text-9 res-text-sm-8 res-text-md-9">{{ Carbon\Carbon::parse($client->created_at)->format('M j Y') }}</dd>

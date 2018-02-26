@@ -53,7 +53,7 @@ Route::get('/support', function(){
 
 	return view('/support');
 
-});
+})->middleware('guest');
 
 Route::get('/sendsms', function(){
 	
