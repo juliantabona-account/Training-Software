@@ -176,7 +176,7 @@ class UserController extends Controller
 
             if($verified){
 
-                $request->session()->flush();
+                $request::session()->flush();
 
                 $client = User::where('email', $client_email)->first();               
                 
