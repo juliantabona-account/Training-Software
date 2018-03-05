@@ -205,7 +205,7 @@
                                                                                     @foreach($main['answers'] as $key2 => $answer)
                                                                                         <div class="form-check abc-radio abc-radio-success ml-2">
                                                                                             <input class="form-check-input" type="radio" id="questionChoiceText{{ $key }}{{ $key2 }}" value="true" name="questionChoiceText{{ $key }}{{ $key2 }}">
-                                                                                            <label class="form-check-label res-text-9 res-text-sm-8 res-text-md-9" for="questionChoiceText{{ $key }}{{ $key2 }}">{{ $answer['choice'] }}</label>
+                                                                                            <label class="form-check-label res-text-9 res-text-sm-9 res-text-md-9" for="questionChoiceText{{ $key }}{{ $key2 }}">{{ $answer['choice'] }}</label>
                                                                                         </div>
                                                                                     @endforeach
                                                                                 </div>

@@ -25,7 +25,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-                <div id = "app-single-form-card" class="card card-default res-mt-10-3 res-mt-sm-10-10 res-mt-md-10-15">
+                <div id = "app-single-form-card" class="card card-default res-mt-10-3 res-mb-10-10 res-mt-sm-10-10 res-mt-md-10-15">
 
                     <div class="card-body">
                         
@@ -38,7 +38,7 @@
 
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <div class="col-md-12">
-                                    <input id="email" type="email" class="form-control res-text-9 res-text-sm-8 res-text-md-8" name="email" value="{{ old('email') }}" placeholder="E-mail address *" required autofocus>
+                                    <input id="email" type="email" class="form-control res-text-9 res-text-sm-8 res-text-md-9" name="email" value="{{ old('email') }}" placeholder="E-mail address *" required autofocus>
 
                                     @if ($errors->has('email'))
                                         <span class="help-block">
@@ -50,7 +50,7 @@
 
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                 <div class="col-md-12">
-                                    <input id="password" type="password" class="form-control res-text-9 res-text-sm-8 res-text-md-8" name="password" placeholder="Password *" required>
+                                    <input id="password" type="password" class="form-control res-text-9 res-text-sm-9 res-text-md-9" name="password" placeholder="Password *" required>
 
                                     @if ($errors->has('password'))
                                         <span class="help-block">

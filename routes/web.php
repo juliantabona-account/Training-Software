@@ -55,6 +55,8 @@ Route::get('/support', function(){
 
 })->middleware('guest');
 
+Route::get('/reports', 'ReportController@index')->middleware('onlyadmin');
+
 Route::get('/sendsms', function(){
 	
 	echo 'Preparing to send...';

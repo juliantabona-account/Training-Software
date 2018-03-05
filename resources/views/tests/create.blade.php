@@ -205,7 +205,7 @@
                                 </div>
                                 <div class = "col-lg-6"> 
                                     <a href = "/courses/{{ $course_id }}" target="_blank" class="btn res-button app-white-btn float-right">
-                                        <i aria-hidden="true" class="fa fa-eye res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>
+                                        <i aria-hidden="true" class="fa fa-eye res-text-9 res-text-sm-9 res-text-md-9 mr-1"></i>
                                         <span class = "res-text-9 res-text-sm-7 res-text-md-9">Preview</span>
                                     </a> 
                                 </div> 

@@ -9,14 +9,15 @@
     <style>
 
         .course-image-box{
-            height: 180px; 
+            height: 180px;
+            overflow: hidden;
         }
 
         img.course-image{
             display: none;
             height: 180px; 
             width: 100%; 
-            background: linear-gradient(#ff5a4e, #ff3925);
+            background: linear-gradient(#128067, #179a7c);
         }
 
         .error-image{
@@ -96,6 +97,9 @@
                                             <i class="fa fa-pencil res-text-9" aria-hidden="true"></i>
                                             <span class = "res-text-9">Edit Course</span>
                                         </a>
+                                        <a href = "/courses/{{ $course->id }}/clients/create" class="btn btn-sm btn-success float-right mr-1">
+                                            <i class="fa fa-user-plus res-text-9" aria-hidden="true"></i>
+                                        </a>
                                         <form action = "/courses/{{ $course->id }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
@@ -103,9 +107,6 @@
                                                 <i class="fa fa-trash res-text-9" aria-hidden="true"></i>
                                             </button>
                                         </form>
-                                        <a href = "/courses/{{ $course->id }}/clients/create" class="btn btn-sm btn-success float-right mr-1">
-                                            <i class="fa fa-user-plus res-text-9" aria-hidden="true"></i>
-                                        </a>
                                     @endif
                                     @if(Auth::user()->hasRole('client'))
                                         <a href = "/courses/{{ $course->id }}" class="btn btn-sm btn-success res-button float-right">

@@ -320,10 +320,10 @@
                                             <div class="card">
                                                 <div class="card-body">
                                                     <div class="form-group">
-                                                        <input type = "text" class="form-control res-text-9 res-text-sm-8 res-text-md-9" name="subject" placeholder="Subject" value="{{ old('subject') }}" required />
+                                                        <input type = "text" class="form-control res-text-9 res-text-sm-9 res-text-md-9" name="subject" placeholder="Subject" value="{{ old('subject') }}" required />
                                                     </div>
                                                     <div class="form-group">
-                                                        <textarea id = "message" class="form-control res-text-9 res-text-sm-8 res-text-md-9" name = "message" rows="4" placeholder = "Messsage" required>{{ old('message') }}</textarea>
+                                                        <textarea id = "message" class="form-control res-text-9 res-text-sm-9 res-text-md-9" name = "message" rows="4" placeholder = "Messsage" required>{{ old('message') }}</textarea>
                                                     </div>
 
                                                         <div class="form-group">
@@ -332,7 +332,7 @@
                                                             </div>
                                                         </div>
 
-                                                    <button type="submit" class="btn res-button app-red-btn float-right mt-2 pr-5 pl-5">
+                                                    <button type="submit" class="btn res-button app-red-btn px-sm-5  mr-3 mr-sm-3 mr-lg-3 ml-3 res-text-9 res-text-sm-8 res-text-md-7 float-right float-md-right">
                                                         <span class = "res-text-9 res-text-sm-7 res-text-md-9">Send</span>
                                                     </button>
                                                 </div>

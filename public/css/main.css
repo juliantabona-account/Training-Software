@@ -257,6 +257,9 @@ button{
 
 /* RESPONSIVE TEXT */
 
+.res-text-05{
+    font-size: 3.6rem !important;
+}
 .res-text-1{
     font-size: 2.5rem !important;
 }
@@ -286,6 +289,9 @@ button{
 }
 
 @media (min-width: 576px) { 
+    .res-text-sm-05{
+        font-size: 3.6rem !important;
+    }
     .res-text-sm-1{
         font-size: 2.5rem !important;
     }
@@ -316,6 +322,9 @@ button{
 }
 
 @media (min-width: 768px) { 
+    .res-text-md-05{
+        font-size: 3.6rem !important;
+    }
     .res-text-md-1{
         font-size: 2.5rem !important;
     }
@@ -347,6 +356,9 @@ button{
 
 
 @media (min-width: 992px) { 
+    .res-text-lg-05{
+        font-size: 3.6rem !important;
+    }
     .res-text-lg-1{
         font-size: 2.5rem !important;
     }
@@ -377,6 +389,9 @@ button{
 }
 
 @media (min-width: 1200px) { 
+    .res-text-xl-05{
+        font-size: 3.6rem !important;
+    }
     .res-text-xl-1{
         font-size: 2.5rem !important;
     }
@@ -501,157 +516,6 @@ button{
 
 
 
-
-/* RESPONSIVE TEXT */
-
-.res-text-1{
-    font-size: 2.5rem !important;
-}
-.res-text-2{
-    font-size: 2.3rem !important;
-}
-.res-text-3{
-    font-size: 2rem !important;
-}
-.res-text-4{
-    font-size: 1.8rem !important;
-}
-.res-text-5{
-    font-size: 1.6rem !important;
-}
-.res-text-6{
-    font-size: 1.4rem !important;
-}
-.res-text-7{
-    font-size: 1.2rem !important;
-}
-.res-text-8{
-    font-size: 1rem !important;
-}
-.res-text-9{
-    font-size: 0.8rem !important;
-}
-
-@media (min-width: 576px) { 
-    .res-text-sm-1{
-        font-size: 2.5rem !important;
-    }
-    .res-text-sm-2{
-        font-size: 2.3rem !important;
-    }
-    .res-text-sm-3{
-        font-size: 2rem !important;
-    }
-    .res-text-sm-4{
-        font-size: 1.8rem !important;
-    }
-    .res-text-sm-5{
-        font-size: 1.6rem !important;
-    }
-    .res-text-sm-6{
-        font-size: 1.4rem !important;
-    }
-    .res-text-sm-7{
-        font-size: 1.2rem !important;
-    }
-    .res-text-sm-8{
-        font-size: 1rem !important;
-    }
-    .res-text-sm-9{
-        font-size: 0.8rem !important;
-    }
-}
-
-@media (min-width: 768px) { 
-    .res-text-md-1{
-        font-size: 2.5rem !important;
-    }
-    .res-text-md-2{
-        font-size: 2.3rem !important;
-    }
-    .res-text-md-3{
-        font-size: 2rem !important;
-    }
-    .res-text-md-4{
-        font-size: 1.8rem !important;
-    }
-    .res-text-md-5{
-        font-size: 1.6rem !important;
-    }
-    .res-text-md-6{
-        font-size: 1.4rem !important;
-    }
-    .res-text-md-7{
-        font-size: 1.2rem !important;
-    }
-    .res-text-md-8{
-        font-size: 1rem !important;
-    }
-    .res-text-md-9{
-        font-size: 0.8rem !important;
-    }
-}
-
-
-@media (min-width: 992px) { 
-    .res-text-lg-1{
-        font-size: 2.5rem !important;
-    }
-    .res-text-lg-2{
-        font-size: 2.3rem !important;
-    }
-    .res-text-lg-3{
-        font-size: 2rem !important;
-    }
-    .res-text-lg-4{
-        font-size: 1.8rem !important;
-    }
-    .res-text-lg-5{
-        font-size: 1.6rem !important;
-    }
-    .res-text-lg-6{
-        font-size: 1.4rem !important;
-    }
-    .res-text-lg-7{
-        font-size: 1.2rem !important;
-    }
-    .res-text-lg-8{
-        font-size: 1rem !important;
-    }
-    .res-text-lg-9{
-        font-size: 0.8rem !important;
-    }
-}
-
-@media (min-width: 1200px) { 
-    .res-text-xl-1{
-        font-size: 2.5rem !important;
-    }
-    .res-text-xl-2{
-        font-size: 2.3rem !important;
-    }
-    .res-text-xl-3{
-        font-size: 2rem !important;
-    }
-    .res-text-xl-4{
-        font-size: 1.8rem !important;
-    }
-    .res-text-xl-5{
-        font-size: 1.6rem !important;
-    }
-    .res-text-xl-6{
-        font-size: 1.4rem !important;
-    }
-    .res-text-xl-7{
-        font-size: 1.2rem !important;
-    }
-    .res-text-xl-8{
-        font-size: 1rem !important;
-    }
-    .res-text-xl-9{
-        font-size: 0.8rem !important;
-    }
-}
 
 /* RESPONSIVE MARGIN TOP */
 
@@ -2744,7 +2608,9 @@ button{
 
 
 
-
+.res-brd-white{
+    border: 1px solid #ffffff !important;
+}
 
 
 
@@ -2769,22 +2635,22 @@ button{
 
 .app-red-btn{
     color: #fff !important;
-    background-color: #d81119 !important;
-    border-color: #b62126 !important;   
+    background-color: #0e624f !important;
+    border-color: #0e624f !important;
     cursor: pointer !important;            
 }
 
 .app-red-btn:hover,
 .app-red-btn:focus{
-    background-color: #a41c21 !important;
-    border-color: #8c1418 !important;
+    background-color: #1c7964 !important;
+    border-color: #1c7964 !important;
     box-shadow: none !important;
     cursor: pointer !important;  
 }
 
 .app-red-btn:active{
-    background-color: #7b1519 !important;
-    border-color: #650b0e !important;
+    background-color: #269a80 !important;
+    border-color: #269a80 !important;
     box-shadow: none !important;
     cursor: pointer !important;   
 }
@@ -2900,7 +2766,7 @@ button{
 
 .module-path-guideline i,
 .module-path-end-guideline i {
-    color: #ff3e3e;
+    color: #0e624f;
 }
 
 .module-path-end-guideline i {
@@ -2922,7 +2788,7 @@ button{
 .module-path-guideline:hover {
     left: -30px;
     padding: 3px 8px;
-    background: #ffc3c3;
+    background: #0e624f38;
     cursor: pointer;
     transition:all 0.2s ease;
 }
@@ -2957,13 +2823,10 @@ button{
 }
 
 .lesson-path-guideline i {
-    color: #ff3e3e;
+    color: #0e624f;
 }
 
 
-
-
-
-
-
-
+.app-footer{
+    background: #ebf0f0;
+}

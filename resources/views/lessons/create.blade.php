@@ -84,7 +84,7 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for = "lesson-title">Lesson Title</label>
-                                                <input id = "lesson-title" type = "text" class="form-control res-text-9 res-text-sm-8 res-text-md-9"  name = "lesson-title" placeholder = "Short And Simple..." required/>
+                                                <input id = "lesson-title" type = "text" class="form-control res-text-9 res-text-sm-9 res-text-md-9"  name = "lesson-title" placeholder = "Short And Simple..." required/>
                                             </div>
                                         </div>
                                     </div>
@@ -156,7 +156,7 @@
                                 </div>
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn res-button app-red-btn mt-2 float-right">
+                                    <button type="submit" class="btn res-button app-red-btn px-sm-5  mr-3 mr-sm-3 mr-lg-3 ml-3 res-text-9 res-text-sm-8 res-text-md-7 float-right float-md-right">
                                         <i class="fa fa-cloud-upload res-text-9 res-text-sm-7 res-text-md-9 mr-1" aria-hidden="true"></i>
                                         <span class = "res-text-9 res-text-sm-7 res-text-md-9">Upload Lesson</span>
                                     </button>

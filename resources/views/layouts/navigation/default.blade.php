@@ -1,5 +1,5 @@
 <nav id = "app-main-navbar" class="navbar navbar-expand-lg navbar-light bg-light">
-    <img id = "app-nav-logo" class="navbar-brand" src="/assets/icons/Saleschief-Logo.png">
+    <img id = "app-nav-logo" class="navbar-brand" src="/assets/icons/Saleschief-Logo-Green.png">
     <button class="navbar-toggler p-0 p-sm-1" type="button" data-toggle="collapse" data-target="#appMenuDrop" aria-controls="appMenuDrop" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>

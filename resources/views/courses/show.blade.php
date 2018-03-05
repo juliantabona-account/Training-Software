@@ -37,7 +37,7 @@
             display: none;
             height: 180px; 
             width: 100%; 
-            background: linear-gradient(#ff5a4e, #ff3925);
+            background: linear-gradient(#128067, #179a7c);
         }
 
         .error-image{

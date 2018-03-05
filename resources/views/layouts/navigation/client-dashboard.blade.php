@@ -2,7 +2,7 @@
     <div class = "row">
         <div class = "col-12 col-sm-12 col-md-12 col-lg-12">
             <nav id = "app-main-navbar" class="navbar navbar-expand-lg navbar-light bg-light pb-0">
-                <img id = "app-nav-logo" class="navbar-brand d-block d-lg-none" src="/assets/icons/Saleschief-Logo.png">
+                <img id = "app-nav-logo" class="navbar-brand d-block d-lg-none" src="/assets/icons/Saleschief-Logo-Green.png">
                 <button class="navbar-toggler p-0 p-sm-1" type="button" data-toggle="collapse" data-target="#appMenuDrop" aria-controls="appMenuDrop" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -11,7 +11,7 @@
                     <div class = "container-fluid p-0">
                         <div class = "row">   
                             <div class = "col-12">
-                                <img id = "app-nav-logo" class="navbar-brand d-none d-lg-block" src="/assets/icons/Saleschief-Logo.png">
+                                <img id = "app-nav-logo" class="navbar-brand d-none d-lg-block" src="/assets/icons/Saleschief-Logo-Green.png">
                                 <div class = "row res-brs-t" style = "background:#f2f2f2;">     
                                     <div class = "col-12 col-sm-5 col-md-4 col-lg-7 pl-0 pr-0 res-brs-sm-r res-brs-lg-r-n">
                                         <ul class="navbar-nav res-ml-lg-10-7 res-brs-lg-l res-brs-lg-r">
@@ -22,7 +22,7 @@
                                                 </a>
                                             </li>
                                         </ul>
-                                        <img src="/assets/icons/dot-graph.png" class = "d-none d-sm-block d-lg-none" style="width:100%;position: absolute;bottom: 0;">
+                                        <img src="http://saleschief-bucket.s3.amazonaws.com/assets/icons/dot-graph.png" class = "d-none d-sm-block d-lg-none" style="width:100%;position: absolute;bottom: 0;">
                                     </div>
                                     <div class = "col-12 col-sm-7 col-md-8 col-lg-5 pl-0">
                                         <ul class="navbar-nav ml-auto">
@@ -56,6 +56,7 @@
                                                         })->sum(); 
                                                     ?>
                                                     <i {{ $totalUnreadMessages ? 'data-count='.$totalUnreadMessages : '' }} class="fa fa-comments mr-2 mr-lg-0 res-text-7{{ $totalUnreadMessages ? ' notification-icon' : '' }}" aria-label="Nofitication centre"></i>
+                                                    <span class="d-inline d-lg-none primary-link res-text-9 res-text-md-8">Messages</span>
                                                 </a>
 
                                                 <div class="dropdown-container">
@@ -87,6 +88,7 @@
                                                         $totalUnreadNotifications = count(Auth::user()->unreadNotifications);
                                                     ?>
                                                     <i {{ $totalUnreadNotifications ? 'data-count='.$totalUnreadNotifications : '' }} class="fa fa-bell mr-2 mr-lg-0 res-text-9 res-text-md-8{{ $totalUnreadNotifications ? ' notification-icon' : '' }}" aria-label="Nofitication centre"></i>
+                                                    <span class="d-inline d-lg-none primary-link res-text-9 res-text-md-8">Notifications</span>
                                                 </a>
 
                                                 <div class="dropdown-container">
@@ -129,15 +131,15 @@
                                         </ul>
                                     </div>
 
-                                    <div class = "col-12 pl-4 res-pl-sm-10-12" style = "background:#e81018;">
+                                    <div class = "col-12 pl-4 res-pl-sm-10-12" style = "background:#0e624f;">
                                         <ul class="navbar-nav d-inline">
-                                            <li class="nav-item d-inline-block whitened pt-4 pb-1 res-pt-sm-10-2 res-pb-sm-10-1">
+                                            <li class="nav-item d-inline-block whitened pt-2 pb-2 pr-3 pl-3">
                                                 <a href="/courses" class="nav-link d-inline-block">
                                                     <span class = "res-text-9 res-text-md-8">Courses</span>
                                                 </a>
                                             </li>
                                             @if(Auth::user()->hasRole('admin'))
-                                            <li class="nav-item dropdown d-inline-block whitened pt-2 pb-1 res-pt-sm-10-2 res-pb-sm-10-1">
+                                            <li class="nav-item dropdown d-inline-block whitened pt-2 pb-2 pr-3 pl-3">
                                                 <a class="nav-link dropdown-toggle d-inline-block" href="#" id="CoursesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <span class = "res-text-9 res-text-md-8">Clients</span>
                                                 </a>
@@ -147,15 +149,15 @@
                                                   <a class="dropdown-item res-text-9 res-text-md-8" href="{{ route('company-list') }}"><i class="fa fa-building res-text-9 mr-1" aria-hidden="true"></i> View Companies</a>
                                                 </div>
                                             </li>
-                                            <li class="nav-item d-inline-block whitened pt-4 pb-1 res-pt-sm-10-2 res-pb-sm-10-1">
-                                                <a href="/courses" class="nav-link d-inline-block">
+                                            <li class="nav-item d-inline-block whitened pt-2 pb-2 pr-3 pl-3">
+                                                <a href="/reports" class="nav-link d-inline-block">
                                                     <span class = "res-text-9 res-text-md-8">Reports</span>
                                                 </a>
                                             </li>
                                             @endif
                                             @if(Auth::user()->hasRole('client'))
-                                            <li class="nav-item d-inline-block whitened pt-4 pb-1 res-pt-sm-10-2 res-pb-sm-10-1">
-                                                <a href="/courses" class="nav-link d-inline-block">
+                                            <li class="nav-item d-inline-block whitened pt-2 pb-2 pr-3 pl-3">
+                                                <a href="#" class="nav-link d-inline-block">
                                                     <span class = "res-text-9 res-text-md-8">Reports</span>
                                                 </a>
                                             </li>

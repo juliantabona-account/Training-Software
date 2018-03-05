@@ -93,8 +93,7 @@
                                         <td class = "res-text-9 res-text-sm-9 res-text-md-9"><a href= "#" class="label label-primary">{{ $client->status }}</a></td>
                                         <td class="text-right">
                                             <div class="btn-group">
-                                                <a href= "/clients/{{ $client->id }}" class="btn-primary btn btn-sm res-text-sm-9 res-text-md-9">View</a>
-                                                <a href= "/clients/{{ $client->id }}" class="btn-success btn btn-sm res-text-sm-9 res-text-md-9">Inbox</a>
+                                                <a href= "/clients/{{ $client->id }}" class="btn btn-sm res-button app-red-btn float-right">View</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -102,7 +101,7 @@
                                         
                                         <p class = "alert alert-warning p-3 m-2">
                                             <span>No Clients Added</span>
-                                            <a href="{{ route('company-enroll', [$company->id]) }}" class="btn btn-success btn-sm res-button float-right">
+                                            <a href="{{ route('company-enroll', [$company->id]) }}" class="btn btn-sm res-button app-red-btn float-right">
                                                 <i aria-hidden="true" class="fa fa-plus res-text-9 text-white"></i> 
                                                 <span class="res-text-9 text-white">Assign Client</span>
                                             </a>

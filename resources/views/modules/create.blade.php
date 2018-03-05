@@ -12,7 +12,7 @@
             </div>
           <div class="modal-body">
                 <div class="form-group">
-                    <input type = "text" class="form-control res-text-9 res-text-sm-8 res-text-md-8" name = "module-title" placeholder = "Enter course title" required />
+                    <input type = "text" class="form-control res-text-9 res-text-sm-9 res-text-md-9" name = "module-title" placeholder = "Enter course title" required />
                 </div>
           </div>
           <div class="modal-footer">

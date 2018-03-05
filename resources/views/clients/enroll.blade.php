@@ -20,7 +20,7 @@
             display: none;
             height: 180px; 
             width: 100%; 
-            background: linear-gradient(#ff5a4e, #ff3925);
+            background: linear-gradient(#128067, #179a7c);
         }
 
         .error-image{
@@ -130,11 +130,11 @@
                                             <div class="card-body">
 
                                                 <div class="form-group">
-                                                    <input type = "text" class="form-control res-text-9 res-text-sm-8 res-text-md-9" name = "first-name" placeholder = "Enter First Name" required>
+                                                    <input type = "text" class="form-control res-text-9 res-text-sm-9 res-text-md-9" name = "first-name" placeholder = "Enter First Name" required>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <input type = "email" class="form-control res-text-9 res-text-sm-8 res-text-md-9" name = "email" placeholder = "Enter Email" required>
+                                                    <input type = "email" class="form-control res-text-9 res-text-sm-9 res-text-md-9" name = "email" placeholder = "Enter Email" required>
                                                 </div>
 
                                                 <button type="submit" class="btn res-button app-red-btn float-right mt-2 pr-5 pl-5">
@@ -184,7 +184,7 @@
                                                           </template>
                                                         </ais-stats>
 
-                                                        <ais-input placeholder="Find client..." class="form-control res-text-9 res-text-sm-8 res-text-md-9" style = "width: 100%;height:34px;"></ais-input>
+                                                        <ais-input placeholder="Find client..." class="form-control res-text-9 res-text-sm-9 res-text-md-9" style = "width: 100%;height:34px;"></ais-input>
 
                                                         <ais-results inline-template>
                                                           <table class = "table table-hover">

@@ -63,20 +63,20 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <input type = "text" class="form-control res-text-9 res-text-sm-8 res-text-md-9" name = "first-name" placeholder = "Enter First Name" required>
+                                        <input type = "text" class="form-control res-text-9 res-text-sm-9 res-text-md-9" name = "first-name" placeholder = "Enter First Name" required>
                                     </div>
 
                                     <div class="form-group">
-                                        <input type = "email" class="form-control res-text-9 res-text-sm-8 res-text-md-9" name = "email" placeholder = "Enter Email" required>
+                                        <input type = "email" class="form-control res-text-9 res-text-sm-9 res-text-md-9" name = "email" placeholder = "Enter Email" required>
                                     </div> 
 
-                                    <select class="form-control res-text-9 res-text-sm-8 res-text-md-9" name="course_id">
+                                    <select class="form-control res-text-9 res-text-sm-9 res-text-md-9" name="course_id">
                                         @foreach($courses as $course)
                                           <option value="{{$course->id}}">{{$course->title}}</option>
                                         @endforeach
                                     </select>
 
-                                    <button type="submit" class="btn res-button app-red-btn float-right mt-2 pr-5 pl-5">
+                                    <button type="submit" class="btn res-button app-red-btn px-sm-5  mr-3 mr-sm-3 mr-lg-3 ml-3 res-text-9 res-text-sm-8 res-text-md-7 float-right float-md-right">
                                         <span class = "res-text-9 res-text-sm-7 res-text-md-9">Enroll Client</span>
                                     </button>
                                 </div>

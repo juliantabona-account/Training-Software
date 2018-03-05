@@ -55,9 +55,9 @@
                         <div class="card-body">
                             <div class="form-group mt-2">
                                 <label for="moduleTitle">Module Title:</label>
-                                <input id = "moduleTitle" type = "text" class="form-control res-text-9 res-text-sm-8 res-text-md-8" name = "module-title" placeholder = "Enter module title" value = "{{ $module->title }}" required />
+                                <input id = "moduleTitle" type = "text" class="form-control res-text-9 res-text-sm-9 res-text-md-9" name = "module-title" placeholder = "Enter module title" value = "{{ $module->title }}" required />
                             </div>
-                            <button type = "submit" class="btn res-button app-red-btn float-right mt-2 pr-5 pl-5">
+                            <button type = "submit" class="btn res-button app-red-btn px-sm-5  mr-3 mr-sm-3 mr-lg-3 ml-3 res-text-9 res-text-sm-8 res-text-md-7 float-right float-md-right">
                                 <i class="fa fa-floppy-o res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
                                 <span class = "res-text-9 res-text-sm-7 res-text-md-9">Save</span>
                             </button>

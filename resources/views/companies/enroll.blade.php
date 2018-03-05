@@ -149,7 +149,7 @@
                                                           </template>
                                                         </ais-stats>
 
-                                                        <ais-input placeholder="Find client..." class="form-control res-text-9 res-text-sm-8 res-text-md-9" style = "width: 100%;height:34px;"></ais-input>
+                                                        <ais-input placeholder="Find client..." class="form-control res-text-9 res-text-sm-9 res-text-md-9" style = "width: 100%;height:34px;"></ais-input>
 
                                                         <ais-results inline-template>
                                                           <table class = "table table-hover">

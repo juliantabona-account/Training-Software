@@ -6,81 +6,78 @@
 
 @section('style')
   
+    <style>
+
+        .overlay {
+            background: url('/assets/backgrounds/coffee-break-meeting.jpg') no-repeat center center fixed; 
+            background-position: center top;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+
+    </style>
+
 @endsection
 
 @section('content')
-
-    <div class="col-md-12 res-pb-lg-10-2 res-brs-lg-b">
-
-        <div class="container res-pt-xl-10-2 mt-0">
-            <div class="row">
-                <div class="col-12">
-                    <div class="row">
-                        <div class="col-5 offset-3">
-                            <h2 class = "res-text-7 res-text-sm-5 res-text-md-3">
-                                <i class="fa fa-cubes"></i>
-                                <span>Contact Us For 24/7 Support Service</span>
-                            </h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="container-fluid res-mt-lg-10-3 res-mb-lg-10-5 p-0 app-bg-1">
-        <div class="app-white-overlay-1">
-            <div class="container res-mt-lg-10-3 res-mb-lg-10-5">
+    <div class="container-fluid p-0">
+        <div class="overlay res-pt-10-6 res-pb-10-6">
+            <div class="container">
                 <div class="row">
 
-                    <div class="col-lg-6 offset-lg-1">
+                    <div class="col-lg-6 offset-lg-1 res-pt-10-1">
                         
                         <form action = "" method="" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
                             <div class="card">
+
+                                <div class="card-header">
+                                    <h2 class = "res-text-8 res-text-sm-8 res-text-md-8 mt-2"><strong>Customer Support</strong></h2>
+                                    <p class = "res-text-9 res-text-sm-9 res-text-md-9 mb-1">Send us a message of any questions or queries you have and we will promply get back to you. Thank you</p>
+                                </div>
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <input type = "text" class="form-control res-text-9 res-text-sm-8 res-text-md-9" name = "firstname" placeholder = "Enter Firstname" required />
+                                        <input type = "text" class="form-control res-text-9 res-text-sm-9 res-text-md-9" name = "firstname" placeholder = "Enter First Name" required />
                                     </div>  
 
 
                                       <div class="form-group">
-                                        <input type = "email" class="form-control res-text-9 res-text-sm-8 res-text-md-9" name = "email" placeholder = "Enter your Email" required />
+                                        <input type = "email" class="form-control res-text-9 res-text-sm-9 res-text-md-9" name = "email" placeholder = "Enter your Email" required />
                                     </div> 
 
 
                                     <div class="form-group">
-                                        <textarea id = "message" class="form-control res-text-9 res-text-sm-8 res-text-md-9" name = "message" rows="4" placeholder = "Your Message" required></textarea>
+                                        <textarea id = "message" class="form-control res-text-9 res-text-sm-9 res-text-md-9" name = "message" rows="4" placeholder = "Your Message" required></textarea>
                                     </div>
                                    
-                                    <button type="submit" class="btn res-button app-red-btn float-right mt-2 pr-5 pl-5">
+                                    <button type="submit" class="btn res-button app-red-btn px-sm-5  mr-3 mr-sm-3 mr-lg-3 ml-3 res-text-9 res-text-sm-8 res-text-md-7 float-right float-md-right">
                                         <span class = "res-text-9 res-text-sm-7 res-text-md-9">Send Message</span>
                                     </button>
                                 </div>
                             </div>
-
                         </form>
-
 
                     </div> 
 
-                     <div class="col-lg-4  "> 
-                     	<ul>
-	                        <h1>IT support +267 75993221</h1>
-
-	                   
-
-	                        <a href="" target="_blabk">View our privacy policy</a> 
-
-	                        <a href="" target="_blabk">End User Agreement</a> 
-
-	                        <a href="" target="_blabk">Client Training Manual</a> 
-	                     </ul>
-                      
+                     <div class="col-lg-4 res-pt-10-1">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class = "res-text-8 res-text-sm-8 res-text-md-8 mt-2"><strong>Get In Touch</strong></h2>
+                                <p class = "res-text-9 res-text-sm-9 res-text-md-9 mb-1">Reach our IT & Customer departments and we will help you in your area of need. Also Look into our FAQ for additional resources.</p>
+                            </div>
+                            <div class="card-body">
+                             	<h1 class = "res-text-9 res-text-sm-9 res-text-md-8">IT support: +267 75993221</h1>
+                                <h1 class = "res-text-9 res-text-sm-9 res-text-md-8 pb-2">Customer support: +267 75993221</h1>
+                                <ul class="list-group list-group-flush">
+                                  <li class="list-group-item"><a href = "#" class = "res-text-9 res-text-sm-7 res-text-md-9">FAQ (Frequently Asked Questions)</a></li>
+                                </ul
+                            </div>
+                        </div>                      
                     </div>
-
                 </div>
             </div>
         </div>
