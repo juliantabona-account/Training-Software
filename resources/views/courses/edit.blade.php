@@ -308,7 +308,8 @@
                                     <h2 class = "res-text-6 mt-1">Overview</h2>
                                 </div>
                                 <div class = "col-lg-6"> 
-                                    <a href = "/courses/{{ $course->id }}" target="_blank" class="btn res-button app-white-btn float-right">
+                                    <a href = "/courses/{{ $course->id }}" target="_blank" class="btn res-button app-white-btn float-right"
+                                         data-toggle="tooltip" title="See how the course would look like from a students point of view">
                                         <i aria-hidden="true" class="fa fa-eye res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>
                                         <span class = "res-text-9 res-text-sm-7 res-text-md-9">Preview</span>
                                     </a> 

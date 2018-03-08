@@ -37,7 +37,9 @@ class LessonController extends Controller
         $lesson = Lesson::find($lesson_id);
         $module = Module::find($module_id);
         
-        Auth::user()->lessonViews()->attach($lesson_id);
+        if(Auth::user()->hasRole('client')){
+            Auth::user()->lessonViews()->attach($lesson_id); 
+        }
         
         if($lesson->video_uri){
             $status = Vimeo::request('/videos/'.str_replace('/videos/', '', $lesson->video_uri).'?fields=status')['body']['status'];

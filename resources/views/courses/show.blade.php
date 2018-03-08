@@ -248,7 +248,7 @@
                 <div class = "col-lg-3">
                     <div class="card ml-3 mt-0 mb-2">
 
-                        <div class="card-body">
+                        <div class="card-body" data-toggle="tooltip" title="Your current progress is {{ round(((COUNT($viewedLessons) + $totalPassedTests) / ($totalLessons+$totalTests)) *100) }}%">
                             <h2 class = "res-text-8 mt-1">
                                 <i class="fa fa-flag mr-1" aria-hidden="true"></i>
                                 <span>Course Progress</span>

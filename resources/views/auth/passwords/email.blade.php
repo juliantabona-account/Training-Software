@@ -9,7 +9,7 @@
     <style>
 
         #app-reset-section {
-            background: url('/assets/backgrounds/blurred-background-office.jpg') no-repeat center center fixed; 
+            background: url('http://saleschief-bucket.s3.amazonaws.com/assets/backgrounds/blurred-audience.jpg') no-repeat center center fixed; 
             background-position: center top;
             -webkit-background-size: cover;
             -moz-background-size: cover;

@@ -9,7 +9,7 @@
     <style>
 
         html, body {
-            background: url('/assets/backgrounds/coffee-break-meeting.jpg') no-repeat center center fixed; 
+            background: url('http://saleschief-bucket.s3.amazonaws.com/assets/backgrounds/coffee-break-meeting.jpg') no-repeat center center fixed; 
             background-position: center top;
             -webkit-background-size: cover;
             -moz-background-size: cover;
