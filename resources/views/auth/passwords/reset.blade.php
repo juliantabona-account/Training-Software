@@ -25,12 +25,12 @@
 <div class="container">
     <div class="row">
         <div class="col-12 col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-            <div id = "app-login-card" class="card card-default">
+            <div id = "app-login-card" class="card card-default res-mt-10-3 res-mb-10-10 res-mt-sm-10-10 res-mt-md-10-15">
 
                 <div class="card-body">
                     
-                    <div class = "col-md-10 mb-md-4 mt-md-4">
-                        <h3>Reset Password</h3>
+                    <div class = "col-md-12 mb-md-4 mt-md-4">
+                        <h2 class = "res-text-7 res-text-sm-5 res-text-md-3">Reset Password</h2>
                     </div>
 
                     <form class="form-horizontal" method="POST" action="{{ route('password.request') }}">
@@ -40,7 +40,7 @@
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <input id="email" type="email" class="form-control res-text-9{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="E-Mail Address *" value="{{ $email or old('email') }}" required autofocus>
 
                                 @if ($errors->has('email'))
@@ -53,7 +53,7 @@
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <input id="password" type="password" class="form-control res-text-9{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Password *" required>
 
                                 @if ($errors->has('password'))
@@ -65,7 +65,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <input id="password-confirm" type="password" class="form-control res-text-9{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}" name="password_confirmation" placeholder="Confirm Password *" required>
 
                                 @if ($errors->has('password'))
