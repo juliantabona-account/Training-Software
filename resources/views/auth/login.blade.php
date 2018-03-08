@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Admin Login｜
+    Login｜
 @endsection
 
 @section('style')
@@ -30,7 +30,7 @@
                     <div class="card-body">
                         
                         <div class="col-md-10 mb-md-4 mt-md-4 mb-4">
-                            <h2 class = "res-text-7 res-text-sm-5 res-text-md-3">Admin Log In</h2>
+                            <h2 class = "res-text-7 res-text-sm-5 res-text-md-3">Log In</h2>
                         </div>
 
                         <form class="form-horizontal" method="POST" action="{{ route('login') }}">
@@ -38,10 +38,10 @@
 
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <div class="col-md-12">
-                                    <input id="email" type="email" class="form-control res-text-9 res-text-sm-8 res-text-md-9" name="email" value="{{ old('email') }}" placeholder="E-mail address *" required autofocus>
+                                    <input id="email" type="email" class="form-control res-text-9{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="E-mail address *" required autofocus>
 
                                     @if ($errors->has('email'))
-                                        <span class="help-block">
+                                        <span class="help-block invalid-feedback">
                                             <strong>{{ $errors->first('email') }}</strong>
                                         </span>
                                     @endif
@@ -50,10 +50,10 @@
 
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                 <div class="col-md-12">
-                                    <input id="password" type="password" class="form-control res-text-9 res-text-sm-9 res-text-md-9" name="password" placeholder="Password *" required>
+                                    <input id="password" type="password" class="form-control res-text-9{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Password *" required>
 
                                     @if ($errors->has('password'))
-                                        <span class="help-block">
+                                        <span class="help-block invalid-feedback">
                                             <strong>{{ $errors->first('password') }}</strong>
                                         </span>
                                     @endif
@@ -63,7 +63,7 @@
                             <div class="form-group mb-0">
                                 <div class="col-12">
                                     <div class="checkbox">
-                                        <label class = "res-text-9 res-text-sm-8 res-text-md-8">
+                                        <label class = "res-text-9">
                                             <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
                                         </label>
                                     </div>

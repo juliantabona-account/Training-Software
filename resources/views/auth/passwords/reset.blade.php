@@ -41,10 +41,10 @@
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control res-text-9 res-text-sm-9 res-text-md-9" name="email" placeholder="E-Mail Address *" value="{{ $email or old('email') }}" required autofocus>
+                                <input id="email" type="email" class="form-control res-text-9{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="E-Mail Address *" value="{{ $email or old('email') }}" required autofocus>
 
                                 @if ($errors->has('email'))
-                                    <span class="help-block">
+                                    <span class="help-block invalid-feedback">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
@@ -54,10 +54,10 @@
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" placeholder="Password *" required>
+                                <input id="password" type="password" class="form-control res-text-9{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Password *" required>
 
                                 @if ($errors->has('password'))
-                                    <span class="help-block">
+                                    <span class="help-block invalid-feedback">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
@@ -66,10 +66,10 @@
 
                         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password *" required>
+                                <input id="password-confirm" type="password" class="form-control res-text-9{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}" name="password_confirmation" placeholder="Confirm Password *" required>
 
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
+                                @if ($errors->has('password'))
+                                    <span class="help-block invalid-feedback">
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>
                                     </span>
                                 @endif
@@ -78,7 +78,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 offset-md-6">
-                                <button type="submit" class="btn res-button app-red-btn px-sm-5  mr-3 mr-sm-3 mr-lg-3 ml-3 res-text-9 res-text-sm-8 res-text-md-7 float-right float-md-right">
+                                <button type="submit" class="btn res-button app-red-btn px-sm-5 mr-3 mr-sm-3 mr-lg-3 ml-3 res-text-9 res-text-sm-8 res-text-md-7 float-right float-md-right">
                                     Reset Password
                                 </button>
                             </div>

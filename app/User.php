@@ -44,6 +44,17 @@ class User extends Authenticatable
         return 'users';
     }
 
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPassword($token));
+    }
+
     public function courses()
     {
         return $this->belongsToMany('App\Course')->withTimestamps();
