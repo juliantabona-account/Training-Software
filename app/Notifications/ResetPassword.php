@@ -46,11 +46,6 @@ class ResetPassword extends Notification
         return (new MailMessage)->view(
             'layouts.email.password_reset', ['token' => $this->token]
         );
-        return (new MailMessage)
-                    ->greeting('Saleschief - Password Reset!')
-                    ->line('Good day, you are receiving this email because we received a password reset request for your account.')
-                    ->action('Reset Password', url($this->token))
-                    ->line('If you did not request a password reset, no further action is required.Regards, Laravel');
     }
 
     /**

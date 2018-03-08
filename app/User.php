@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Cmgmyr\Messenger\Traits\Messagable;
+use App\Notifications\ResetPassword;
 
 class User extends Authenticatable
 {
