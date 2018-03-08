@@ -41,7 +41,7 @@
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
 
                             <div class="col-md-12">
-                                <input id="email" type="email" class="form-control res-text-9{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="E-Mail Address *" value="{{ $email or old('email') }}" required autofocus>
+                                <input id="email" type="email" class="form-control res-text-9{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="E-Mail Address *" value="{{ old('email') }}" required autofocus>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block invalid-feedback">
