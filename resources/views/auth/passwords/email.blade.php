@@ -62,7 +62,7 @@
                                         <input id="email" type="email" class="form-control res-text-9{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Enter E-Mail Address *" required>
 
                                         @if ($errors->has('email'))
-                                            <span class="help-block invalid-feedback">
+                                            <span class="help-block invalid-feedback res-text-9">
                                                 <strong>{{ $errors->first('email') }}</strong>
                                             </span>
                                         @endif

@@ -110,8 +110,26 @@
 
     <div class="container-fluid res-mt-lg-10-5 res-mb-lg-10-10">
 
+        @include('response.message')
+
         <div class="row">
             <div class="col-lg-7 res-ml-lg-10-15">
+
+                @if ($errors->has('question_arrangement'))
+                    <div class="row">
+                        <div class="col-12 col-sm-10 offset-sm-1 mb-4">
+                            <div class="alert alert-danger" role="alert">
+                                <span class = "res-text-9">
+                                    <i class = "fa fa fa-file-text-o"></i>
+                                    Add atleast one question
+                                </span>
+                                <button type="button" class="close mt-2 d-block res-text-9" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                @endif
 
                 <div class = "row">
 
@@ -137,53 +155,170 @@
 
                                 <ul class="list-group draggable"> 
 
-                                   
+                                    @if( old('question_arrangement') )
 
+                                        @php
 
-                                    <li class="question-box">
-                                        <input class = "question-type" type = "hidden" value = "truefalse">
-                                        <div class="lesson-row">
-                                            <input class="avail_lesson" type="hidden" value="31">
-                                            <div class="lesson-path-guideline"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
-                                            <table class="table">
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="desc table-content"> 
-                                                            <span class="question-number-tag res-text-9 res-text-sm-8 res-text-md-9">Question 1</span> 
-                                                            <i class="btn fa fa-arrows dragger-btn" aria-hidden="true"></i>
-                                                            <div class="lesson-content">
-                                                                <div class="row">
-                                                                    <div class="col-12">
-                                                                        <div class="form-group">
-                                                                            <textarea name="question" placeholder="Enter question..." required="required" class="question form-control mt-4 res-text-9 res-text-sm-8 res-text-md-9"></textarea>
+                                            $marking_key = json_decode( old('question_arrangement') , true )[0];
+                                            $marking_key = array_slice($marking_key, 0, $marking_key['length']);
+
+                                        @endphp
+
+                                        @foreach($marking_key as $key => $main)
+                                        
+                                            @if($main['type'] == "truefalse")
+
+                                                <li class = "question-box">
+                                                    <input class = "question-type" type = "hidden" value = "truefalse">
+                                                    <div class="lesson-row">
+                                                        <input class="avail_lesson" type="hidden" value="31">
+                                                        <div class="lesson-path-guideline"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="desc table-content">
+                                                                        <span class="question-number-tag res-text-9 res-text-sm-8 res-text-md-9">Question {{ $key+ 1 }} </span>
+                                                                        <i class="btn fa fa-arrows dragger-btn" aria-hidden="true"></i>
+                                                                        <div class="lesson-content">
+                                                                            <div class="row">
+                                                                                <div class="col-12">
+                                                                                    <div class="form-group">
+                                                                                        <textarea name="question" placeholder="Enter question..." required="required" class="question form-control mt-4 res-text-9 res-text-sm-8 res-text-md-9">{{ $main['question'] }}</textarea>
+                                                                                    </div>
+                                                                                    <div class="form-check abc-radio abc-radio-success form-check-inline ml-2">
+                                                                                        <input class="form-check-input" type="radio" id="question{{ $key+1 }}" value="true" name="question{{ $key+3 }}" {{ $main['answers'][0] ? 'checked':'' }}>
+                                                                                        <label class="form-check-label res-text-9 res-text-sm-8 res-text-md-9" for="question{{ $key+1 }}"> True </label>
+                                                                                    </div>
+                                                                                    <div class="form-check abc-radio abc-radio-success form-check-inline">
+                                                                                        <input class="form-check-input" type="radio" id="question{{ $key+2 }}" value="false" name="question{{ $key+3 }}" {{ $main['answers'][1] ? 'checked':'' }}>
+                                                                                        <label class="form-check-label res-text-9 res-text-sm-8 res-text-md-9" for="question{{ $key+2 }}"> False </label>
+                                                                                    </div>
+                                                                                    <button type="button" class="add-multiple-choice-btn btn btn-sm btn-success float-right res-text-9 res-text-sm-8 res-text-md-9 res-pl-10-1 ml-2">
+                                                                                        <i aria-hidden="true" class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>Multiple Choice
+                                                                                    </button> 
+                                                                                    <button type="button" class="add-true-false-btn btn btn-sm btn-success float-right res-text-9 res-text-sm-8 res-text-md-9 res-pl-10-1 ml-2">
+                                                                                        <i aria-hidden="true" class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>True/False
+                                                                                    </button>                                                                     
+                                                                                    <button type="button" class="delete-question-btn btn btn-sm btn-danger res-pl-10-1 float-right res-text-9 res-text-sm-8 res-text-md-9">
+                                                                                        <i aria-hidden="true" class="fa fa-trash res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="form-check abc-radio abc-radio-success form-check-inline ml-2">
-                                                                            <input class="form-check-input" type="radio" id="questionChoice1" value="true" name="question1" checked>
-                                                                            <label class="form-check-label res-text-9 res-text-sm-8 res-text-md-9" for="questionChoice1"> True </label>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </li>
+
+                                            @elseif($main['type'] == "multiplechoice")
+                                                <li class = "question-box">
+                                                    <input class = "question-type" type = "hidden" value = "multiplechoice">
+                                                    <div class="lesson-row">
+                                                        <input class="avail_lesson" type="hidden" value="31">
+                                                        <div class="lesson-path-guideline"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="desc table-content">
+                                                                        <span class="question-number-tag res-text-9 res-text-sm-8 res-text-md-9">Question {{ $key+ 1 }} </span> 
+                                                                        <i class="btn fa fa-arrows dragger-btn" aria-hidden="true"></i>
+                                                                        <div class="lesson-content">
+                                                                            <div class="row">
+                                                                                <div class="col-12">
+                                                                                    <div class="form-group">
+                                                                                        <textarea name="question" placeholder="Enter question..." required="required" class="question form-control mt-4 res-text-9 res-text-sm-8 res-text-md-9">{{ $main['question'] }}</textarea>
+                                                                                    </div>
+                                                                                    <div class = "questions-option-box">
+                                                                                        @foreach($main['answers'] as $key2 => $answer)
+                                                                                            <div class="form-check abc-radio abc-radio-success ml-2">
+                                                                                                <input class="form-check-input" type="radio" id="questionChoiceText{{ $key }}{{ $key2 }}" value="true" name="questionChoiceText{{ $key }}{{ $key2 }}" {{ $answer['correct'] ? 'checked':'' }}>
+                                                                                                <label class="form-check-label res-text-9 res-text-sm-8 res-text-md-9" for="questionChoice{{ $key }}{{ $key2 }}">
+                                                                                                    <input type="text" id = "questionChoice{{ $key }}{{ $key2 }}" name="questionChoice{{ $key }}" value = "{{ $answer['choice'] }}" placeholder="Enter option 1" required="required" class="multiple-choice-option d-inline-block form-control res-text-9 res-text-md-9 res-text-sm-8 w-50">
+                                                                                                    <div class = "multiple-choice-toolbox d-inline">
+                                                                                                        <button type="button" class="btn btn-sm delete-multiple-choice-option-btn btn-danger ml-2 res-pl-10-1 res-text-9 res-text-sm-8 res-text-md-9">
+                                                                                                            <i aria-hidden="true" class="fa fa-trash res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>
+                                                                                                        </button>
+                                                                                                        <button type="button" class="btn btn-sm add-multiple-choice-option-btn btn-success res-text-9 res-text-sm-8 res-text-md-9 res-pl-10-1 ml-2">
+                                                                                                            <i aria-hidden="true" class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>
+                                                                                                        </button>
+                                                                                                    </div>
+                                                                                                 </label>
+                                                                                            </div>
+                                                                                        @endforeach
+                                                                                    </div>
+                                                                                    <div class = "pt-2 mt-3 res-brs-t">
+                                                                                        <button type="button" class="add-multiple-choice-btn btn btn-sm btn-success float-right res-text-9 res-text-sm-8 res-text-md-9 res-pl-10-1 ml-2">
+                                                                                            <i aria-hidden="true" class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>Multiple Choice
+                                                                                        </button>
+                                                                                        <button type="button" class="add-true-false-btn btn btn-sm btn-success float-right res-text-9 res-text-sm-8 res-text-md-9 res-pl-10-1 ml-2">
+                                                                                            <i aria-hidden="true" class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>True/False
+                                                                                        </button>                                                                  
+                                                                                        <button type="button" class="delete-question-btn btn btn-sm btn-danger res-pl-10-1 float-right res-text-9 res-text-sm-8 res-text-md-9">
+                                                                                            <i aria-hidden="true" class="fa fa-trash res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="form-check abc-radio abc-radio-success form-check-inline">
-                                                                            <input class="form-check-input" type="radio" id="questionChoice2" value="false" name="question1">
-                                                                            <label class="form-check-label res-text-9 res-text-sm-8 res-text-md-9" for="questionChoice2"> False </label>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </li>
+
+                                            @endif
+
+                                        @endforeach
+
+                                    @else
+
+                                        <li class="question-box">
+                                            <input class = "question-type" type = "hidden" value = "truefalse">
+                                            <div class="lesson-row">
+                                                <input class="avail_lesson" type="hidden" value="31">
+                                                <div class="lesson-path-guideline"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
+                                                <table class="table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="desc table-content"> 
+                                                                <span class="question-number-tag res-text-9 res-text-sm-8 res-text-md-9">Question 1</span> 
+                                                                <i class="btn fa fa-arrows dragger-btn" aria-hidden="true"></i>
+                                                                <div class="lesson-content">
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+                                                                            <div class="form-group">
+                                                                                <textarea name="question" placeholder="Enter question..." required="required" class="question form-control mt-4 res-text-9 res-text-sm-8 res-text-md-9"></textarea>
+                                                                            </div>
+                                                                            <div class="form-check abc-radio abc-radio-success form-check-inline ml-2">
+                                                                                <input class="form-check-input" type="radio" id="questionChoice1" value="true" name="question1" checked>
+                                                                                <label class="form-check-label res-text-9 res-text-sm-8 res-text-md-9" for="questionChoice1"> True </label>
+                                                                            </div>
+                                                                            <div class="form-check abc-radio abc-radio-success form-check-inline">
+                                                                                <input class="form-check-input" type="radio" id="questionChoice2" value="false" name="question1">
+                                                                                <label class="form-check-label res-text-9 res-text-sm-8 res-text-md-9" for="questionChoice2"> False </label>
+                                                                            </div>
+                                                                            <button type="button" class="add-multiple-choice-btn btn btn-sm btn-success float-right res-text-9 res-text-sm-8 res-text-md-9 res-pl-10-1 ml-2">
+                                                                                <i aria-hidden="true" class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>Multiple Choice
+                                                                            </button>
+                                                                            <button type="button" class="add-true-false-btn btn btn-sm btn-success float-right res-text-9 res-text-sm-8 res-text-md-9 res-pl-10-1 ml-2">
+                                                                                <i aria-hidden="true" class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>True/False
+                                                                            </button>                                                                        
+                                                                            <button type="button" class="delete-question-btn btn btn-sm btn-danger res-pl-10-1 float-right res-text-9 res-text-sm-8 res-text-md-9">
+                                                                                <i aria-hidden="true" class="fa fa-trash res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>
+                                                                            </button>
                                                                         </div>
-                                                                        <button type="button" class="add-multiple-choice-btn btn btn-sm btn-success float-right res-text-9 res-text-sm-8 res-text-md-9 res-pl-10-1 ml-2">
-                                                                            <i aria-hidden="true" class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>Multiple Choice
-                                                                        </button>
-                                                                        <button type="button" class="add-true-false-btn btn btn-sm btn-success float-right res-text-9 res-text-sm-8 res-text-md-9 res-pl-10-1 ml-2">
-                                                                            <i aria-hidden="true" class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>True/False
-                                                                        </button>                                                                        
-                                                                        <button type="button" class="delete-question-btn btn btn-sm btn-danger res-pl-10-1 float-right res-text-9 res-text-sm-8 res-text-md-9">
-                                                                            <i aria-hidden="true" class="fa fa-trash res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>
-                                                                        </button>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </li>
-
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
 
@@ -196,7 +331,7 @@
             <div class = "col-lg-3">
                 <form action = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <input class = "arrangement" type = "hidden" name = "arrangement">
+                    <input class = "question_arrangement" type = "hidden" name = "question_arrangement">
                     <div class="card ml-3 mt-0">
                         <div class="card-header">
                             <div class = "row">
@@ -214,18 +349,23 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="question-title">Test Heading</label>
-                                <textarea id = "question-title" class="form-control res-text-9 res-text-sm-8 res-text-md-9" name = "question-title" rows="2" required>The "{{ $lesson->title }}" Test</textarea>
+                                <textarea id = "question-title" class="form-control res-text-9{{ $errors->has('title') ? ' is-invalid' : '' }}" name = "title" rows="2" required>The "{{ $lesson->title }}" Test</textarea>
+                                @if ($errors->has('title'))
+                                    <span class="ml-2 help-block invalid-feedback res-text-9">
+                                        <strong> | {{ $errors->first('title') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label for="question-notes">Test Notes</label>
-                                <textarea id = "question-notes" class="form-control res-text-9 res-text-sm-8 res-text-md-9" name = "question-notes" rows="4" required>Double check that all questions are answered before submittion.</textarea>
+                                <textarea id = "question-notes" class="form-control res-text-9 res-text-sm-8 res-text-md-9" name = "question-notes" rows="4" required>Double check that all questions are answered before submitting.</textarea>
                             </div>
                         </div>
 
                         <div class="card-footer">
                             <button type = "submit" class="btn res-button app-red-btn float-right pr-5 pl-5">
                                 <i class="fa fa-floppy-o res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
-                                <span class = "res-text-9 res-text-sm-7 res-text-md-9">Save</span>
+                                <span class = "res-text-9 res-text-sm-7 res-text-md-9" app-load="saving...">Save</span>
                             </button>
                         </div>
                     </div>

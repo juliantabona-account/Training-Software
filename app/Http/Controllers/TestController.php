@@ -7,6 +7,7 @@ use Request;
 use App\Test;
 use App\Lesson;
 use App\Report;
+use Exception;
 
 class TestController extends Controller
 {
@@ -51,20 +52,42 @@ class TestController extends Controller
     public function store(Request $request, $course_id, $module_id, $lesson_id)
     {
 
-        //Upload Test Details
+        $validator = $request::validate([
+            'title' => 'required',
+            'question_arrangement' => 'required'
+        ]);
 
-        $marking_key = json_decode( $request::input('arrangement') , true )[0];
-        $marking_key = array_slice($marking_key, 0, $marking_key['length']);
+        try{    //catching test on creation
+            
+            $marking_key = json_decode( $request::input('question_arrangement') , true )[0];
+            $marking_key = array_slice($marking_key, 0, $marking_key['length']);
 
-        $test = Test::create([
-                    'title' => $request::input('question-title'),
-                    'notes' => $request::input('question-notes'),
-                    'marking_key' => $marking_key,
-                    'user_id' => Auth::user()->id,
-                    'lesson_id' => $lesson_id
-                ]);
+            $test = Test::create([
+                        'title' => $request::input('title'),
+                        'notes' => $request::input('question-notes'),
+                        'marking_key' => $marking_key,
+                        'user_id' => Auth::user()->id,
+                        'lesson_id' => $lesson_id
+                    ]);
 
-        return redirect('/courses/'.$course_id.'/module/'.$module_id.'/lesson/'.$lesson_id.'/tests');
+            //Auth::user()->notify(new LessonTrashed( Lesson::find($lesson_id) ));
+
+            $request::session()->flash('status', 'Test created successfully!');
+            $request::session()->flash('status-icon', 'fa fa-check');
+            $request::session()->flash('type', 'success');
+
+            return redirect('/courses/'.$course_id.'/module/'.$module_id.'/lesson/'.$lesson_id.'/tests');
+
+        }catch(Exception $e){    //something went wrong deleting the course
+            return $e;
+            $request::session()->flash('status', 'Something went wrong creating the test. Try again');
+            $request::session()->flash('status-icon', 'fa fa fa-file-text-o');
+            $request::session()->flash('type', 'danger');
+
+            return back()->withInput();
+        
+        } 
+
     }
 
     public function edit($course_id, $module_id, $lesson_id, $test_id)

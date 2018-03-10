@@ -191,12 +191,12 @@
 
                                                                     </td>
                                                                     <td class="desc table-action">
-                                                                        <a href="/courses/{{ $course->id }}/module/{{ $module->id }}/lesson/{{ $lesson->id }}" class="btn res-button app-white-btn res-mt-lg-10-4 float-right">
+                                                                        <a href="/courses/{{ $course->id }}/module/{{ $module->id }}/lesson/{{ $lesson->id }}" class="btn res-button app-white-btn res-mt-lg-10-4 float-right loadable-btn">
                                                                             <i aria-hidden="true" class="fa fa-play-circle res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i>
                                                                             @if( in_array($lesson->id, collect($viewedLessons)->toArray()) )
-                                                                                <span class = "res-text-9 res-text-sm-7 res-text-md-9">Review Lesson</span>
+                                                                                <span class = "res-text-9 res-text-sm-7 res-text-md-9" app-load="Loading...">Review Lesson</span>
                                                                             @else
-                                                                                <span class = "res-text-9 res-text-sm-7 res-text-md-9">Start Lesson</span>
+                                                                                <span class = "res-text-9 res-text-sm-7 res-text-md-9" app-load="Starting Lesson...">Start Lesson</span>
                                                                             @endif
                                                                         </a>  
 

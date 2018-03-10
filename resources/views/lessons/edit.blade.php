@@ -44,7 +44,7 @@
                         <div class="col-5 offset-3">
                             <h2 class = "res-text-7 res-text-sm-5 res-text-md-3 text-center">
                                 <i class="fa fa-cube"></i>
-                                <span>Create Lesson</span>
+                                <span>Edit Lesson</span>
                             </h2>
                             <h4 class = "res-text-8 res-text-sm-8 res-text-md-8 text-center">
                                 <i class="fa fa-cubes"></i>
@@ -75,6 +75,8 @@
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
 
+                    @include('response.message')
+
                     <div class="row">
                         <div class="col-lg-7 res-ml-lg-10-15">
 
@@ -86,7 +88,12 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for = "lesson-title">Lesson Title</label>
-                                                <input id = "lesson-title" type = "text" class="form-control res-text-9 res-text-sm-9 res-text-md-9"  name = "lesson-title" placeholder = "Short And Simple..." value = "{{ $lesson->title }}" required/>
+                                                <input id = "lesson-title" type = "text" class="form-control res-text-9{{ $errors->has('title') ? ' is-invalid' : '' }}"  name = "title" placeholder = "Short And Simple..." value = "{{old('title', $lesson->title)}}" required/>
+                                                @if ($errors->has('title'))
+                                                    <span class="help-block invalid-feedback res-text-9">
+                                                        <strong> | {{ $errors->first('title') }}</strong>
+                                                    </span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -95,7 +102,10 @@
                                         <div role="alert" class="alert alert-warning mt-3 mb-0 lesson-notes-title">
                                             <i class="fa fa-film"></i> 
                                             <span>Lesson Video</span>
-                                            <a href = "/courses/{{ $course_id }}/module/{{ $module->id }}/lesson/{{ $lesson->id }}/video" class="btn btn-sm btn-success res-button float-right">
+                                           <a href="{{ route('lesson-video-remove', [$course_id, $module->id, $lesson->id]) }}" class="btn btn-sm btn-danger res-button float-right ml-2 loadable-btn">
+                                                <span class = "res-text-9 res-text-sm-7 res-text-md-9" app-load="Removing...">Remove Video</span>
+                                            </a>
+                                            <a href = "/courses/{{ $course_id }}/module/{{ $module->id }}/lesson/{{ $lesson->id }}/video" class="btn btn-sm btn-success res-button float-right loadable-btn">
                                                 <i class="fa fa-film res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
                                                 <span class = "res-text-9 res-text-sm-7 res-text-md-9">Change Video</span>
                                             </a>
@@ -106,10 +116,10 @@
                                         <div class="alert alert-warning" role="alert">
                                             <i class="fa fa-film" aria-hidden="true"></i>
                                             <span>No Video</span>
-                                            <button type="submit" class="btn btn-sm res-button app-red-btn float-right pr-2 pl-2">
+                                            <a href = "/courses/{{ $course_id }}/module/{{ $module->id }}/lesson/{{ $lesson->id }}/video" class="btn btn-sm app-red-btn res-button float-right loadable-btn">
                                                 <i class="fa fa-film res-text-9 res-text-sm-7 res-text-md-9 mr-1" aria-hidden="true"></i>
-                                                <span class = "res-text-9 res-text-sm-7 res-text-md-9">Add Video</span>
-                                            </button> 
+                                                <span class = "res-text-9 res-text-sm-7 res-text-md-9" app-load="Loading...">Add Video</span>
+                                            </a> 
                                         </div>
 
                                     @else
@@ -131,7 +141,17 @@
                                         <i class="fa fa-file-o"></i>
                                         <span>Lesson Notes</span>
                                     </div>
-                                    <textarea id = "lesson-notes" class = "mt-4" name = "lesson-notes">{{ $lesson->notes }}</textarea>
+                                    <textarea id = "lesson-notes" class = "mt-4" name = "notes">
+                                        @if( old('notes') )
+
+                                            {{  old('notes') }}
+                                        
+                                        @else
+                                        
+                                            {{ $lesson->notes }}
+                                        
+                                        @endif
+                                    </textarea>
 
                                 </div>
 
@@ -144,14 +164,20 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="lesson-description">Lesson Overview</label>
-                                        <textarea id = "lesson-description" class="form-control res-text-9 res-text-sm-8 res-text-md-9" name = "lesson-overview" rows="4" placeholder = "Say something short about this lesson..." required>{{ $lesson->overview }}</textarea>
+                                        <textarea id = "lesson-description" class="form-control res-text-9{{ $errors->has('overview') ? ' is-invalid' : '' }}" name = "overview" rows="4" placeholder = "Say something short about this lesson..." required>{{old('overview', $lesson->overview)}}</textarea>
+
+                                        @if ($errors->has('overview'))
+                                            <span class="help-block invalid-feedback res-text-9">
+                                                <strong> | {{ $errors->first('overview') }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
                                 </div>
 
                                 <div class="card-footer">
                                     <button type="submit" class="btn res-button app-red-btn px-sm-5  mr-3 mr-sm-3 mr-lg-3 ml-3 res-text-9 res-text-sm-8 res-text-md-7 float-right float-md-right">
                                         <i class="fa fa-save res-text-9 res-text-sm-7 res-text-md-9 mr-1" aria-hidden="true"></i>
-                                        <span class = "res-text-9 res-text-sm-7 res-text-md-9">Save Lesson</span>
+                                        <span class = "res-text-9 res-text-sm-7 res-text-md-9" app-load="Saving...">Save Lesson</span>
                                     </button>
                                 </div>
 
@@ -173,17 +199,11 @@
 
 @section('js')
 
-    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=yzpugovhcr8rirn4ok2qg1vs8bbbpuvemqng6k59tgf1x4f4"></script>
     <script src="https://player.vimeo.com/api/player.js"></script>
 
     <script>
-
-        var vimeoPlayer = new Vimeo.Player('vimeo_player');
         
-        vimeoPlayer.on('play', function() {
-            console.log('User is now playing!');
-        });
-
         tinymce.init({
             selector: '#lesson-notes',
             height: 500,
@@ -205,6 +225,16 @@
                 });
             }
          });
+
+        @if($status == 'available')
+
+            var vimeoPlayer = new Vimeo.Player('vimeo_player');
+
+            vimeoPlayer.on('play', function() {
+                console.log('User is now playing!');
+            });
+
+        @endif
 
     </script>
 

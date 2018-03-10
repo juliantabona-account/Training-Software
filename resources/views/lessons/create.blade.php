@@ -73,6 +73,8 @@
                 <form action="/courses/{{ $course_id }}/module/{{ $module->id }}/lesson" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
 
+                    @include('response.message')
+
                     <div class="row">
                         <div class="col-lg-7 res-ml-lg-10-15">
 
@@ -84,7 +86,13 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for = "lesson-title">Lesson Title</label>
-                                                <input id = "lesson-title" type = "text" class="form-control res-text-9 res-text-sm-9 res-text-md-9"  name = "lesson-title" placeholder = "Short And Simple..." required/>
+                                                <input id = "lesson-title" type = "text" class="form-control res-text-9{{ $errors->has('overview') ? ' is-invalid' : '' }}" value = "{{ old('title') }}" name = "title" placeholder = "Short And Simple..." required/>
+
+                                                @if ($errors->has('title'))
+                                                    <span class="help-block invalid-feedback res-text-9">
+                                                        <strong>{{ $errors->first('title') }}</strong>
+                                                    </span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -96,11 +104,14 @@
                                             </div>
                                         </div>
 
-                                        <textarea id = "lesson-notes" class = "mt-4" name = "lesson-notes">
+                                        <textarea id = "lesson-notes" class = "mt-4" name = "notes">
+                                            @if( old('notes') )
 
+                                                {{  old('notes') }}
+                                            @else
                                             <p style="text-align: center; font-size: 15px;" data-mce-style="text-align: center; font-size: 15px;">
                                                 <span style="color: rgb(0, 0, 0);" data-mce-style="color: #000000;">
-                                                    <img title="SalesChief Logo" src="../../../../../../assets/icons/Saleschief-Logo.png" alt="SalesChief Logo" width="180" height="auto" data-mce-src="../../../../../../assets/icons/Saleschief-Logo.png" data-mce-selected="1">
+                                                    <img title="SalesChief Logo" src="{{ env('APP_LOGO_300_64') }}" width="180" height="auto" data-mce-src="{{ env('APP_LOGO_300_64') }}" data-mce-selected="1">
                                                 </span>
                                             </p>
                                             <h3 style="text-align: center;" data-mce-style="text-align: center;">
@@ -137,7 +148,7 @@
                                             <p style="padding-left: 30px;" data-mce-style="padding-left: 30px;">
                                                 <span style="color: #000000;" data-mce-style="color: #000000;">3) How to create a strong/reliable sales strategy</span>
                                             </p> 
-
+                                            @endif
                                         </textarea>
                                     </div>
                                 </div>
@@ -151,14 +162,20 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="lesson-description">Lesson Overview</label>
-                                        <textarea id = "lesson-description" class="form-control res-text-9 res-text-sm-8 res-text-md-9" name = "lesson-overview" rows="4" placeholder = "Say something short about this lesson..." required></textarea>
+                                        <textarea id = "lesson-description" class="form-control res-text-9{{ $errors->has('overview') ? ' is-invalid' : '' }}" name = "overview" rows="4" placeholder = "Say something short about this lesson..." required>{{ old('overview') }}</textarea>
+
+                                        @if ($errors->has('overview'))
+                                            <span class="help-block invalid-feedback res-text-9">
+                                                <strong>{{ $errors->first('overview') }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
                                 </div>
 
                                 <div class="card-footer">
                                     <button type="submit" class="btn res-button app-red-btn px-sm-5  mr-3 mr-sm-3 mr-lg-3 ml-3 res-text-9 res-text-sm-8 res-text-md-7 float-right float-md-right">
                                         <i class="fa fa-cloud-upload res-text-9 res-text-sm-7 res-text-md-9 mr-1" aria-hidden="true"></i>
-                                        <span class = "res-text-9 res-text-sm-7 res-text-md-9">Upload Lesson</span>
+                                        <span class = "res-text-9 res-text-sm-7 res-text-md-9" app-load="uploading lesson...">Upload Lesson</span>
                                     </button>
                                 </div>
 
@@ -180,7 +197,7 @@
 
 @section('js')
 
-    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=yzpugovhcr8rirn4ok2qg1vs8bbbpuvemqng6k59tgf1x4f4"></script>
     <script>
 
         tinymce.init({

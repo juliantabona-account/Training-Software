@@ -114,6 +114,7 @@ Route::delete('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}', 'Les
 Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/edit', 'LessonController@edit')->middleware('onlyadmin');
 Route::post('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/video', 'LessonController@videoUpload')->name('lesson-video-save')->middleware('onlyadmin');
 Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/video', 'LessonController@video')->name('lesson-video')->middleware('onlyadmin');
+Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/video/remove', 'LessonController@removeVideo')->name('lesson-video-remove')->middleware('onlyadmin');
 
 /* 
 	LESSON NOTES - ADD, EDIT, UPDATE, DELETE

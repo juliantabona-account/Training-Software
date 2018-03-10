@@ -42,9 +42,9 @@
                         
                         <div class="col-12 col-sm-6 offset-sm-2 col-md-4 offset-md-4 offset-lg-2 col-lg-3 pr-0 pt-3 pt-sm-0 mt-2 mt-sm-0 res-brs-t res-brs-sm-t-n">
                             @if(Auth::user()->hasRole('admin'))
-                            <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/create" class="btn btn-sm res-button app-red-btn float-right ml-2">
+                            <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/create" class="btn btn-sm res-button app-red-btn float-right ml-2 loadable-btn">
                                 <i class="fa fa-file-text-o res-text-9" aria-hidden="true"></i>
-                                <span class = "res-text-9">Create Test</span>
+                                <span class = "res-text-9" app-load="Loading...">Create Test</span>
                             </a>
                             @endif
                             <a href = "/courses/{{ $course_id }}" class="btn btn-sm res-button app-red-btn float-right">
@@ -72,18 +72,18 @@
                         <div class="col-sm-8 offset-sm-2 col-md-6 offset-md-0 col-lg-4 mb-4">
                             
                             <div class="card ml-0 mr-0 ml-xl-4 mr-xl-4">
-                                <img class="card-img-top test-image"  alt="{{ $test->title }}" src="{{ env('APP_TEST_ICON') }}" img-died="image">
+                                <img class="card-img-top test-image" src="{{ env('APP_NO_IMAGE_ICON') }}" img-died="image">
                                 <div class="card-body">
                                     <h4 class="card-title mb-3 pb-3 res-brs-b res-text-8">{{ $test->title }}</h4>
                                     @if(Auth::user()->hasRole('admin'))
-                                        <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}/edit" class="btn btn-sm res-button app-red-btn float-right">
+                                        <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}/edit" class="btn btn-sm res-button app-red-btn float-right loadable-btn">
                                             <i class="fa fa-pencil res-text-9" aria-hidden="true"></i>
-                                            <span class = "res-text-9">Edit Test</span>
+                                            <span class = "res-text-9" app-load="Loading...">Edit Test</span>
                                         </a>
                                         <form action = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
-                                            <button type = "submit" class="btn btn-sm btn-danger float-right mr-1">
+                                            <button type = "button" class="test-delete-btn btn btn-sm btn-danger float-right mr-1">
                                                 <i class="fa fa-trash res-text-9" aria-hidden="true"></i>
                                             </button>
                                         </form>
@@ -110,13 +110,13 @@
                                                     </div>
 
                                                     @if($testScore[$test->id]['currentscore'] < 100)
-                                                        <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}" class="btn btn-sm btn-success res-button float-right">
+                                                        <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}" class="btn btn-sm btn-success res-button float-right loadable-btn">
                                                             <i class="fa fa-file-text-o"></i>
-                                                            <span class = "res-text-9">Complete Test</span>
+                                                            <span class = "res-text-9" app-load="Loading...">Complete Test</span>
                                                         </a>
                                                     @else
-                                                        <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}" class="btn btn-sm btn-success res-button float-right">
-                                                            <span class = "res-text-9">View Test</span>
+                                                        <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}" class="btn btn-sm btn-success res-button float-right loadable-btn">
+                                                            <span class = "res-text-9" app-load="Loading...">View Test</span>
                                                         </a>
                                                     @endif
 
@@ -125,9 +125,9 @@
                                             @endforeach
                                         @else
 
-                                        <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}" class="btn btn-sm btn-success res-button float-right">
+                                        <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}" class="btn btn-sm btn-success res-button float-right loadable-btn">
                                             <i class="fa fa-pencil res-text-9" aria-hidden="true"></i>
-                                            <span class = "res-text-9">Take Test</span>
+                                            <span class = "res-text-9" app-load="Loading...">Take Test</span>
                                         </a>
 
                                         @endif
@@ -148,9 +148,9 @@
                                 <div class="card-body">
                                     <h4 class="card-title res-text-6 mb-1"><span class="badge badge-secondary res-text-9">No Tests</span></h4>                        
                                     <p class="res-text-9 pb-3 res-brs-lg-b">Get started by creating your first test.</p>
-                                    <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/create" class="btn btn-sm res-button app-red-btn float-right">
+                                    <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/create" class="btn btn-sm res-button app-red-btn float-right loadable-btn">
                                         <i class="fa fa-plus res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
-                                        <span class="res-text-9 res-text-sm-7 res-text-md-9">Create Test</span>
+                                        <span class="res-text-9 res-text-sm-7 res-text-md-9" app-load="Loading...">Create Test</span>
                                     </a>                           
                                 </div>
                             </div>
@@ -163,5 +163,39 @@
     </div>
 
 
+
+@endsection
+
+@section('js')
+
+    <script type="text/javascript">
+        
+        $('.test-delete-btn').click(function(e){
+
+            var test_title = $(this).closest('.card-body').find('.card-title').text().replace(/\"/g, "");
+
+            swal({
+              title: "Delete Test?",
+              text: 'Are you sure you want to delete "'+test_title+'"!',
+              buttons: ["Cancel", "Delete"],
+              dangerMode: true
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+
+                    swal({
+                      text: "Deleting...",
+                      icon: "success",
+                      timer: 2000,
+                      buttons: false
+                    });
+
+                    $(this).parent('form').submit();
+                }
+            });
+
+        });
+
+    </script>
 
 @endsection

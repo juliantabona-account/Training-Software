@@ -44,6 +44,9 @@
     <div class="container-fluid res-mt-lg-10-3 res-mb-lg-10-5 p-0 app-bg-1">
         <div class="app-white-overlay-1">
             <div class="container res-mt-lg-10-3 res-mb-lg-10-5">
+
+                @include('response.message')
+
                 <div class="row">
 
                     <div class="col-lg-3">
@@ -62,6 +65,7 @@
 
                         <div class="card">
                             <div class="card-body">
+                                <a href="/courses/41/edit" class="btn btn-sm res-button btn-danger float-right loadable-btn pr-5 pl-5 mb-2"><span class="res-text-9 mr-2" app-load="skipping...">Skip</span><i aria-hidden="true" class="fa fa-arrow-circle-right res-text-9"></i> </a>
                                 <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                     <thead>
                                         <tr class = "alert alert-warning">
@@ -97,7 +101,7 @@
                                                         <input type = "hidden" value = "{{ $video['uri'] }}" name = "video">
                                                         <input type = "hidden" value = "{{ $video['name'] }}" name = "name">
                                                         <button type = "submit" class="btn btn-sm btn-success float-right mr-1 res-text-9 res-text-sm-9 res-text-md-9">
-                                                            Use Video
+                                                            <span  app-load="uploading...">Use Video</span>
                                                         </button>
                                                     </form>
                                                 </td>

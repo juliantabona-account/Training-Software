@@ -50,8 +50,12 @@
 
         <!-- Bootstrap 4 -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
-
+        
+        <!-- Chart.js -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+        
+        <!-- Sweet Alert -->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
         <script src="{{ asset('js/app.js') }}"></script>
 

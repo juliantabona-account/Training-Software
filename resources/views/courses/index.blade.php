@@ -66,18 +66,9 @@
         <div class="app-white-overlay-1">
             <div class="container res-mt-lg-10-3 res-mb-lg-10-5">
 
-                <div class="row">
+                @include('response.message')
 
-                    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 mb-4">
-                        @if(Session::has('status'))
-                            <div class="alert alert-{{ Session::get('type') }}" role="alert">
-                                <span class = "res-text-9 res-text-sm-9 res-text-md-9"><i class="fa fa-user mr-1"></i> {{ Session::get('status') }}</span>
-                                <button type="button" class="close mt-2 d-block res-text-9 res-text-sm-9 res-text-md-9" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        @endif
-                    </div>
+                <div class="row">
 
                     @if(COUNT($courses))
                         @foreach($courses as $course)
@@ -105,7 +96,7 @@
                                         <form action = "/courses/{{ $course->id }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
-                                            <button type = "submit" class="btn btn-sm btn-danger float-right mr-1">
+                                            <button type = "button" class="btn btn-sm btn-danger course-delete-btn float-right mr-1">
                                                 <i class="fa fa-trash res-text-9" aria-hidden="true"></i>
                                             </button>
                                         </form>
@@ -146,5 +137,39 @@
             </div>
         </div>
     </div>
+
+@endsection
+
+@section('js')
+
+    <script type="text/javascript">
+        
+        $('.course-delete-btn').click(function(e){
+
+            var course_title = $(this).parent().parent().find('.card-title').text();
+
+            swal({
+              title: "Delete Course?",
+              text: 'Are you sure you want to delete "'+course_title+'"!',
+              buttons: ["Cancel", "Delete"],
+              dangerMode: true
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+
+                    swal({
+                      text: "Deleting...",
+                      icon: "success",
+                      timer: 2000,
+                      buttons: false
+                    });
+
+                    $(this).parent('form').submit();
+                }
+            });
+
+        });
+
+    </script>
 
 @endsection

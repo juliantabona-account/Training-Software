@@ -134,7 +134,31 @@ $(document).on("click",".delete-question-btn",function() {
     
     if($(this).closest('ul').find('li').length > 1){
 
-        $(this).closest('li').remove();
+        var msg = $(this).closest('.table-content').find('.question-number-tag').text();
+
+        if(msg != ''){
+            msg = 'Are you sure you want to delete "'+msg+'"!';
+        }
+
+        swal({
+          title: "Delete Question?",
+          text: msg,
+          buttons: ["Cancel", "Delete"],
+          dangerMode: true
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+
+                swal({
+                  text: "Deleting...",
+                  icon: "success",
+                  timer: 500,
+                  buttons: false
+                });
+
+                $(this).closest('li').remove();
+            }
+        });
 
     }else{
 
@@ -380,6 +404,38 @@ function runQuestionsArrangement(){
     $('.arrangement_state').val(1);
 }
 
+
+/*
+
+  CONFIRM BROWSER REDIRECT ON (CLOSE/RELOAD/BACK) WHEN THE USER HAS MADE CHANGES TO QUESTIONS
+
+*/
+
+$(document).ready(function () {
+    // Warning
+    $(window).on('beforeunload', function(){
+        if( $('.question_arrangement').val() != '' && $('.arrangement_state').val() == 1){
+            var s = "You have unsaved changes. Are you sure you want to leave?";
+
+            event = event || window.event;
+            if (event) {
+                // This is for IE
+                event.returnValue = s;
+            }
+
+            // This is for all other browsers
+            return s;
+        }
+    });
+
+    // Form Submit
+    $(document).on("submit", "form", function(event){
+        // disable warning
+        $(window).off('beforeunload');
+    });
+});
+
+
 /*
 
   MODULE AND LESSON EXPAND AND COLLAPSE HANDLER
@@ -571,6 +627,7 @@ $('.btn-file :file').on('fileselect', function(event, label) {
     }
 
 });
+
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -586,6 +643,19 @@ function readURL(input) {
 $("#imgInp").change(function(){
     readURL(this);
 });  
+
+
+$('form button[type="submit"], .loadable-btn, .swal-button').click(function(){
+    var button = $(this);
+    if(button.find('.loader').length == 0){
+        button.find('i').hide();  
+        button.find('span').text( button.find('span').attr('app-load') ); 
+        button.attr("disabled","disabled").prepend('<i class="fa fa-circle-o-notch fa-spin res-text-9 mr-1 loader"></i>');
+        button.closest('form').submit(); 
+    }
+    
+
+});
 
 /*
 

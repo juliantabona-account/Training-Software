@@ -7,6 +7,7 @@ use Request;
 use App\Module;
 use App\Lesson;
 use App\Course;
+use Exception;
 use Vinkla\Vimeo\Facades\Vimeo;
 use App\Notifications\LessonCreated;
 use App\Notifications\LessonUpdated;
@@ -37,9 +38,9 @@ class LessonController extends Controller
         $lesson = Lesson::find($lesson_id);
         $module = Module::find($module_id);
         
-        if(Auth::user()->hasRole('client')){
+        //if(Auth::user()->hasRole('client')){
             Auth::user()->lessonViews()->attach($lesson_id); 
-        }
+        //}
         
         if($lesson->video_uri){
             $status = Vimeo::request('/videos/'.str_replace('/videos/', '', $lesson->video_uri).'?fields=status')['body']['status'];
@@ -61,39 +62,73 @@ class LessonController extends Controller
     public function store(Request $request, $course_id, $module_id)
     {
 
-        //Upload Lesson Details
+        $validator = $request::validate([
+            'title' => 'required',
+            'overview' => 'required'
+        ]);
 
-        $module = Module::findOrFail($module_id);
+        try{    //catching lesson creation, user notification
 
-        $uploadLesson = $module->lessons()->create([
-                            'title' => $request::input('lesson-title'),
-                            'overview' => $request::input('lesson-overview'),
-                            'notes' => $request::input('lesson-notes')
-                        ]);
+            $module = Module::findOrFail($module_id);
 
-        $course = Course::find($course_id);
+            $uploadLesson = $module->lessons()->create([
+                                'title' => $request::input('title'),
+                                'overview' => $request::input('overview'),
+                                'notes' => $request::input('notes')
+                            ]);
 
-        if($uploadLesson){
-            Auth::user()->notify(new LessonCreated($uploadLesson, $course));
-        }
+            $course = Course::find($course_id);
 
-        return redirect('/courses/'.$course_id.'/module/'.$module_id.'/lesson/'.$uploadLesson->id.'/video');
+            if($uploadLesson){
+                Auth::user()->notify(new LessonCreated($uploadLesson, $course));
+            }
+
+            $request::session()->flash('status', 'Lesson created successfully!');
+            $request::session()->flash('status-icon', 'fa fa-check');
+            $request::session()->flash('type', 'success');
+
+            return redirect('/courses/'.$course_id.'/module/'.$module_id.'/lesson/'.$uploadLesson->id.'/video');
+
+        }catch(Exception $e){    //something went wrong uploading image
+
+            $request::session()->flash('status', 'Something went wrong uploading the lesson. Try again');
+            $request::session()->flash('status-icon', 'fa fa-cloud-upload');
+            $request::session()->flash('type', 'danger');
+
+            return back()->withInput();
+        
+        } 
+
     }
 
     public function videoUpload(Request $request, $course_id, $module_id, $lesson_id)
     {
 
-        //Upload Lesson Details
+        try{     //catch video upload to lesson
 
-        $lesson = Lesson::find($lesson_id)->update([
-                    'video_uri' => $request::input('video')
-                ]);
+            $lesson = Lesson::find($lesson_id)->update([
+                        'video_uri' => $request::input('video')
+                    ]);
 
-        $lesson = Lesson::find($lesson_id);
+            $lesson = Lesson::find($lesson_id);
 
-        Auth::user()->notify(new VideoAssigned( $lesson, $request::input('name') ));
+            Auth::user()->notify(new VideoAssigned( $lesson, $request::input('name') ));
 
-        return redirect('/courses/'.$course_id.'/edit');
+            $request::session()->flash('status', 'Video uploaded to lesson successfully!');
+            $request::session()->flash('status-icon', 'fa fa-check');
+            $request::session()->flash('type', 'success');
+
+            return redirect('/courses/'.$course_id.'/edit');
+
+        }catch(Exception $e){    //something went wrong uploading image
+
+            $request::session()->flash('status', 'Something went wrong uploading the video to lesson. Try again');
+            $request::session()->flash('status-icon', 'fa fa-cloud-upload');
+            $request::session()->flash('type', 'danger');
+
+            return back()->withInput();
+        
+        } 
     }
 
     public function notesImageUpload(Request $request, $course_id, $module_id, $lesson_id)
@@ -119,26 +154,95 @@ class LessonController extends Controller
 
     public function update(Request $request, $course_id, $module_id, $lesson_id)
     {
-        $lesson = Lesson::find($lesson_id)->update([
-                    'title' => $request::input('lesson-title'),
-                    'overview' => $request::input('lesson-overview'),
-                    'notes' => $request::input('lesson-notes')
-                ]);
 
-        if($lesson){
-            Auth::user()->notify(new LessonUpdated(Lesson::find( $lesson_id )));
-        }
+        $validator = $request::validate([
+            'title' => 'required',
+            'overview' => 'required'
+        ]);
 
-        return redirect('/courses/'.$course_id.'/module/'.$module_id.'/lesson/'.$lesson_id.'/edit');
+        try{    //catching lesson creation, user notification
+
+            $lesson = Lesson::find($lesson_id)->update([
+                        'title' => $request::input('title'),
+                        'overview' => $request::input('overview'),
+                        'notes' => $request::input('notes')
+                    ]);
+
+            if($lesson){
+                Auth::user()->notify(new LessonUpdated(Lesson::find( $lesson_id )));
+            }
+
+            $request::session()->flash('status', 'Lesson updated successfully!');
+            $request::session()->flash('status-icon', 'fa fa-check');
+            $request::session()->flash('type', 'success');
+
+            return redirect('/courses/'.$course_id.'/module/'.$module_id.'/lesson/'.$lesson_id.'/edit');
+
+        }catch(Exception $e){    //something went wrong uploading image
+
+            $request::session()->flash('status', 'Something went wrong updating the lesson. Try again');
+            $request::session()->flash('status-icon', 'fa fa-refresh');
+            $request::session()->flash('type', 'danger');
+
+            return back()->withInput();
+        
+        } 
     }
 
-    public function delete($course_id, $module_id, $lesson_id)
+    public function removeVideo(Request $request, $course_id, $module_id, $lesson_id)
     {
-        Auth::user()->notify(new LessonTrashed( Lesson::find($lesson_id) ));
-        
-        Lesson::find($lesson_id)->delete();
 
-        return redirect('/courses/'.$course_id.'/edit');
+        try{    //catching course on delete
+            
+            $lesson = Lesson::find($lesson_id)->update([
+                        'video_uri' => ''
+                    ]);
+
+            $request::session()->flash('status', 'Lesson video removed successfully!');
+            $request::session()->flash('status-icon', 'fa fa-check');
+            $request::session()->flash('type', 'success');
+
+            //Auth::user()->notify(new LessonTrashed( Lesson::find($lesson_id) ));
+
+            return redirect('/courses/'.$course_id.'/module/'.$module_id.'/lesson/'.$lesson_id.'/edit');
+
+        }catch(Exception $e){    //something went wrong deleting the course
+
+            $request::session()->flash('status', 'Something went wrong trying to remove the lesson video. Try again');
+            $request::session()->flash('status-icon', 'fa fa-film');
+            $request::session()->flash('type', 'danger');
+
+            return back();
+        
+        } 
+
+    }
+
+    public function delete(Request $request, $course_id, $module_id, $lesson_id)
+    {
+
+        try{    //catching course on delete
+
+            Auth::user()->notify(new LessonTrashed( Lesson::find($lesson_id) ));
+            
+            Lesson::find($lesson_id)->delete();
+
+            $request::session()->flash('status', 'Lesson deleted successfully!');
+            $request::session()->flash('status-icon', 'fa fa-trash');
+            $request::session()->flash('type', 'success');
+
+            return redirect('/courses/'.$course_id.'/edit');
+
+        }catch(Exception $e){    //something went wrong deleting the course
+
+            $request::session()->flash('status', 'Something went wrong trying to delete the lesson. Try again');
+            $request::session()->flash('status-icon', 'fa fa-trash');
+            $request::session()->flash('type', 'danger');
+
+            return back();
+        
+        } 
+
     }
 
 }

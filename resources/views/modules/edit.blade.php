@@ -59,7 +59,7 @@
                             </div>
                             <button type = "submit" class="btn res-button app-red-btn px-sm-5  mr-3 mr-sm-3 mr-lg-3 ml-3 res-text-9 res-text-sm-8 res-text-md-7 float-right float-md-right">
                                 <i class="fa fa-floppy-o res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
-                                <span class = "res-text-9 res-text-sm-7 res-text-md-9">Save</span>
+                                <span class = "res-text-9 res-text-sm-7 res-text-md-9" app-load="saving...">Save</span>
                             </button>
                         </div>
                     </div>

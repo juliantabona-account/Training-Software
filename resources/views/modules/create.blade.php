@@ -18,7 +18,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type = "submit" class="btn res-button app-red-btn float-right">
-                <span class = "res-text-9 res-text-sm-7 res-text-md-9">Create Module</span>
+                <span class = "res-text-9 res-text-sm-7 res-text-md-9" app-load="creating module...">Create Module</span>
             </button>
           </div>
         </form>

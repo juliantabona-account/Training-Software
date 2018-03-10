@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Input;
 use App\Notifications\CourseCreated;
 use App\Notifications\CourseUpdated;
 use App\Notifications\CourseTrashed;
+use Illuminate\Support\Facades\Validator;
 
 class CourseController extends Controller
 {
@@ -147,15 +148,25 @@ class CourseController extends Controller
     public function store(Request $request)
     {
 
-        try{
+        $request::session()->forget('status');
 
+        $validator = $request::validate([
+            'title' => 'required',
+            'overview' => 'required',
+        ]);
 
-            $image_name = '';
+        $image_name = '';
 
-            if(Input::file())
-            {
+        if(Input::file())
+        {
 
-                $image = Input::file('course-image');
+            $validator = $request::validate([
+                'upload' => 'required | mimes:jpeg,jpg,png | max:2000'
+            ]);
+
+            try{    //catching image resize and upload
+
+                $image = Input::file('upload');
                 
                 Image::make($image->getRealPath())->widen(318, function ($constraint) {
                     $constraint->upsize();
@@ -176,13 +187,25 @@ class CourseController extends Controller
                 Storage::disk('s3')->put($image_name, file_get_contents($image), 'public');
 
                 $image_name = env('AWS_URL').$image_name;
-            }
 
+            }catch(Exception $e){    //something went wrong uploading image
+
+                $request::session()->flash('status', 'Something went wrong uploading the image. Try again');
+                $request::session()->flash('status-icon', 'fa fa-cloud-upload');
+                $request::session()->flash('type', 'danger');
+
+                return back()->withInput();
+            
+            } 
+
+        }
+
+        try{    //catching course creation, user notification and emailing process
 
             $course = Course::create([
-                        'title' => $request::input('course-title'),
-                        'overview' => $request::input('course-overview'),
-                        'announcement' => 'Welcome to "' . $request::input('course-title') . '". Complete lessons in their order to unlock other modules.',
+                        'title' => $request::input('title'),
+                        'overview' => $request::input('overview'),
+                        'announcement' => 'Welcome to "' . $request::input('title') . '". Complete lessons in their order to unlock other modules.',
                         'img' => $image_name
                     ]);
 
@@ -194,13 +217,20 @@ class CourseController extends Controller
 
             Auth::user()->notify(new CourseCreated($course));
 
-            return redirect()->route('course-list');
+            $request::session()->flash('status', 'Course created successfully!');
+            $request::session()->flash('status-icon', 'fa fa-check');
+            $request::session()->flash('type', 'success');
 
-        }catch(Exception $e){
+            return redirect()->route('course-list'); 
 
-            return view('error.connection_fail');
+        }catch(Exception $e){    //something went wrong uploading image
+
+            $request::session()->flash('status', 'Something went wrong creating the course. Try again');
+            $request::session()->flash('type', 'danger');
+
+            return back()->withInput();
         
-        }    
+        }   
 
     }
 
@@ -245,20 +275,32 @@ class CourseController extends Controller
     public function update(Request $request, $course_id)
     {
 
-        try{
+        $request::session()->forget('status');
 
-            $filename = '';
-            $image_name = '';
+        $filename = '';
+        $image_name = '';
 
-            if(Input::file())
-            {
+        $validator = $request::validate([
+            'title' => 'required',
+            'overview' => 'required'
+        ]);
+
+        if(Input::file())
+        {
+
+            $validator = $request::validate([
+                'upload' => 'required | mimes:jpeg,jpg,png | max:2000'
+            ]);
+
+            try{    //catching image resize and upload
+
                 $old_image_path = str_replace(env('AWS_URL'), '', $request::input('current-course-image'));
 
                 if(Storage::disk('s3')->exists( $old_image_path )) {
                     Storage::disk('s3')->delete( $old_image_path );
                 }
 
-                $image = Input::file('course-image');
+                $image = Input::file('upload');
                 
                 Image::make($image->getRealPath())->widen(318, function ($constraint) {
                     $constraint->upsize();
@@ -270,16 +312,30 @@ class CourseController extends Controller
 
                 $image_name = env('AWS_URL').$image_name;
 
-            }
+            }catch(Exception $e){    //something went wrong uploading image
 
-            if($image_name == ''){
-                $image_name = $request::input('course-image');
-            }
+                $request::session()->flash('status', 'Something went wrong uploading the image. Try again');
+                $request::session()->flash('status-icon', 'fa fa-cloud-upload');
+                $request::session()->flash('type', 'danger');
+
+                return back()->withInput();
+            
+            } 
+
+        }
+
+        if($image_name == ''){
+            $image_name = $request::input('upload');
+        }
+
+
+
+        try{    //catching course update and user notification
 
             $course = Course::find($course_id)->update([
-                        'title' => $request::input('course-title'),
-                        'overview' => $request::input('course-overview'),
-                        'announcement' => $request::input('course-announcement'),
+                        'title' => $request::input('title'),
+                        'overview' => $request::input('overview'),
+                        'announcement' => $request::input('announcement'),
                         'img' => $image_name
                     ]);
 
@@ -325,20 +381,28 @@ class CourseController extends Controller
 
             Auth::user()->notify(new CourseUpdated(Course::find($course_id))); 
 
+            $request::session()->flash('status', 'Course changes saved!');
+            $request::session()->flash('status-icon', 'fa fa-check');
+            $request::session()->flash('type', 'success');
+
             return redirect('/courses/'.$course_id.'/edit');
 
-        }catch(Exception $e){
+        }catch(Exception $e){    //something went wrong uploading image
 
-            return view('error.connection_fail');
+            $request::session()->flash('status', 'Something went wrong trying to save the course. Try again');
+            $request::session()->flash('status-icon', 'fa fa-floppy-o');
+            $request::session()->flash('type', 'danger');
+
+            return back()->withInput();
         
         } 
 
     }
 
-    public function delete($course_id)
+    public function delete(Request $request, $course_id)
     {
 
-        try{
+        try{    //catching course on delete
 
             $course = Course::find($course_id);
 
@@ -352,13 +416,21 @@ class CourseController extends Controller
 
             $course->delete();
 
+            $request::session()->flash('status', 'Course deleted successfully!');
+            $request::session()->flash('status-icon', 'fa fa-trash');
+            $request::session()->flash('type', 'success');
+
             return redirect()->route('course-list');
 
-        }catch(Exception $e){
+        }catch(Exception $e){    //something went wrong deleting the course
 
-            return view('error.connection_fail');
+            $request::session()->flash('status', 'Something went wrong trying to delete the course. Try again');
+            $request::session()->flash('status-icon', 'fa fa-trash');
+            $request::session()->flash('type', 'danger');
+
+            return back();
         
-        }    
+        }      
 
     }
 
