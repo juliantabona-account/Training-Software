@@ -7,22 +7,18 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class ClientEnrolled extends Notification
+class ClientActivated extends Notification
 {
     use Queueable;
-
-    protected $client;
-    protected $course;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($client, $course)
+    public function __construct()
     {
-        $this->client = $client;
-        $this->course = $course;
+        //
     }
 
     /**
@@ -33,25 +29,21 @@ class ClientEnrolled extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['mail'];
     }
 
     /**
-     * Get the array representation of the notification.
+     * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return array
+     * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toDatabase($notifiable)
+    public function toMail($notifiable)
     {
-        return [
-            'storage' => [
-
-                'client' => $this->client,
-                'course' => $this->course
-
-            ]
-        ];
+        return (new MailMessage)
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
+                    ->line('Thank you for using our application!');
     }
 
     /**

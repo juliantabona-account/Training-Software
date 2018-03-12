@@ -78,7 +78,28 @@
         <form action = "/courses/{{ $course->id }}" method="POST">
             {{ csrf_field() }}
             {{ method_field('PUT') }}
+
+        @if(Auth::user()->hasRole('admin'))
             <div class="row">
+
+                <div class="col-lg-11">
+                    <a href="/courses/{{$course->id}}/edit" data-toggle="tooltip" title="" data-original-title="Stop preview and return to Edit Mode" class="btn btn-danger float-right">
+                        <i aria-hidden="true" class="fa fa-eye-slash res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i> 
+                        <span class="res-text-9 res-text-sm-7 res-text-md-9">Exit Preview Mode</span>
+                    </a>
+                    <a href="{{ route('course-reset-progress', [$course->id, Auth::id()]) }}" data-toggle="tooltip" title="" data-original-title="Reset your course progress including (lessons &amp; tests)" class="btn btn-primary float-right mr-2">
+                        <i aria-hidden="true" class="fa fa-refresh res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i> 
+                        <span class="res-text-9 res-text-sm-7 res-text-md-9">Reset Progress</span>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="row ml-3 mr-3 pt-5 pb-5 preview-border">
+        @else     
+            <div class="row ml-3 mr-3 pt-4 pb-5">
+        @endif
+
                 <div class="col-lg-7 res-ml-lg-10-15">
 
                     <div class = "row">
@@ -201,13 +222,25 @@
                                                                         </a>  
 
                                                                         @if(COUNT($lesson->tests) && $testCompleted == COUNT($lesson->tests)) 
-                                                                            <a href="/courses/{{ $course->id }}/module/{{ $module->id }}/lesson/{{ $lesson->id }}/tests" class="badge badge-success res-text-lg-9 mr-3 mt-4">
-                                                                                <i class="fa fa-file-text-o"></i> Test Results
-                                                                            </a>
+                                                                            @if(Auth::user()->hasRole('admin'))
+                                                                                <a href="/courses/{{ $course->id }}/module/{{ $module->id }}/lesson/{{ $lesson->id }}/tests?view=preview" class="badge badge-success res-text-lg-9 mr-3 mt-4">
+                                                                                    <i class="fa fa-file-text-o"></i> Test Results
+                                                                                </a>
+                                                                            @else
+                                                                                <a href="/courses/{{ $course->id }}/module/{{ $module->id }}/lesson/{{ $lesson->id }}/tests" class="badge badge-success res-text-lg-9 mr-3 mt-4">
+                                                                                    <i class="fa fa-file-text-o"></i> Test Results
+                                                                                </a>
+                                                                            @endif
                                                                         @elseif(COUNT($lesson->tests) && $testCompleted < COUNT($lesson->tests))
-                                                                            <a href="/courses/{{ $course->id }}/module/{{ $module->id }}/lesson/{{ $lesson->id }}/tests" class="badge badge-primary res-text-lg-9 mr-3 mt-4">
-                                                                                <i class="fa fa-file-text-o"></i> Take Test
-                                                                            </a>
+                                                                            @if(Auth::user()->hasRole('admin'))
+                                                                                <a href="/courses/{{ $course->id }}/module/{{ $module->id }}/lesson/{{ $lesson->id }}/tests?view=preview" class="badge badge-primary res-text-lg-9 mr-3 mt-4">
+                                                                                    <i class="fa fa-file-text-o"></i> Take Test
+                                                                                </a>
+                                                                            @else
+                                                                                <a href="/courses/{{ $course->id }}/module/{{ $module->id }}/lesson/{{ $lesson->id }}/tests" class="badge badge-primary res-text-lg-9 mr-3 mt-4">
+                                                                                    <i class="fa fa-file-text-o"></i> Take Test
+                                                                                </a>
+                                                                            @endif
                                                                         @endif
                                                                     </td>
                                                                 </tr>
@@ -246,9 +279,11 @@
                 </div>
 
                 <div class = "col-lg-3">
+
                     <div class="card ml-3 mt-0 mb-2">
 
                         <div class="card-body" data-toggle="tooltip" title="Your current progress is {{ round(((COUNT($viewedLessons) + $totalPassedTests) / ($totalLessons+$totalTests)) *100) }}%">
+
                             <h2 class = "res-text-8 mt-1">
                                 <i class="fa fa-flag mr-1" aria-hidden="true"></i>
                                 <span>Course Progress</span>
@@ -299,5 +334,6 @@
 @section('js')
 
     <script src="{{asset('js/jquery-sortable/jquery-sortable.js')}}"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 
 @endsection

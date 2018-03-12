@@ -2826,6 +2826,25 @@ button{
     color: #0e624f;
 }
 
+.preview-border {
+    margin-top: -20px;
+    background: linear-gradient(90deg, #dc3545 50%, transparent 50%), linear-gradient(90deg, #dc3545 50%, transparent 50%), linear-gradient(0deg, #dc3545 50%, transparent 50%), linear-gradient(0deg, #dc3545 50%, transparent 50%);
+    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    background-size: 15px 2px, 15px 2px, 2px 15px, 2px 15px;
+    background-position: 0px 0px, 200px 100px, 0px 100px, 200px 0px;
+    padding: 10px;
+    animation: border-dance 4s infinite linear;
+}
+
+@keyframes border-dance {
+  0% {
+    background-position: 0px 0px, 20% 100%, 0px 20%, 100% 0px;
+  }
+  100% {
+    background-position: 20% 0px, 0px 100%, 0px 0%, 100% 20%;
+  }
+}
+
 
 .app-footer{
     background: #ebf0f0;

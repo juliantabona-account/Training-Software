@@ -20,6 +20,17 @@
             background: linear-gradient(#128067, #179a7c);
         }
 
+        img.no-course{
+            margin-left: auto !important;
+            margin-right: auto !important;
+            width: 100% !important;
+            height: auto !important;
+            padding: 25% 43% !important;
+            background: linear-gradient(#128067, #179a7c);
+        }
+
+
+
         .error-image{
             margin-left: auto !important;
             margin-right: auto !important;
@@ -117,7 +128,9 @@
 
                         <div class="col-lg-4 offset-4">          
                             <div class="card" style="width: 20rem;">
-                                <img class="card-img-top course-image" alt="Inbound Marketing" src="/assets/temp/placeholder.png" img-died="image">
+                                <div class = "course-image-box">
+                                    <img class="card-img-top no-course" alt="No course" src="{{ env('APP_NO_IMAGE_ICON') }}" img-died="image">
+                                </div>
                                 <div class="card-body">
                                     @if( Auth::user()->hasRole('admin') )
                                         <p class="res-text-9 mt-1 pt-2 pb-2 res-brs-lg-b res-brs-lg-t">Get started by creating your first course and adding lessons.</p>

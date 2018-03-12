@@ -119,6 +119,9 @@
     <div class="container-fluid res-mt-lg-10-3 res-mb-lg-10-5 p-0 app-bg-1">
         <div class="app-white-overlay-1">
             <div class="container res-mt-lg-10-3 res-mb-lg-10-5">
+
+                @include('response.message')
+
                 <div class="row">
 
                     <div class="col-lg-3">

@@ -84,7 +84,26 @@
 
     <div class="container-fluid res-mt-lg-10-5 res-mb-lg-10-10">
 
-        <div class="row">
+        @if(Auth::user()->hasRole('admin'))
+            <div class="row">
+
+                <div class="col-lg-11">
+                    <a href="/courses/{{$course_id}}/edit" data-toggle="tooltip" title="" data-original-title="Stop preview and return to Edit Mode" class="btn btn-danger float-right">
+                        <i aria-hidden="true" class="fa fa-eye-slash res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i> 
+                        <span class="res-text-9 res-text-sm-7 res-text-md-9">Exit Preview Mode</span>
+                    </a>
+                        <a href="/courses/{{ $course_id }}" data-toggle="tooltip" title="" data-original-title="Go back to previewing the course" class="btn btn-primary float-right mr-2">
+                                <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
+                                <span class = "res-text-9">Go Back</span>
+                        </a>
+                </div>
+
+            </div>
+
+            <div class="row ml-3 mr-3 pt-5 pb-5 preview-border">
+        @else     
+            <div class="row">
+        @endif
             <div class="col-lg-7 res-ml-lg-10-15">
 
                 <div class = "row">
@@ -140,14 +159,25 @@
                                                                                 <div class="form-group">
                                                                                     <textarea name="question" placeholder="Enter question..." required="required" class="question form-control mt-4 res-text-9 res-text-sm-8 res-text-md-9">{{ $main['question'] }}</textarea>
                                                                                 </div>
-                                                                                <div class="form-check abc-radio abc-radio-success form-check-inline ml-2">
-                                                                                    <input class="form-check-input" type="radio" id="question{{ $key+1 }}" value="true" name="question{{ $key+3 }}">
-                                                                                    <label class="form-check-label res-text-9 res-text-sm-8 res-text-md-9" for="question{{ $key+1 }}"> True </label>
-                                                                                </div>
-                                                                                <div class="form-check abc-radio abc-radio-success form-check-inline">
-                                                                                    <input class="form-check-input" type="radio" id="question{{ $key+2 }}" value="false" name="question{{ $key+3 }}">
-                                                                                    <label class="form-check-label res-text-9 res-text-sm-8 res-text-md-9" for="question{{ $key+2 }}"> False </label>
-                                                                                </div>
+                                                                                @if($curentReport != '')
+                                                                                    <div class="form-check abc-radio abc-radio-success form-check-inline ml-2">
+                                                                                        <input class="form-check-input" type="radio" id="question{{ $key+1 }}" value="true" name="question{{ $key+3 }}" {{ $curentReport['sheet'][$key]['answers'][0] ? 'checked':'' }}>
+                                                                                        <label class="form-check-label res-text-9 res-text-sm-8 res-text-md-9" for="question{{ $key+1 }}"> True </label>
+                                                                                    </div>
+                                                                                    <div class="form-check abc-radio abc-radio-success form-check-inline">
+                                                                                        <input class="form-check-input" type="radio" id="question{{ $key+2 }}" value="false" name="question{{ $key+3 }}" {{ $curentReport['sheet'][$key]['answers'][1] ? 'checked':'' }}>
+                                                                                        <label class="form-check-label res-text-9 res-text-sm-8 res-text-md-9" for="question{{ $key+2 }}"> False </label>
+                                                                                    </div>
+                                                                                @else
+                                                                                    <div class="form-check abc-radio abc-radio-success form-check-inline ml-2">
+                                                                                        <input class="form-check-input" type="radio" id="question{{ $key+1 }}" value="true" name="question{{ $key+3 }}">
+                                                                                        <label class="form-check-label res-text-9 res-text-sm-8 res-text-md-9" for="question{{ $key+1 }}"> True </label>
+                                                                                    </div>
+                                                                                    <div class="form-check abc-radio abc-radio-success form-check-inline">
+                                                                                        <input class="form-check-input" type="radio" id="question{{ $key+2 }}" value="false" name="question{{ $key+3 }}">
+                                                                                        <label class="form-check-label res-text-9 res-text-sm-8 res-text-md-9" for="question{{ $key+2 }}"> False </label>
+                                                                                    </div>
+                                                                                @endif
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -203,10 +233,17 @@
                                                                                 </div>
                                                                                 <div class = "questions-option-box">
                                                                                     @foreach($main['answers'] as $key2 => $answer)
+                                                                                        @if($curentReport != '')
                                                                                         <div class="form-check abc-radio abc-radio-success ml-2">
-                                                                                            <input class="form-check-input" type="radio" id="questionChoiceText{{ $key }}{{ $key2 }}" value="true" name="questionChoiceText{{ $key }}{{ $key2 }}">
+                                                                                            <input class="form-check-input" type="radio" id="questionChoiceText{{ $key }}{{ $key2 }}" value="true" name="questionChoiceText{{ $key }}{{ $key2 }}" {{ $curentReport['sheet'][$key]['answers'][$key2]['correct'] ? 'checked':'' }}>
                                                                                             <label class="form-check-label res-text-9 res-text-sm-9 res-text-md-9" for="questionChoiceText{{ $key }}{{ $key2 }}">{{ $answer['choice'] }}</label>
                                                                                         </div>
+                                                                                        @else
+                                                                                            <div class="form-check abc-radio abc-radio-success ml-2">
+                                                                                                <input class="form-check-input" type="radio" id="questionChoiceText{{ $key }}{{ $key2 }}" value="true" name="questionChoiceText{{ $key }}{{ $key2 }}">
+                                                                                                <label class="form-check-label res-text-9 res-text-sm-9 res-text-md-9" for="questionChoiceText{{ $key }}{{ $key2 }}">{{ $answer['choice'] }}</label>
+                                                                                            </div>
+                                                                                        @endif
                                                                                     @endforeach
                                                                                 </div>
                                                                             </div>
@@ -307,9 +344,9 @@
                                 </p>
                                 <p class = "res-text-9">{{ $currentscore > 80 ? 'You passed the test. You may now proceed with the rest of the course material': 'You failed the test. You need to retry until your Current Score is 100%' }}</p>
                             @else
-
+                                <i class="d-block fa fa-info-circle mb-2 mr-1 pb-2 res-brs-b"></i>
                                 <div class="alert alert-warning" role="alert">
-                                    <span class = "res-text-9 res-text-sm-9 res-text-md-8"><i class="fa fa-info-circle mr-1"></i> Answer all question and submit the test.</span>
+                                    <p class = "res-text-9 res-text-sm-9 res-text-md-8">Answer all question and submit the test.</p>
                                 </div>
 
                             @endif
@@ -319,19 +356,10 @@
                         <div class="card-footer">
                             @if(COUNT($test->reports) && $currentscore > 80)
 
-                                @if(Auth::user()->hasRole('admin'))
-                                    <a href = "/courses/{{ $course_id }}/edit" class="btn btn-sm res-button app-red-btn float-right">
-                                        <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
-                                        <span class = "res-text-9">Back To Lessons</span>
-                                    </a>
-                                @else
-                                    <a href = "/courses/{{ $course_id }}" class="btn btn-sm res-button app-red-btn float-right">
-                                        <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
-                                        <span class = "res-text-9">Back To Lessons</span>
-                                    </a>
-                                @endif
-
-
+                                <a href = "/courses/{{ $course_id }}" class="btn btn-sm res-button app-red-btn float-right">
+                                    <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
+                                    <span class = "res-text-9">Back To Lessons</span>
+                                </a>
 
                             @else
 

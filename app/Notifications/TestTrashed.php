@@ -7,22 +7,20 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class ClientEnrolled extends Notification
+class TestTrashed extends Notification
 {
     use Queueable;
 
-    protected $client;
-    protected $course;
+    protected $test;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($client, $course)
+    public function __construct($test)
     {
-        $this->client = $client;
-        $this->course = $course;
+        $this->test = $test;
     }
 
     /**
@@ -45,12 +43,7 @@ class ClientEnrolled extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'storage' => [
-
-                'client' => $this->client,
-                'course' => $this->course
-
-            ]
+            'test' => $this->test
         ];
     }
 

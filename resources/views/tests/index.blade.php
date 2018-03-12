@@ -41,16 +41,21 @@
                         </div>
                         
                         <div class="col-12 col-sm-6 offset-sm-2 col-md-4 offset-md-4 offset-lg-2 col-lg-3 pr-0 pt-3 pt-sm-0 mt-2 mt-sm-0 res-brs-t res-brs-sm-t-n">
-                            @if(Auth::user()->hasRole('admin'))
-                            <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/create" class="btn btn-sm res-button app-red-btn float-right ml-2 loadable-btn">
-                                <i class="fa fa-file-text-o res-text-9" aria-hidden="true"></i>
-                                <span class = "res-text-9" app-load="Loading...">Create Test</span>
-                            </a>
+                            @if(Auth::user()->hasRole('admin') && app('request')->input('view') != 'preview')
+                                <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/create" class="btn btn-sm res-button app-red-btn float-right ml-2 loadable-btn">
+                                    <i class="fa fa-file-text-o res-text-9" aria-hidden="true"></i>
+                                    <span class = "res-text-9" app-load="Loading...">Create Test</span>
+                                </a>
+                                <a href = "/courses/{{ $course_id }}/edit" class="btn btn-sm res-button app-red-btn float-right">
+                                    <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
+                                    <span class = "res-text-9">Lessons</span>
+                                </a>
+                            @else
+                                <a href = "/courses/{{ $course_id }}" class="btn btn-sm res-button app-red-btn float-right">
+                                    <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
+                                    <span class = "res-text-9">Lessons</span>
+                                </a>
                             @endif
-                            <a href = "/courses/{{ $course_id }}" class="btn btn-sm res-button app-red-btn float-right">
-                                <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
-                                <span class = "res-text-9">Lessons</span>
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -64,7 +69,26 @@
         <div class="app-white-overlay-1">
             <div class="container res-mt-lg-10-3 res-mb-lg-10-5">
 
+            @if(Auth::user()->hasRole('admin') && app('request')->input('view') == 'preview')
                 <div class="row">
+
+                    <div class="col-lg-11">
+                        <a href="/courses/{{$course_id}}/edit" data-toggle="tooltip" title="" data-original-title="Stop preview and return to Edit Mode" class="btn btn-danger float-right">
+                            <i aria-hidden="true" class="fa fa-eye-slash res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i> 
+                            <span class="res-text-9 res-text-sm-7 res-text-md-9">Exit Preview Mode</span>
+                        </a>
+                        <a href="/courses/{{ $course_id }}" data-toggle="tooltip" title="" data-original-title="Go back to previewing the course" class="btn btn-primary float-right mr-2">
+                                <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
+                                <span class = "res-text-9">Go Back</span>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="row pt-5 pb-5 preview-border">
+            @else       
+                <div class="row">
+            @endif
 
                     @if(COUNT($tests))
                         @foreach($tests as $test)
@@ -75,7 +99,7 @@
                                 <img class="card-img-top test-image" src="{{ env('APP_NO_IMAGE_ICON') }}" img-died="image">
                                 <div class="card-body">
                                     <h4 class="card-title mb-3 pb-3 res-brs-b res-text-8">{{ $test->title }}</h4>
-                                    @if(Auth::user()->hasRole('admin'))
+                                    @if(Auth::user()->hasRole('admin') && app('request')->input('view') != 'preview')
                                         <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}/edit" class="btn btn-sm res-button app-red-btn float-right loadable-btn">
                                             <i class="fa fa-pencil res-text-9" aria-hidden="true"></i>
                                             <span class = "res-text-9" app-load="Loading...">Edit Test</span>
@@ -88,7 +112,7 @@
                                             </button>
                                         </form>
                                     @endif
-                                    @if(Auth::user()->hasRole('client'))
+                                    @if(Auth::user()->hasRole('client') || app('request')->input('view') == 'preview')
 
                                         @if( COUNT($test->reports) )
 
@@ -126,7 +150,6 @@
                                         @else
 
                                         <a href = "/courses/{{ $course_id }}/module/{{ $module_id }}/lesson/{{ $lesson_id }}/tests/{{ $test->id }}" class="btn btn-sm btn-success res-button float-right loadable-btn">
-                                            <i class="fa fa-pencil res-text-9" aria-hidden="true"></i>
                                             <span class = "res-text-9" app-load="Loading...">Take Test</span>
                                         </a>
 

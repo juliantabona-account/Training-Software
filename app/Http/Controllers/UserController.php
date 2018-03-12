@@ -21,6 +21,12 @@ use Cmgmyr\Messenger\Models\Thread;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use App\Notifications\ClientEnrolled;
+use App\Notifications\ClientActivated;
+use App\Notifications\ClientProfilled;
+use App\Notifications\CourseInvitation;
+use App\Notifications\ClientWelcome;
+
 
 class UserController extends Controller
 {
@@ -115,8 +121,6 @@ class UserController extends Controller
                                     'verifyToken' => Str::random(40)
                                 ]);
 
-                
-
                 //Send Verification Email
                 $email = Mail::to( $request::input('email') )->send(new EnrollStudent($client));
 
@@ -147,6 +151,14 @@ class UserController extends Controller
 
                 $request::session()->flash('status', $client->first_name . ' has been successfully enrolled!');
                 $request::session()->flash('type', 'success');
+
+                $course = Course::find($course_id);
+
+                if($client){
+                    $client->notify(new CourseInvitation($client, $course));
+                    Auth::user()->notify(new ClientEnrolled($client, $course));
+
+                }
 
             }
 

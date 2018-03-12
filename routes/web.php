@@ -90,6 +90,7 @@ Route::get('/courses/{course_id}', 'CourseController@show')->middleware('auth');
 Route::put('/courses/{course_id}', 'CourseController@update')->middleware('onlyadmin');
 Route::delete('/courses/{course_id}', 'CourseController@delete')->middleware('onlyadmin');
 Route::get('/courses/{course_id}/edit', 'CourseController@edit')->middleware('onlyadmin');
+Route::get('/courses/{course_id}/{client_id}/resetprogress', 'CourseController@resetProgress')->name('course-reset-progress')->middleware('onlyadmin');
 Route::get('/courses/{course_id}/clients/create', 'UserController@enroll')->name('client-enroll')->middleware('onlyadmin');
 
 
@@ -144,7 +145,7 @@ Route::get('/courses/{course_id}/module/{module_id}/lesson/{lesson_id}/tests/{te
 Route::get('/clients', 'UserController@index')->name('client-list')->middleware('onlyadmin');
 Route::post('/clients', 'UserController@store')->name('client-save')->middleware('onlyadmin');
 Route::get('/clients/create', 'UserController@create')->name('client-create')->middleware('onlyadmin');
-Route::get('/clients/{client_id}', 'UserController@show')->name('client-update')->middleware('onlyadmin');
+Route::get('/clients/{client_id}', 'UserController@show')->name('client-show')->middleware('onlyadmin');
 Route::put('/clients/{client_id}', 'UserController@update')->name('client-save-update');
 
 Route::get('/clients/activate/{client_email}/{client_token}', 'UserController@activate')->name('client-activate');

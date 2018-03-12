@@ -6,6 +6,7 @@ use Auth;
 use Image;
 use Request;
 use Storage;
+use App\User;
 use App\Course;
 use App\Module;
 use Exception;
@@ -31,7 +32,7 @@ class CourseController extends Controller
     public function index(Request $request)
     {
 
-        try{
+        try{    //catching on getting the courses
 
             if( Auth::user()->hasRole('client') ){
 
@@ -45,9 +46,12 @@ class CourseController extends Controller
 
             return view('courses.index', compact('courses'));
 
-        }catch(Exception $e){
+        }catch(Exception $e){    //something went wrong getting the courses
+            $request::session()->flash('status', 'Something went wrong trying to get courses. Try again');
+            $request::session()->flash('status-icon', 'fa fa-book');
+            $request::session()->flash('type', 'danger');
 
-            return view('error.connection_fail');
+            return back();
         
         }     
 
@@ -56,30 +60,36 @@ class CourseController extends Controller
     public function enroll(Request $request)
     {
 
-        try{
+        try{    //catching on getting the client enroll page
 
             $courses = Course::orderBy('created_at', 'desc')->get();
             $client_id = $request::input('client-id');
             
             return view('courses.enroll', compact('courses', 'client_id'));
 
-        }catch(Exception $e){
+        }catch(Exception $e){    //something went wrong getting the client enroll page
 
-            return view('error.connection_fail');
+            $request::session()->flash('status', 'Something went wrong preparing enrollment. Try again');
+            $request::session()->flash('status-icon', 'fa fa-book');
+            $request::session()->flash('type', 'danger');
+
+            return back();
         
-        }    
+        }      
 
     }
 
-    public function show($course_id)
+    public function show(Request $request, $course_id)
     {
-        //try{
+
+        try{    //catching on getting the course and modules
+
             $course = Course::find($course_id);
             //$modules = Course::find($course_id)->moduleWithLessons()->get();
             //$modules = Course::find($course_id)->modules()->get();
 
             $modules = Course::find($course_id)->modules()->with(array('lessons'=>function($query){
-                $query->with(array('tests'=>function($query){
+                $query->with(array('viewedUsers','tests'=>function($query){
                     $query->with('reports');
                 }));
             }))->get();
@@ -97,11 +107,35 @@ class CourseController extends Controller
 
             $video_uris = implode(',', array_filter(collect($video_uris)->toArray()));
 
+        }catch(Exception $e){    //something went wrong getting the course and modules
+        
+            $request::session()->flash('status', 'Something went wrong trying to get the course. Try again');
+            $request::session()->flash('status-icon', 'fa fa-book');
+            $request::session()->flash('type', 'danger');
+
+            return back();
+        
+        }
+
+        try{    //catching on connecting to vimeo and getting videos
+
             if(!empty($video_uris)){
             	$videos = Vimeo::request('/videos?uris='.$video_uris)['body']['data'];
             }else{
             	$videos = [];
             } 
+
+        }catch(Exception $e){    //something went wrong connecting to vimeo and getting videos
+        
+            $request::session()->flash('status', 'Something went wrong trying to get the course videos. Try again');
+            $request::session()->flash('status-icon', 'fa fa-book');
+            $request::session()->flash('type', 'danger');
+
+            return back();
+        
+        }
+
+        try{    //cathcing on calculating the total lessons, total lesson views and total tests
 
             $totalLessons = collect($modules)->map(function ($module) use ($video_uris) {
 
@@ -109,11 +143,17 @@ class CourseController extends Controller
 
             })->sum();
 
-            $viewedLessons = array_unique(collect(Auth::user()->lessonViews)->map(function ($viewedLesson){
+            $viewedLessons = array_unique(array_flatten(collect($modules)->map(function ($module){
 
-                                return $viewedLesson->pivot->lesson_id;
+                                return collect($module->lessons)->map(function ($lesson){
 
-                            })->toArray());
+                                            if($lesson->viewedUsers()->where('user_id', Auth::id())->get()->count()){
+                                                return $lesson->id;
+                                            }
+
+                                        })->toArray();
+
+                            })->toArray()));
 
             $totalTests = collect($modules)->map(function ($module) {
 
@@ -123,23 +163,57 @@ class CourseController extends Controller
 
             })->sum();
 
-        //}catch(Exception $e){
-        //    return view('error.connection_fail');
-        //}
+            return view('courses.show', compact('course','modules', 'videos', 'viewedLessons', 'totalLessons', 'totalTests'));
 
-        return view('courses.show', compact('course','modules', 'videos', 'viewedLessons', 'totalLessons', 'totalTests'));
+        }catch(Exception $e){   //something went wrong calculating the total lessons, total lesson views and total tests
+        
+            $request::session()->flash('status', 'Something went wrong trying to prepare the course. Try again');
+            $request::session()->flash('status-icon', 'fa fa-book');
+            $request::session()->flash('type', 'danger');
+
+            return back();
+        
+        }
+
     }
 
-    public function create()
+    public function resetProgress(Request $request, $course_id, $user_id){
+
+        try{    //catching on lesson views and test reports reset process
+
+            User::find($user_id)->lessonViews()->detach();
+            User::find($user_id)->testReports()->delete();
+
+            $request::session()->flash('status', 'Course progress has been reset!');
+            $request::session()->flash('status-icon', 'fa fa-check');
+            $request::session()->flash('type', 'success');
+
+        }catch(Exception $e){    //somthing went wrong on reset process
+        
+            $request::session()->flash('status', 'Something went wrong trying to reset the course progress. Try again');
+            $request::session()->flash('status-icon', 'fa fa-flag');
+            $request::session()->flash('type', 'danger');
+        
+        }
+
+        return back();
+
+    }
+
+    public function create(Request $request)
     {
 
-        try{
+        try{    //catching on getting the course creation page
 
             return view('courses.create');
 
-        }catch(Exception $e){
+        }catch(Exception $e){    //something went wrong getting the creation page
 
-            return view('error.connection_fail');
+            $request::session()->flash('status', 'Something went wrong preparing to create a new course. Try again');
+            $request::session()->flash('status-icon', 'fa fa-book');
+            $request::session()->flash('type', 'danger');
+
+            return back();
         
         } 
 
@@ -164,7 +238,7 @@ class CourseController extends Controller
                 'upload' => 'required | mimes:jpeg,jpg,png | max:2000'
             ]);
 
-            try{    //catching image resize and upload
+            try{    //catching on image resize and upload
 
                 $image = Input::file('upload');
                 
@@ -200,7 +274,7 @@ class CourseController extends Controller
 
         }
 
-        try{    //catching course creation, user notification and emailing process
+        try{    //catching on course creation, user notification and emailing process
 
             $course = Course::create([
                         'title' => $request::input('title'),
@@ -223,7 +297,7 @@ class CourseController extends Controller
 
             return redirect()->route('course-list'); 
 
-        }catch(Exception $e){    //something went wrong uploading image
+        }catch(Exception $e){    //something went wrong creating the course
 
             $request::session()->flash('status', 'Something went wrong creating the course. Try again');
             $request::session()->flash('type', 'danger');
@@ -234,9 +308,10 @@ class CourseController extends Controller
 
     }
 
-    public function edit($course_id)
+    public function edit(Request $request, $course_id)
     {
-        try{
+        try{    //catching course on preparing to edit
+
             $course = Course::find($course_id);
             //$modules = Course::find($course_id)->moduleWithLessons()->get();
             $modules = Course::find($course_id)->modules()->get();
@@ -257,17 +332,35 @@ class CourseController extends Controller
             })->flatten(1);
 
             $video_uris = implode(',', array_filter(collect($video_uris)->toArray()));
+        
+        }catch(Exception $e){    //something went wrong preparing to edit
+
+            $request::session()->flash('status', 'Something went wrong preparing to edit the course. Try again');
+            $request::session()->flash('status-icon', 'fa fa-book');
+            $request::session()->flash('type', 'danger');
+
+            return back();
+        
+        }   
+
+
+        try{    //catching on connecting to vimeo and getting videos
 
             if(!empty($video_uris)){
-            	$videos = Vimeo::request('/videos?uris='.$video_uris)['body']['data'];
+                $videos = Vimeo::request('/videos?uris='.$video_uris)['body']['data'];
             }else{
-            	$videos = [];
+                $videos = [];
             }
-        }catch(Exception $e){
 
-            return view('error.connection_fail');
+        }catch(Exception $e){    //something went wrong connecting to vimeo and getting videos
         
-        }        
+            $request::session()->flash('status', 'Something went wrong trying to get the course videos. Try again');
+            $request::session()->flash('status-icon', 'fa fa-book');
+            $request::session()->flash('type', 'danger');
+
+            return back();
+        
+        }     
 
         return view('courses.edit', compact('course','modules', 'videos', 'moduleCount', 'lessonCount'));
     }
@@ -292,7 +385,7 @@ class CourseController extends Controller
                 'upload' => 'required | mimes:jpeg,jpg,png | max:2000'
             ]);
 
-            try{    //catching image resize and upload
+            try{    //catching on image resize and upload
 
                 $old_image_path = str_replace(env('AWS_URL'), '', $request::input('current-course-image'));
 
@@ -327,8 +420,6 @@ class CourseController extends Controller
         if($image_name == ''){
             $image_name = $request::input('upload');
         }
-
-
 
         try{    //catching course update and user notification
 
@@ -387,7 +478,7 @@ class CourseController extends Controller
 
             return redirect('/courses/'.$course_id.'/edit');
 
-        }catch(Exception $e){    //something went wrong uploading image
+        }catch(Exception $e){    //something went wrong updating the course
 
             $request::session()->flash('status', 'Something went wrong trying to save the course. Try again');
             $request::session()->flash('status-icon', 'fa fa-floppy-o');

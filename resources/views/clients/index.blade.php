@@ -86,7 +86,7 @@
                                         <td class = "res-text-9 res-text-sm-9 res-text-md-9"><a href= "#" class="label label-primary">{{ $client->status }}</a></td>
                                         <td class="text-right">
                                             <div class="btn-group">
-                                                <a href= "/clients/{{ $client->id }}" class="btn btn-sm res-button app-red-btn float-right">View</a>
+                                                <a href= "/clients/{{ $client->id }}" class="btn btn-sm res-button app-red-btn float-right loadable-btn"><span app-load="Loading...">View</span></a>
                                             </div>
                                         </td>
                                     </tr>

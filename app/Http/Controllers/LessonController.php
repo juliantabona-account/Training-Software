@@ -26,37 +26,79 @@ class LessonController extends Controller
         $this->middleware('auth');
     }
 
-    public function create($course_id, $module_id)
+    public function create(Request $request, $course_id, $module_id)
     {
-    	$module = Module::find($module_id);
 
-        return view('lessons.create', compact('course_id', 'module'));
+        try{    //Catch on getting the lesson creation page
+
+            $module = Module::find($module_id);
+
+            return view('lessons.create', compact('course_id', 'module'));
+
+        }catch(Exception $e){
+
+            $request::session()->flash('status', 'Something went wrong preparing to create a new lesson. Try again');
+            $request::session()->flash('status-icon', 'fa fa-cube');
+            $request::session()->flash('type', 'danger');
+
+            return back();
+        
+        } 
+
     }
 
-    public function show($course_id, $module_id, $lesson_id)
+    public function show(Request $request, $course_id, $module_id, $lesson_id)
     {
-        $lesson = Lesson::find($lesson_id);
-        $module = Module::find($module_id);
+
+        try{    //Catch on getting the lesson
+
+            $lesson = Lesson::find($lesson_id);
+            $module = Module::find($module_id);
+            
+            //if(Auth::user()->hasRole('client')){
+                Auth::user()->lessonViews()->attach($lesson_id); 
+            //}
+            
+            if($lesson->video_uri){
+                $status = Vimeo::request('/videos/'.str_replace('/videos/', '', $lesson->video_uri).'?fields=status')['body']['status'];
+            }else{
+                $status = 'empty';
+            }
+            
+            return view('lessons.show', compact('course_id', 'module', 'lesson', 'status'));
+
+        }catch(Exception $e){
         
-        //if(Auth::user()->hasRole('client')){
-            Auth::user()->lessonViews()->attach($lesson_id); 
-        //}
+            $request::session()->flash('status', 'Something went wrong trying to get the lesson. Try again');
+            $request::session()->flash('status-icon', 'fa fa-cube');
+            $request::session()->flash('type', 'danger');
+
+            return back();
         
-        if($lesson->video_uri){
-            $status = Vimeo::request('/videos/'.str_replace('/videos/', '', $lesson->video_uri).'?fields=status')['body']['status'];
-        }else{
-            $status = 'empty';
         }
-        
-        return view('lessons.show', compact('course_id', 'module', 'lesson', 'status'));
+
     }  
 
-    public function video($course_id, $module_id, $lesson_id)
+    public function video(Request $request, $course_id, $module_id, $lesson_id)
     {
-        $lesson = Lesson::find($lesson_id);
-        $videos = Vimeo::request('/me/videos', ['per_page' => 10], 'GET')['body']['data'];
-        //return $videos;
-        return view('videos.index', compact('lesson', 'course_id', 'module_id', 'lesson_id','videos'));
+
+        try{    //catching on getting the lesson videos
+            
+            $lesson = Lesson::find($lesson_id);
+            $videos = Vimeo::request('/me/videos', ['per_page' => 10], 'GET')['body']['data']; 
+
+            return view('videos.index', compact('lesson', 'course_id', 'module_id', 'lesson_id','videos'));
+
+        }catch(Exception $e){    //something went wrong deleting the course
+
+            $request::session()->flash('status', 'Something went wrong trying to get video list. Try again');
+            $request::session()->flash('status-icon', 'fa fa-film');
+            $request::session()->flash('type', 'danger');
+
+            return redirect('/courses/'.$course_id.'/edit');
+        
+        }
+
     }   
 
     public function store(Request $request, $course_id, $module_id)
@@ -138,18 +180,32 @@ class LessonController extends Controller
     }
 
 
-    public function edit($course_id, $module_id, $lesson_id)
+    public function edit(Request $request, $course_id, $module_id, $lesson_id)
     {
-        $lesson = Lesson::find($lesson_id);
-        $module = Module::find($module_id);
+
+        try{    //Catch when getting the edited course
+
+            $lesson = Lesson::find($lesson_id);
+            $module = Module::find($module_id);
+            
+            if($lesson->video_uri){
+                $status = Vimeo::request('/videos/'.str_replace('/videos/', '', $lesson->video_uri).'?fields=status')['body']['status'];
+            }else{
+                $status = 'empty';
+            }
+            
+            return view('lessons.edit', compact('course_id', 'module', 'lesson', 'status'));
         
-        if($lesson->video_uri){
-            $status = Vimeo::request('/videos/'.str_replace('/videos/', '', $lesson->video_uri).'?fields=status')['body']['status'];
-        }else{
-            $status = 'empty';
-        }
+        }catch(Exception $e){
+
+            $request::session()->flash('status', 'Something went wrong preparing to edit the lesson. Try again');
+            $request::session()->flash('status-icon', 'fa fa-cube');
+            $request::session()->flash('type', 'danger');
+
+            return back();
         
-        return view('lessons.edit', compact('course_id', 'module', 'lesson', 'status'));
+        }   
+
     }
 
     public function update(Request $request, $course_id, $module_id, $lesson_id)
@@ -192,7 +248,7 @@ class LessonController extends Controller
     public function removeVideo(Request $request, $course_id, $module_id, $lesson_id)
     {
 
-        try{    //catching course on delete
+        try{    //catching on removing video from lesson
             
             $lesson = Lesson::find($lesson_id)->update([
                         'video_uri' => ''

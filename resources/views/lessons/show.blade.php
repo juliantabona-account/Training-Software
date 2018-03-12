@@ -62,8 +62,8 @@
 
                         <div class="col-2 offset-2">
                             <a href = "/courses/{{ $course_id }}" class="btn res-button app-red-btn">
-                                <i class="fa fa-arrow-circle-left res-text-9 res-text-sm-7 res-text-md-9" aria-hidden="true"></i>
-                                <span class = "res-text-9 res-text-sm-7 res-text-md-9">Go Back</span>
+                                <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
+                                <span class = "res-text-9">Go Back</span>
                             </a>
                         </div>
                     </div>
@@ -77,7 +77,26 @@
 
             <div id = "player-container" class="container-fluid res-pt-lg-10-1 res-pb-lg-10-10">
 
+            @if(Auth::user()->hasRole('admin'))
                 <div class="row">
+
+                    <div class="col-lg-11">
+                        <a href="/courses/{{$course_id}}/edit" data-toggle="tooltip" title="" data-original-title="Stop preview and return to Edit Mode" class="btn btn-danger float-right">
+                            <i aria-hidden="true" class="fa fa-eye-slash res-text-9 res-text-sm-7 res-text-md-9 mr-1"></i> 
+                            <span class="res-text-9 res-text-sm-7 res-text-md-9">Exit Preview Mode</span>
+                        </a>
+                        <a href="/courses/{{ $course_id }}" data-toggle="tooltip" title="" data-original-title="Go back to previewing the course" class="btn btn-primary float-right mr-2">
+                                <i class="fa fa-arrow-circle-left res-text-9" aria-hidden="true"></i>
+                                <span class = "res-text-9">Go Back</span>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="row pt-5 pb-5 preview-border">
+            @else       
+                <div class="row">
+            @endif
                     <div class="col-lg-8 res-ml-lg-10-10">
 
                         <div class = "row">
