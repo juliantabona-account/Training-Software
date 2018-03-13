@@ -89,10 +89,15 @@ class CourseController extends Controller
             //$modules = Course::find($course_id)->modules()->get();
 
             $modules = Course::find($course_id)->modules()->with(array('lessons'=>function($query){
-                $query->with(array('viewedUsers','tests'=>function($query){
-                    $query->with('reports');
-                }));
-            }))->get();
+                $query->with(
+                            array('viewedUsers','tests'=>function($query){
+                                $query->where('user_id', Auth::id());
+                            }),
+                            array('viewedUsers','tests'=>function($query){
+                                $query->with('reports');
+                            })
+                        );
+                    }))->get();
 
             $video_uris = [];
             $totalLessons = 0;
@@ -143,17 +148,19 @@ class CourseController extends Controller
 
             })->sum();
 
-            $viewedLessons = array_unique(array_flatten(collect($modules)->map(function ($module){
+            $viewedLessons = array_filter(array_unique(array_flatten(collect($modules)->map(function ($module){
 
                                 return collect($module->lessons)->map(function ($lesson){
 
                                             if($lesson->viewedUsers()->where('user_id', Auth::id())->get()->count()){
                                                 return $lesson->id;
+                                            }else{
+
                                             }
 
                                         })->toArray();
 
-                            })->toArray()));
+                            })->toArray())));
 
             $totalTests = collect($modules)->map(function ($module) {
 
