@@ -95,7 +95,7 @@ class CourseController extends Controller
                             }),
                             array('tests'=>function($query){
                                 $query->with(array('reports'=>function($query){
-                                    $query->where('id', Auth::id());
+                                    $query->where('client_id', Auth::id());
                                 }));
                             })
                         );
@@ -171,6 +171,8 @@ class CourseController extends Controller
                 })->sum();
 
             })->sum();
+
+            return $modules;
 
             return view('courses.show', compact('course','modules', 'videos', 'viewedLessons', 'totalLessons', 'totalTests'));
 
