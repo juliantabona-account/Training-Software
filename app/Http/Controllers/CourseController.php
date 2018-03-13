@@ -172,8 +172,6 @@ class CourseController extends Controller
 
             })->sum();
 
-            return $modules;
-
             return view('courses.show', compact('course','modules', 'videos', 'viewedLessons', 'totalLessons', 'totalTests'));
 
         }catch(Exception $e){   //something went wrong calculating the total lessons, total lesson views and total tests
