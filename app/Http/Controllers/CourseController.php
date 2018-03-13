@@ -94,7 +94,9 @@ class CourseController extends Controller
                                 $query->where('user_id', Auth::id());
                             }),
                             array('tests'=>function($query){
-                                $query->with('reports');
+                                $query->with(array('reports'=>function($query){
+                                    $query->where('client_id', Auth::id());
+                                }));
                             })
                         );
                     }))->get();
