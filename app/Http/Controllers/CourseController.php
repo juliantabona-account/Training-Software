@@ -90,10 +90,10 @@ class CourseController extends Controller
 
             $modules = Course::find($course_id)->modules()->with(array('lessons'=>function($query){
                 $query->with(
-                            array('viewedUsers','tests'=>function($query){
+                            array('viewedUsers'=>function($query){
                                 $query->where('user_id', Auth::id());
                             }),
-                            array('viewedUsers','tests'=>function($query){
+                            array('tests'=>function($query){
                                 $query->with('reports');
                             })
                         );
