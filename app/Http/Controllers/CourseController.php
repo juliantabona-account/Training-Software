@@ -104,8 +104,6 @@ class CourseController extends Controller
             $video_uris = [];
             $totalLessons = 0;
 
-            return $modules;
-
             $video_uris = collect($modules)->map(function ($module) use ($video_uris) {
 
                 return collect($module->lessons)->map(function ($topic) {
