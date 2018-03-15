@@ -175,6 +175,9 @@ class UserController extends Controller
 
     public function activate(Request $request, $client_email, $client_token)
     {
+
+        return 'activating...';
+
         //Lets get the requested user
         $client = User::where('email', $client_email)->first();
 
@@ -243,7 +246,7 @@ class UserController extends Controller
             }            
 
         }else{  //Wrong verification link provided
-            return 'Wrong link...';
+
             $request::session()->flash('status', 'Verification Link expired or incorrect');
             $request::session()->flash('type', 'warning');
 
