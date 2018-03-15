@@ -18,9 +18,6 @@ class OnlyAdmin
     public function handle($request, Closure $next)
     {
 
-        //Lets get the requested user
-        $client = User::where('email', $client_email)->first();
-
         if(Auth::check() && Auth::user()->hasRole('admin')){
 
             return $next($request);

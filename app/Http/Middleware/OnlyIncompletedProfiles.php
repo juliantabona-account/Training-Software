@@ -21,8 +21,6 @@ class OnlyIncompletedProfiles
     public function handle($request, Closure $next, $client_email)
     {
 
-        
-
         //Lets get the requested user
         $client = User::where('email', $client_email)->first();
 
@@ -41,7 +39,6 @@ class OnlyIncompletedProfiles
 
         //User is not Verified and not Setup
         }else if(Auth::check() && Auth::user()->status == 0 && Auth::user()->verify != ''){
-
 
             //Logout any active user
             $request->session()->flush(); 
