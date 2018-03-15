@@ -10,7 +10,7 @@ use App\User;
 use App\Role;
 use App\Course;
 use Illuminate\Support\Str;
-use App\Mail\EnrollStudent;
+use App\Mail\EnrollmentConfirmation;
 use App\Mail\AccountActivated;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Input;
@@ -122,7 +122,7 @@ class UserController extends Controller
                                 ]);
 
                 //Send Verification Email
-                $email = Mail::to( $request::input('email') )->send(new EnrollStudent($client));
+                $email = Mail::to( $request::input('email') )->send(new EnrollmentConfirmation($client));
 
             }
         }
@@ -204,7 +204,7 @@ class UserController extends Controller
 
         }else{
 
-            echo 'Account activation link has expired!';
+            return view('clients.account_reset', compact('client_email')); 
 
         }
         
@@ -228,6 +228,34 @@ class UserController extends Controller
         }else{
             return redirect('/login');
         }
+        
+    }
+
+    public function resetActivation(Request $request, $client_email)
+    {
+
+        $validator = $request::validate([
+            'email' => 'required'
+        ]);
+
+        //Check if user has been created before
+
+        $client = User::where('email', $client_email)->first();
+
+        if ($client === null) {
+
+            //reset activation
+            $client = $client->update([
+                                'status' => 0,
+                                'verifyToken' => Str::random(40)
+                            ]);
+
+            //Send Verification Email
+            $email = Mail::to( $client_email )->send(new EnrollmentConfirmation($client));
+
+        }
+
+
         
     }
 
