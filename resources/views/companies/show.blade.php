@@ -90,7 +90,17 @@
                                         <td class = "res-text-9 res-text-sm-9 res-text-md-9">{{ $client->last_name }}</td>
                                         <td class = "res-text-9 res-text-sm-9 res-text-md-9">{{ $client->mobile }}</td>
                                         <td class = "res-text-9 res-text-sm-9 res-text-md-9">{{ $client->email }}</td>
-                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9"><a href= "#" class="label label-primary">{{ $client->status }}</a></td>
+                                        <td class = "res-text-9 res-text-sm-9 res-text-md-9">
+                                            
+                                            @if($client->status == 0)
+                                                <span class = "text-danger">InActive</span>
+                                            @elseif($client->status == 1)
+                                                <span class = "text-primary">Activated</span>
+                                            @elseif($client->status == 2)
+                                                <span class = "text-success">Active</span>
+                                            @endif
+
+                                        </td>
                                         <td class="text-right">
                                             <div class="btn-group">
                                                 <a href= "/clients/{{ $client->id }}" class="btn btn-sm res-button app-red-btn float-right">View</a>

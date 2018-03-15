@@ -68,7 +68,8 @@ class MessagesController extends Controller
     public function create()
     {
         $users = User::where('id', '!=', Auth::id())->get();
-        return view('messenger.create', compact('users'));
+        $admins = User::whereHas('roles', function($q){$q->whereIn('name', ['admin']);})->get();
+        return view('messenger.create', compact('users', 'admins'));
     }
     /**
      * Stores a new message thread.
@@ -77,6 +78,7 @@ class MessagesController extends Controller
      */
     public function store()
     {
+
         $input = Input::all();
         $thread = Thread::create([
             'subject' => $input['subject'],
@@ -93,12 +95,13 @@ class MessagesController extends Controller
             'user_id' => Auth::id(),
             'last_read' => new Carbon,
         ]);
+
         // Recipients
         if (Input::has('recipients')) {
             $thread->addParticipant($input['recipients']);
         }
         
-        return redirect('/messages/'.$message->id);
+        return redirect()->route('messages.show', $thread->id);
     }
     /**
      * Adds a new message to a current thread.

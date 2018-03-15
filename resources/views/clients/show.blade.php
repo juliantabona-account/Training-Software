@@ -311,10 +311,12 @@
                                             </div>
                                         </div>
 
-                                        <div class="chat-discussion">
-
-                                            @each('messenger.partials.thread_2', $threads, 'thread', 'messenger.partials.no-threads')
-                                           
+                                        <div class="chat-discussion" style = "height:{{ COUNT($threads) == 0 ? '150px' : ''  }};">
+                                            @if(COUNT($threads))
+                                                @each('messenger.partials.thread_2', $threads, 'thread', 'messenger.partials.no-threads')
+                                            @else
+                                                <p class="alert alert-warning p-3 m-2"><span>Send your first message</span> </p>
+                                            @endif
                                         </div>
 
                                         <form action="{{ route('messages.store') }}" method="post">

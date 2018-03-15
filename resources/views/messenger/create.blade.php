@@ -78,7 +78,7 @@
 
                                         <div class="form-group">
                                             <div class="input-group">
-
+                                                @if(Auth::user()->hasRole('admin'))
                                                 <ais-index
                                                     app-id="{{ env('ALGOLIA_APP_ID') }}"
                                                     api-key="{{ env('ALGOLIA_SECRET') }}"
@@ -124,7 +124,31 @@
                                                        </template>
                                                     </ais-no-results>
                                                   </ais-index>
+                                                @else
+                                                
+                                                  <table class = "table table-hover">
+                                                    <tbody>
+                                                        @foreach($admins as $admin)
+                                                            
+                                                            <tr>
+                                                                <td class = "res-text-9 res-text-sm-8 res-text-md-9"><img class="rounded mb-2 profile-image" 
+                                                                         src="http://saleschief-bucket.s3.amazonaws.com/assets/icons/profile-placeholder.jpg" img-died="image">
+                                                                </td>
+                                                                <td class = "res-text-9 res-text-sm-8 res-text-md-9">{{ $admin->first_name }} {{ $admin->last_name }}</td>
+                                                                <td class = "res-text-9 res-text-sm-8 res-text-md-9">{{ $admin->email }}</td>
+                                                                <td class = "res-text-9 res-text-sm-8 res-text-md-9">
+                                                                    <div class="checkbox">
+                                                                        <label title="first_name">
+                                                                            <input type="radio" name="recipients[]" value="{{ $admin->id }}">
+                                                                        </label>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
 
+                                                        @endforeach
+                                                    </tbody>
+                                                  </table>
+                                                @endif
                                             </div>
                                         </div>
 

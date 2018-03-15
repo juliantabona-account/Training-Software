@@ -152,7 +152,13 @@
 
                         <div class="card">
                         	<div class="card-heading">
-                        		<h2 class = "res-text-8 pt-3 pl-3 pb-3 bg-primary text-white mb-0">Discussions With Julian</h2>
+                        		<h2 class = "res-text-8 pt-3 pl-3 pb-3 bg-primary text-white mb-0">Discussions With 
+                                    @foreach($thread->users as $user)
+                                        @if(Auth::id() != $user->id)
+                                            <span class = "badge badge-light p-2 pl-3 pr-3 res-text-9 mr-1">{{ $user->first_name }} {{ $user->last_name }}</span>
+                                        @endif
+                                    @endforeach
+                                </h2>
                         	</div>
                             <div class="card-body pt-2 pb-0 pl-0 pr-0">
 
