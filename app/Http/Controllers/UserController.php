@@ -179,7 +179,7 @@ class UserController extends Controller
         $client = User::where('email', $client_email)->first();
 
         //Do we have a user
-        if(!COUNT($client)){
+        if(!COUNT(collect($client)->toArray())){
 
             $request::session()->flash('status', 'Could not verify '.$client_email.'. Account does not exist!');
             $request::session()->flash('type', 'warning');
