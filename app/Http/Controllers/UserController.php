@@ -174,8 +174,7 @@ class UserController extends Controller
 
 
     public function activate(Request $request, $client_email, $client_token)
-    {   
-        return 'activate';
+    {
 
         $client = User::where('email', $client_email)->first();
 
@@ -205,7 +204,7 @@ class UserController extends Controller
 
         }else{
 
-            return view('clients.account_reset', compact('client_email')); 
+            echo 'Account activation link has expired!';
 
         }
         
@@ -229,34 +228,6 @@ class UserController extends Controller
         }else{
             return redirect('/login');
         }
-        
-    }
-
-    public function resetActivation(Request $request, $client_email)
-    {
-
-        $validator = $request::validate([
-            'email' => 'required'
-        ]);
-
-        //Check if user has been created before
-
-        $client = User::where('email', $client_email)->first();
-
-        if ($client === null) {
-
-            //reset activation
-            $client = $client->update([
-                                'status' => 0,
-                                'verifyToken' => Str::random(40)
-                            ]);
-
-            //Send Verification Email
-            $email = Mail::to( $client_email )->send(new EnrollmentConfirmation($client));
-
-        }
-
-
         
     }
 
