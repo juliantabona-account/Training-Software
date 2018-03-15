@@ -243,7 +243,7 @@ class UserController extends Controller
             }            
 
         }else{  //Wrong verification link provided
-
+            return 'Wrong link...';
             $request::session()->flash('status', 'Verification Link expired or incorrect');
             $request::session()->flash('type', 'warning');
 
