@@ -176,8 +176,6 @@ class UserController extends Controller
     public function activate(Request $request, $client_email, $client_token)
     {
 
-        return 'activating...';
-
         //Lets get the requested user
         $client = User::where('email', $client_email)->first();
 
