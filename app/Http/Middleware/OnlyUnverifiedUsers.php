@@ -2,11 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use App\User;
 use Closure;
-use Auth;
 
-class OnlyAdmin
+class OnlyUnverifiedUsers
 {
     /**
      * Handle an incoming request.
@@ -15,16 +13,18 @@ class OnlyAdmin
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $client_email, $client_token)
     {
 
         //Lets get the requested user
         $client = User::where('email', $client_email)->first();
 
-        if(Auth::check() && Auth::user()->hasRole('admin')){
+        if(!Auth::check() && ){
 
             return $next($request);
         
+        }else if(!Auth::check() && Auth::user()->hasRole('admin')){
+
         }else{
 
             return redirect('/courses');

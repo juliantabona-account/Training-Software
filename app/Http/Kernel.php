@@ -61,5 +61,7 @@ class Kernel extends HttpKernel
         'permission' => \Zizaco\Entrust\Middleware\EntrustPermission::class,
         'ability' => \Zizaco\Entrust\Middleware\EntrustAbility::class,
         'onlyadmin' => \App\Http\Middleware\OnlyAdmin::class,
+        'onlyunverifiedusers' => \App\Http\Middleware\OnlyUnverifiedUsers::class,
+        'onlyincompletedprofiles' => \App\Http\Middleware\OnlyIncompletedProfiles::class,
     ];
 }

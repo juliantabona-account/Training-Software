@@ -31,7 +31,7 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <div id = "app-register-card" class="card card-default">
-
+                    @include('response.message')
                     <div class="card-body">
                         
                         <div class = "col-md-10 mb-md-4 mt-md-4">

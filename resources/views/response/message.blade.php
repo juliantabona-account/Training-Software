@@ -14,4 +14,9 @@
             </div>
         </div>
     </div>
+    @php
+
+        Session::forget('status');
+
+    @endphp
 @endif

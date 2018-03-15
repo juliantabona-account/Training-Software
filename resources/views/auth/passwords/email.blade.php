@@ -39,7 +39,7 @@
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
                     <div id = "app-single-form-card" class="card card-default res-mt-10-3 res-mt-sm-10-10 res-mt-md-10-15">
-
+                        @include('response.message')
                         <div class="card-body">
 
                             <div class = "col-md-12 mb-md-4 mt-md-4">

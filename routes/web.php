@@ -149,7 +149,7 @@ Route::get('/clients/{client_id}', 'UserController@show')->name('client-show')->
 Route::put('/clients/{client_id}', 'UserController@update')->name('client-save-update');
 
 Route::get('/clients/activate/{client_email}/{client_token}', 'UserController@activate')->name('client-activate');
-Route::get('/clients/account/setup/{client_email}', 'UserController@setup')->name('client-setup');
+Route::get('/clients/account/setup/{client_email}', 'UserController@setup')->name('client-setup')->middleware('onlyincompletedprofiles:client_email');
 
 Route::get('/users/{user_id}', 'UserController@profile')->name('user-profile')->middleware('auth');
 Route::put('/users/{user_id}/password/update', 'UserController@updatePassword')->name('user-password-update')->middleware('auth');

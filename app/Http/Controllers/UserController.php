@@ -175,9 +175,50 @@ class UserController extends Controller
 
     public function activate(Request $request, $client_email, $client_token)
     {
-
+        //Lets get the requested user
         $client = User::where('email', $client_email)->first();
 
+        //Do we have a user
+        if(!COUNT($client)){
+
+            $request::session()->flash('status', 'Could not verify '.$client_email.'. Account does not exist!');
+            $request::session()->flash('type', 'warning');
+
+            return redirect('/login');
+
+        }
+
+        //Check if already verified
+
+        if($client->verifyToken == '' && $client->status == 1){
+
+            //Logout any active user
+            $request::session()->flush();              
+            
+            //Login current user
+            Auth::login($client);
+
+            //Check if the user setup their account
+            if($client->password != ''){
+
+                $request::session()->flash('status', 'Account already verified! Complete Profile');
+                $request::session()->flash('type', 'success');
+
+                return redirect('/clients/account/setup/'.$client_email);
+
+            }else{
+
+                $request::session()->flash('status', 'Account already verified!');
+                $request::session()->flash('type', 'success');
+
+                return redirect('/courses');
+
+            }
+
+        }
+
+
+        //This far the user exists and has not been verified. Lets verify now
         if($client->email == $client_email && $client->verifyToken == $client_token){
 
             //Verify Acccount
@@ -202,9 +243,12 @@ class UserController extends Controller
 
             }            
 
-        }else{
+        }else{  //Wrong verification link provided
 
-            echo 'Account activation link has expired!';
+            $request::session()->flash('status', 'Verification Link expired or incorrect');
+            $request::session()->flash('type', 'warning');
+
+            return redirect('/login');
 
         }
         
@@ -214,20 +258,7 @@ class UserController extends Controller
     {
         $client = User::where('email', $client_email)->first();
 
-        //Check if the user is activated
-        if($client->status == 1 && $client->verifyToken == Null){
-            if(empty($client->password)){
-                return view('clients.setup', compact('client')); 
-            }          
-
-        }
-
-        //Check if the user is logged in
-        if(Auth::check()){
-            return redirect()->route('user-profile', Auth::id());
-        }else{
-            return redirect('/login');
-        }
+        return view('clients.setup', compact('client')); 
         
     }
 
@@ -272,7 +303,7 @@ class UserController extends Controller
         $client->email = $request::input('email');
         $client->mobile = $request::input('mobile');
         $client->avatar = $image_name;
-        $client->status = 1;
+        $client->status = 2;
         $client->verifyToken = Null;
         $client->password = bcrypt( $request::input('password') );
         $client->save();
