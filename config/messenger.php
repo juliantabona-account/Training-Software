@@ -19,3 +19,5 @@ return [
 
     'threads_table' => null,
 ];
+
+$thread->participantsString($userId, ['first_name', 'last_name']);
