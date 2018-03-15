@@ -199,7 +199,7 @@ class UserController extends Controller
             Auth::login($client);
 
             //Check if the user setup their account
-            if($client->password != ''){
+            if($client->status > 1){
 
                 $request::session()->flash('status', 'Account already verified! Complete Profile');
                 $request::session()->flash('type', 'success');
@@ -216,7 +216,6 @@ class UserController extends Controller
             }
 
         }
-
 
         //This far the user exists and has not been verified. Lets verify now
         if($client->email == $client_email && $client->verifyToken == $client_token){
