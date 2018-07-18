@@ -16,7 +16,7 @@
 <li class="notification {{ $class }}">
     <div class="media">
       @if($msg_image != '')
-        <img class="mr-2 img-circle" src="{{ $msg_image }}" style="width: 50px; height: 50px;">
+        <img class="mr-2 img-circle" src="{{ $msg_image }}" style="width: 50px;height: 50px;border-radius: 100%;border: 1px solid #bfbfbf;">
       @else
           <i class="fa fa-user-circle-o mr-2 res-text-9 res-text-md-8" aria-hidden="true" style="width: 50px;height: 50px;padding: 5px;background: #868e96;border-radius: 100%;color: #fff;font-size: 40px !important;"></i>  
       @endif

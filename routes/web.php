@@ -43,6 +43,14 @@ Route::get('/sendmail', function(){
 
 });
 
+Route::get('/video_upload_test', function(){
+
+	return view('videos/uploading_video_test');
+
+});
+
+Route::post('/video_upload_test_uploader', 'CourseController@video_upload_test');
+
 Route::get('/error', function(){
 
 	return view('error.connection_fail');

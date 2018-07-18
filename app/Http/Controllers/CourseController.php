@@ -29,6 +29,19 @@ class CourseController extends Controller
         $this->middleware('auth');
     }
 
+
+    public function video_upload_test(Request $request){
+       
+        $photo_object = new \stdClass();
+        $photo_object->name = str_replace('photos/', '',$photo->getClientOriginalName());
+        $photo_object->size = round(Storage::size($filename) / 1024, 2);
+        $photo_object->fileID = $product_photo->id;
+    
+ 
+        return response()->json(array('files' => $photo_object), 200);
+
+    }
+
     public function index(Request $request)
     {
 
