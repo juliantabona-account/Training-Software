@@ -2635,9 +2635,10 @@ button{
 
 .app-red-btn{
     color: #fff !important;
-    background-color: #0e624f !important;
-    border-color: #0e624f !important;
-    cursor: pointer !important;            
+    border-radius: 0px;
+    background-color: #006230 !important;
+    border-color: #006230 !important;
+    cursor: pointer !important;
 }
 
 .app-red-btn:hover,
@@ -2848,4 +2849,8 @@ button{
 
 .app-footer{
     background: #ebf0f0;
+}
+
+.btn{
+    border-radius:0px;
 }

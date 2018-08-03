@@ -21,7 +21,7 @@
                 <div class="col-12 col-md-6 offset-md-3">
                     <ul class="nav nav-pills nav-justified text-center list-unstyled">
                         <li class = "mr-4 ml-5 mt-2">Powered By <a href="http://www.optimumqbw.com">Optimum Q</a></li>
-                        <li class = "mr-4 ml-5 mt-2">© 2018 SALESCHIEF</li>
+                        <li class = "mr-4 ml-5 mt-2">© 2018 Optimum Q</li>
                     </ul>
                 </div>
             </div>

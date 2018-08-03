@@ -20,7 +20,7 @@
             display: none;
             height: 180px; 
             width: 100%; 
-            background: linear-gradient(#128067, #179a7c);
+            background: linear-gradient(#006230, #00823f);
         }
 
         .error-image{

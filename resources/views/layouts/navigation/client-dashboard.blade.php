@@ -131,7 +131,7 @@
                                         </ul>
                                     </div>
 
-                                    <div class = "col-12 pl-4 res-pl-sm-10-12" style = "background:#0e624f;">
+                                    <div class = "col-12 pl-4 res-pl-sm-10-12" style = "background:#006230;">
                                         <ul class="navbar-nav d-inline">
                                             <li class="nav-item d-inline-block whitened pt-2 pb-2 pr-3 pl-3">
                                                 <a href="/courses" class="nav-link d-inline-block">

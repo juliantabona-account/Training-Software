@@ -14,7 +14,7 @@
             width: 100% !important;
             height: auto !important;
             padding: 18% 40% !important;
-            background: linear-gradient(#ff5a4e, #ff3925);
+            background: linear-gradient(#006230, #00823f);
         }
 
         img.course-image{
