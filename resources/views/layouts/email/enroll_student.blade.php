@@ -42,7 +42,7 @@
 														<![endif]-->
 														<img style="margin-left: 20px;" src="{{ env('APP_LOGO_300_64') }}">
 
-														<h1 style="font-size: 30px; padding-right: 30px; padding-left: 30px;">Welcome To SalesChief</h1>
+														<h1 style="font-size: 30px; padding-right: 30px; padding-left: 30px;">Welcome To BTC Academy</h1>
 
 														<p style="font-size: 17px; padding-right: 30px; padding-left: 30px;">
 															Hi {{ $user->first_name }}, we would like to enroll you into being a part of something great! You are going to love it from here on. Lets get started by 
@@ -68,7 +68,7 @@
 														<![endif]-->
 														<div style="padding-right: 30px; padding-left: 30px; margin-bottom: 40px;">
 															<a href="{{ env('APP_DOMAIN') }}/clients/activate/{{ $user->email }}/{{ $user->verifyToken }}" class="sm_auto_width sm_block button_link" 
-															   style="min-width: 234px;border-radius: 0px;padding: 10px;background-color: #0e624f;font-size: 20px;color: #ffffff;display: inline-block;text-align: center;vertical-align: top;font-weight: 100;text-decoration: none!important;" target="_blank">
+															   style="min-width: 234px;border-radius: 0px;padding: 10px;background-color: #006230;font-size: 20px;color: #ffffff;display: inline-block;text-align: center;vertical-align: top;font-weight: 100;text-decoration: none!important;" target="_blank">
 																Activate Account
 															</a>
 														</div>
